@@ -16,7 +16,6 @@
 .indexDescription {
     text-align: center;
     align-self: center;
-    padding: 0 0 25px 0px;
     color: blue;
 }
 
@@ -51,4 +50,79 @@
 
 .indexUserIcon {
     font-size: 200px;
+}
+
+.signInBody {
+    font-family: 'Segoe UI', Tahoma, Geneva;
+}
+
+.signInHeader {
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+
+.signInMain {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.signinDescription {
+    color: blue;
+    text-align: center;
+    align-self: center;
+}
+
+.signinForm {
+    background: blue;
+    color: white;
+    border-radius: 6px;
+    margin: 10px 5px;
+}
+
+
+.signInFieldsetInput {
+    border: none;
+}
+
+.signInSubheading {
+    text-align: center;
+}
+
+.signinInputContainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+}
+
+.siginLabels {
+    text-align: right;
+    align-self: center;
+}
+
+.signinInputs {
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.signinButton {
+    margin-right: 3px;
+    padding: 10px 24px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.signinButtonArea {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.signinLinkSignup {
+    text-decoration: none;
+    color: white;
 }
