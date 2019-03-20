@@ -1,0 +1,54 @@
+.indexBody {
+    font-family: 'Segoe UI', Tahoma, Geneva;
+}
+
+.indexHeader {
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+
+.indexMain {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.indexDescription {
+    text-align: center;
+    align-self: center;
+    padding: 0 0 25px 0px;
+    color: blue;
+}
+
+.indexUserLinkContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.indexUserLink {
+    margin: 0 10px 20px 10px;
+    background: blue;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.indexUserLink>a {
+    text-decoration: none;
+}
+
+.indexLinkSubHeading {
+    color: white;
+}
+
+.indexUserContainer {
+    color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    align-items: center;
+}
+
+.indexUserIcon {
+    font-size: 200px;
+}
