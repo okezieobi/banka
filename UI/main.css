@@ -52,29 +52,29 @@
     font-size: 200px;
 }
 
-.signInBody {
+.userInBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
 }
 
-.signInHeader {
+.userInHeader {
     display: flex;
     justify-content: center;
     color: blue;
 }
 
-.signInMain {
+.userMain {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
 }
 
-.signinDescription {
+.userDescription {
     color: blue;
     text-align: center;
     align-self: center;
 }
 
-.signinForm {
+.userForm {
     background: blue;
     color: white;
     border-radius: 6px;
@@ -82,32 +82,32 @@
 }
 
 
-.signInFieldsetInput {
+.userFieldsetInput {
     border: none;
 }
 
-.signInSubheading {
+.userSubheading {
     text-align: center;
 }
 
-.signinInputContainer {
+.userInputContainer {
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 10px;
 }
 
-.siginLabels {
+.userLabels {
     text-align: right;
     align-self: center;
 }
 
-.signinInputs {
+.userInputs {
     border: none;
     border-radius: 3px;
     padding: 10px;
 }
 
-.signinButton {
+.userButton {
     margin-right: 3px;
     padding: 10px 24px;
     background: white;
@@ -116,13 +116,13 @@
     border-radius: 3px;
 }
 
-.signinButtonArea {
+.userButtonArea {
     padding-top: 10px;
     display: flex;
     justify-content: flex-end;
 }
 
-.signinLinkSignup {
+.userLink {
     text-decoration: none;
     color: white;
 }
