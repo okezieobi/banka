@@ -126,3 +126,97 @@
     text-decoration: none;
     color: white;
 }
+
+.dashboardIndexBody {
+    font-family: 'Segoe UI', Tahoma, Geneva;
+}
+
+.dashboardIndexHeader {
+    display: flex;
+    justify-content: space-between;
+    color: blue;
+}
+
+.activeIcon {
+    color: black;
+}
+
+.userHomeSignOut,
+.dashboardHomeLink {
+    text-decoration: none;
+    text-align: center;
+}
+
+.homeIcon,
+.signoutIcon {
+    font-size: 40px;
+}
+
+.mobileIcon {
+    display: none;
+}
+
+.largeScreenIcon {
+    font-size: 25px;
+}
+
+.mobileIconProperties {
+    font-size: 50px;
+}
+
+@media screen and (max-width: 500px) {
+    .largeScreenIcon {
+        display: none;
+    }
+
+    .mobileIcon {
+        display: block;
+    }
+}
+
+.userIndexMain {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.userSideBar {
+    display: flex;
+    flex-flow: column nowrap;
+    color: blue;
+    justify-content: space-evenly;
+    margin-right: 5px;
+}
+
+.userProfile,
+.userBankAccounts {
+    text-decoration: none;
+    text-align: center;
+}
+
+.userSideBarIcons {
+    font-size: 40px;
+}
+
+.userMainContent {
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 8;
+    justify-content: space-around;
+}
+
+.userAccountCard {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    border-radius: 10px;
+    background: blue;
+    color: white;
+    align-items: center;
+    padding: 0 10px;
+    margin: 0 10px 10px 0;
+}
+
+.userAccountLabel {
+    text-align: right;
+}
