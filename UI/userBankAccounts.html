@@ -40,11 +40,11 @@
     <main class="userIndexMain">
         <section class="userSideBar">
             <section><a class="userBankAccounts activeIcon" href="userBankAccounts.html">
-                    <h5><i class="fas fa-money-check-alt userSideBarIcons"></i><br>Accounts</h5>
+                    <h6><i class="fas fa-money-check-alt userSideBarIcons"></i><br>Accounts</h6>
                 </a>
             </section>
             <section><a class="userProfile" href="userProfile.html">
-                    <h5><i class="far fa-user userSideBarIcons"></i><br>Profile</h5>
+                    <h6><i class="far fa-user userSideBarIcons"></i><br>Profile</h6>
                 </a></section>
         </section>
         <section class="userMainContent">
@@ -57,18 +57,35 @@
                 </button>
             </section>
             <section class="userAccountContainer">
-                <a class="userAccountDetailsLink" href="userAccountDetails.html">
-                    <table class="userAccountCardInfo">
+                <section class="userAccountCardInfo">
+                    <table class="userAccountData">
                         <tr>
                             <th class="userAccountDataLabel">Account No:</th>
-                            <td>1016375383</td>
+                            <td>1016398383</td>
                         </tr>
                         <tr>
                             <th class="userAccountDataLabel">Current Balance:</th>
                             <td>1000</td>
                         </tr>
                     </table>
-                </a>
+                    <details>
+                        <summary class="historySummary">Account History</summary>
+                        <table class="userAccountData">
+                            <tr>
+                                <th class="userTableStyling">No:</th>
+                                <th class="userTableStyling">Date</th>
+                                <th class="userTableStyling">Type</th>
+                                <th class="userTableStyling">Amount</th>
+                            </tr>
+                            <tr>
+                                <td class="userTableStyling">1</td>
+                                <td class="userTableStyling">11 March 2019</td>
+                                <td class="userTableStyling">Debit</td>
+                                <td class="userTableStyling">20000</td>
+                            </tr>
+                        </table>
+                    </details>
+                </section>
             </section>
         </section>
     </main>
