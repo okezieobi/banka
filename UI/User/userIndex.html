@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../main.css">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
@@ -20,7 +20,7 @@
     <header>
         <nav class="dashboardIndexHeader">
             <section>
-                <a class="dashboardHomeLink" href="userIndex.html">
+                <a class="dashboardHomeLink activeIcon" href="userIndex.html">
                     <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
                 </a>
             </section>
@@ -31,7 +31,7 @@
                 <h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1>
             </section>
             <section>
-                <a class="userHomeSignOut" href="../index.html">
+                <a class="userHomeSignOut" href="../../index.html">
                     <h5><i class="fas fa-sign-out-alt signoutIcon"></i><br>Sign Out</h5>
                 </a>
             </section>
@@ -39,52 +39,45 @@
     </header>
     <main class="userIndexMain">
         <section class="userSideBar">
-            <section><a class="userBankAccounts activeIcon" href="userBankAccounts.html">
-                    <h6><i class="fas fa-money-check-alt userSideBarIcons"></i><br>Accounts</h6>
+            <section><a class="userBankAccounts" href="userBankAccounts.html">
+                    <h5><i class="fas fa-money-check-alt userSideBarIcons"></i><br>Accounts</h5>
                 </a>
             </section>
             <section><a class="userProfile" href="userProfile.html">
-                    <h6><i class="far fa-user userSideBarIcons"></i><br>Profile</h6>
+                    <h5><i class="far fa-user userSideBarIcons"></i><br>Profile</h5>
                 </a></section>
         </section>
         <section class="userMainContent">
-            <section>
-                <button class="userCreateAccount">
-                    <div>
-                        <h4>Create account here</h4>
-                    </div>
-                    <div><i class="fas fa-plus mobileIconProperties"></i></div>
-                </button>
+            <section class="userAccountContainer">
+                <section class="userAccountCardInfo">
+                    <a class="userAccountDetailsLink" href="userAccountDetails.html">
+                        <table class="userAccountData">
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Account No:</th>
+                                <td>1016398383</td>
+                            </tr>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Current Balance:</th>
+                                <td>1000</td>
+                            </tr>
+                        </table>
+                    </a>
+                </section>
             </section>
             <section class="userAccountContainer">
                 <section class="userAccountCardInfo">
-                    <table class="userAccountData">
-                        <tr>
-                            <th class="userAccountDataLabel">Account No:</th>
-                            <td>1016398383</td>
-                        </tr>
-                        <tr>
-                            <th class="userAccountDataLabel">Current Balance:</th>
-                            <td>1000</td>
-                        </tr>
-                    </table>
-                    <details>
-                        <summary class="historySummary">Account History</summary>
+                    <a class="userAccountDetailsLink" href="userAccountDetails.html">
                         <table class="userAccountData">
-                            <tr>
-                                <th class="userTableStyling">No:</th>
-                                <th class="userTableStyling">Date</th>
-                                <th class="userTableStyling">Type</th>
-                                <th class="userTableStyling">Amount</th>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Account No:</th>
+                                <td>1016386343</td>
                             </tr>
-                            <tr>
-                                <td class="userTableStyling">1</td>
-                                <td class="userTableStyling">11 March 2019</td>
-                                <td class="userTableStyling">Debit</td>
-                                <td class="userTableStyling">20000</td>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Current Balance:</th>
+                                <td>1000</td>
                             </tr>
                         </table>
-                    </details>
+                    </a>
                 </section>
             </section>
         </section>

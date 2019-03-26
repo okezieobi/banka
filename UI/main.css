@@ -215,15 +215,21 @@
     text-decoration: none;
 }
 
+.userAccountCardInfoProfile {
+    color: white;
+    border-radius: 10px;
+    background: blue;
+    padding: 0 10px 10px 5px;
+}
+
 .userAccountCardInfo {
     color: white;
     border-radius: 10px;
     background: blue;
-    padding: 0 5px 10px 5px;
 }
 
 .userAccountDataLabel {
-    padding: 10px 3px;
+    padding: 10px;
     text-align: right;
 }
 
@@ -233,8 +239,24 @@
     width: 100%;
 }
 
+.userAccountDataTable {
+    padding: 12px 3px;
+    color: white;
+    width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+    .userAccountDataTable {
+        font-size: 11px;
+    }
+
+    .userAccountCardInfoProfile {
+        font-size: 14px;
+    }
+}
+
 .userAccountContainer {
-    margin: 0 10px 10px 0
+    margin: 0 13px 10px 0
 }
 
 .userCreateAccount {
@@ -245,26 +267,53 @@
     flex-flow: column nowrap;
     justify-content: space-evenly;
     align-items: center;
-    padding: 10px;
+    padding: 0 10px 13px 10px;
     margin: 0 10px 10px 0;
 }
 
 .userTableStyling {
-    padding: 0 17px 10px 0;
+    padding: 0 10px;
+    text-align: right;
 }
 
-.userTableRowStyle>th,
-.userTableRowStyle>td {
-    display: block
+.userTableElement {
+    padding-right: 10px;
 }
 
 .userTableRowStyle {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: center;
+}
+
+.userTableHeadingStyle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottomPadding {
+    padding-bottom: 10px;
 }
 
 .historySummary {
     text-align: center;
     outline: none;
+}
+
+
+th,
+td {
+    display: block
+}
+
+
+.userAccountTableInfo {
+    color: white;
+    border-radius: 10px;
+    background: blue;
+    flex-grow: 8;
+    padding: 0 5px 0 0;
 }
