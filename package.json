@@ -4,7 +4,7 @@
   "description": "Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where\r users can signup and create bank accounts online, but must visit the branch to withdraw or\r deposit money",
   "main": "index.js",
   "scripts": {
-    "views": "reload -b",
+    "views": "browser-sync -s -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/okezieobi/banka#readme",
   "devDependencies": {
-    "reload": "^2.4.0"
+    "browser-sync": "^2.26.3"
   }
 }

@@ -82,6 +82,19 @@
 }
 
 
+.createAdminStaffForm {
+    background: blue;
+    color: white;
+    border-radius: 6px;
+    margin: 10px 5px;
+}
+
+@media screen and (max-width: 560px) {
+    .createAdminStaffForm {
+        font-size: 18px;
+    }
+}
+
 .userFieldsetInput {
     border: none;
 }
@@ -116,6 +129,34 @@
     border-radius: 3px;
 }
 
+.adminStaffButton {
+    margin-right: 3px;
+    padding: 10px 72px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.adminStaffRegisterButton {
+    margin-right: 3px;
+    padding: 10px 69px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.manageAccountButton {
+    margin-right: 3px;
+    padding: 10px 24px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+
 .userAccountButton {
     margin-right: 3px;
     padding: 10px 24px;
@@ -129,6 +170,18 @@
     padding-top: 10px;
     display: flex;
     justify-content: flex-end;
+}
+
+.manageAccountsButtonArea {
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.adminStaffButtonArea {
+    padding: 15px 10px 0 0;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .userLink {
@@ -186,10 +239,14 @@
         display: block;
     }
 
-    .userSideBar {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-around;
+    .createAdminStaffForm {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .createAdminStaffForm {
+        font-size: 10px;
     }
 }
 
@@ -241,6 +298,13 @@
     background: blue;
 }
 
+.manageAccountCardInfo {
+    color: white;
+    border-radius: 10px;
+    background: blue;
+    padding-bottom: 20px;
+}
+
 .userAccountDataLabel {
     padding: 10px;
     text-align: right;
@@ -260,7 +324,7 @@
 
 @media screen and (max-width: 640px) {
     .userAccountDataTable {
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .userAccountCardInfoProfile {
@@ -307,11 +371,18 @@
     align-items: center;
 }
 
+.userTableMainHeadingStyle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .bottomPadding {
     padding-bottom: 10px;
 }
 
-.historySummary {
+.summary {
     text-align: center;
     outline: none;
 }
@@ -334,4 +405,10 @@ td {
 
 .bankAccountType {
     margin: 0 0 20px 0;
+}
+
+.radioButtons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
 }
