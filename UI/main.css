@@ -116,6 +116,15 @@
     border-radius: 3px;
 }
 
+.userAccountButton {
+    margin-right: 3px;
+    padding: 10px 24px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 10px;
+}
+
 .userButtonArea {
     padding-top: 10px;
     display: flex;
@@ -162,6 +171,10 @@
 
 .mobileIconProperties {
     font-size: 50px;
+}
+
+.accountIconProperties {
+    font-size: 40px;
 }
 
 @media screen and (max-width: 500px) {
@@ -245,7 +258,7 @@
     width: 100%;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
     .userAccountDataTable {
         font-size: 11px;
     }
@@ -316,4 +329,9 @@ td {
     background: blue;
     flex-grow: 8;
     padding: 0 5px 0 0;
+}
+
+
+.bankAccountType {
+    margin: 0 0 20px 0;
 }
