@@ -89,9 +89,9 @@
     margin: 10px 5px;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 458px) {
     .createAdminStaffForm {
-        font-size: 18px;
+        font-size: 10px;
     }
 }
 
@@ -141,6 +141,14 @@
 .adminStaffRegisterButton {
     margin-right: 3px;
     padding: 10px 69px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.adminStaffBankButton {
+    padding: 10px 24px;
     background: white;
     color: blue;
     border: none;
@@ -239,15 +247,6 @@
         display: block;
     }
 
-    .createAdminStaffForm {
-        font-size: 10px;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .createAdminStaffForm {
-        font-size: 10px;
-    }
 }
 
 .userIndexMain {
@@ -411,4 +410,8 @@ td {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
+}
+
+.rightMargin {
+    margin-right: 25px;
 }
