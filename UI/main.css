@@ -321,9 +321,28 @@
     width: 100%;
 }
 
+.userAccountDataTableMain {
+    padding: 12px 303px;
+    color: white;
+    width: 100%;
+}
+
+@media screen and (max-width: 970px) {
+
+    .userAccountDataTableMain {
+        padding: 12px 3px;
+    }
+}
+
 @media screen and (max-width: 640px) {
-    .userAccountDataTable {
+
+    .userAccountDataTable,
+    .userAccountDataTableMain {
         font-size: 10px;
+    }
+
+    .userAccountDataTableMain {
+        padding: 12px 3px;
     }
 
     .userAccountCardInfoProfile {
