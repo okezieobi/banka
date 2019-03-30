@@ -23,5 +23,6 @@
   "homepage": "https://github.com/okezieobi/banka#readme",
   "devDependencies": {
     "browser-sync": "^2.26.3"
-  }
+  },
+  "dependencies": {}
 }
