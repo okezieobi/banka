@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../routes/User/signIn.js"],"names":["router","post","signin"],"mappings":";;;;;;;AAAA;;AACA;;;;AAEAA,gBAAOC,IAAP,CAAY,cAAZ,EAA4BC,eAA5B;;eAEeF,e","sourcesContent":["import signin from '../../controllers/User/signIn';\r\nimport router from '../router';\r\n\r\nrouter.post('/auth/signin', signin);\r\n\r\nexport default router;\r\n"],"file":"signIn.js"}
