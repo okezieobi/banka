@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../routes/router.js"],"names":["router"],"mappings":";;;;;;;AAAA;;;;AAEA,IAAMA,MAAM,GAAG,oCAAf;eACeA,M","sourcesContent":["import Router from 'express-promise-router';\r\n\r\nconst router = Router();\r\nexport default router;\r\n"],"file":"router.js"}
+{"version":3,"sources":["../../routes/router.js"],"names":["router"],"mappings":";;;;;;;AAAA;;;;AAEA,IAAMA,MAAM,GAAG,oCAAf;eACeA,M","sourcesContent":["import Router from 'express-promise-router';\n\nconst router = Router();\nexport default router;\n"],"file":"router.js"}
