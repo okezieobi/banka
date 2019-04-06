@@ -2,6 +2,6 @@
 import logic from '../index';
 import data from '../../db';
 
-logic.deleteAccount = () => {}
+logic.deleteAccount = () => {};
 
 export default logic.deleteAccount;

@@ -2,6 +2,6 @@
 import logic from '../index';
 import data from '../../db';
 
-logic.toggleAccountState = () => {}
+logic.toggleAccountState = () => {};
 
 export default logic.toggleAccountState;

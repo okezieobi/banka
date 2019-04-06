@@ -2,6 +2,6 @@
 import logic from '../index';
 import data from '../../db';
 
-logic.createBankAccount = () => {}
+logic.createBankAccount = () => {};
 
 export default logic.createBankAccount;
