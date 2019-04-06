@@ -113,10 +113,10 @@ function () {
     }
   }, {
     key: "errorResponse",
-    value: function errorResponse(res, status, message) {
+    value: function errorResponse(res, status, error) {
       this.errRes = {
         status: status,
-        message: message
+        error: error
       };
       res.send(this.errRes);
     }
