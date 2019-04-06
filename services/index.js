@@ -19,10 +19,10 @@ class Banka {
     return this.foundUser;
   }
 
-  errorResponse(res, status, message) {
+  errorResponse(res, status, error) {
     this.errRes = {
       status,
-      message,
+      error,
     };
     res.send(this.errRes);
   }
