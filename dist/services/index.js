@@ -118,7 +118,7 @@ function () {
         status: status,
         message: message
       };
-      return res.send(this.errRes);
+      res.send(this.errRes);
     }
   }, {
     key: "successResponse",
