@@ -24,7 +24,7 @@ class Banka {
       status,
       message,
     };
-    return res.send(this.errRes);
+    res.send(this.errRes);
   }
 
   successResponse(res, status, data) {

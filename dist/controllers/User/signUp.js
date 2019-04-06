@@ -9,6 +9,8 @@ var _index = _interopRequireDefault(require("../index"));
 
 var _db = _interopRequireDefault(require("../../db"));
 
+var _services = _interopRequireDefault(require("../../services"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // @ts-ignore
