@@ -9,7 +9,7 @@ class Banka {
 
   userData(data) {
     this.userReqData = {
-      id: Math.floor(Math.random() * 1000000000000000),
+      id: (this.users.length + 1) * 1000000,
       email: String(data.userEmail),
       firstName: String(data.userFirstName),
       lastName: String(data.userLastName),
@@ -32,8 +32,8 @@ class Banka {
 
   bankAccount(data) {
     this.bankAccountData = {
-      id: Math.floor(Math.random() * 1000000000000000),
-      accountNumber: Math.floor(1000000000 + Math.random() * 9000000000),
+      id: (this.bankAccounts.length + 1) * 1000000,
+      accountNumber: (this.bankAccounts.length + 1) * 9000000,
       createdOn: new Date(),
       owner: parseInt(data.ownerId, 10),
       type: String(data.bankAccountType),
@@ -57,7 +57,7 @@ class Banka {
 
   transaction(data) {
     this.transactionData = {
-      id: Math.floor(Math.random() * 1000000000000000),
+      id: (this.transactions.length + 1) * 1000000,
       createdOn: new Date(),
       type: String(data.transactionType),
       accountNumber: parseInt(data.accountNumber, 10),
@@ -83,7 +83,7 @@ class Banka {
 
   adminStaffData(data) {
     this.adminStaff = {
-      id: Math.floor(Math.random() * 1000000000000000),
+      id: (this.admins.length + 1) * 1000000,
       username: String(data.username),
       password: String(data.password),
       isAdmin: true,
@@ -93,7 +93,7 @@ class Banka {
 
   staffData(data) {
     this.staffInfo = {
-      id: Math.floor(Math.random() * 1000000000000000),
+      id: (this.staff.length + 1) * 1000000,
       username: String(data.username),
       password: String(data.password),
       type: String(data.accountType),
