@@ -41,7 +41,7 @@ function () {
         firstName: String(data.userFirstName),
         lastName: String(data.userLastName),
         password: String(data.userPassword),
-        type: String(data.accountType),
+        type: 'Client',
         isAdmin: false
       };
       return this.userReqData;
@@ -130,7 +130,7 @@ function () {
         id: Math.floor(Math.random() * 1000000000),
         username: String(data.username),
         password: String(data.password),
-        type: String(data.accountType),
+        type: 'Staff',
         isAdmin: false
       };
       return this.staffInfo;
@@ -145,16 +145,14 @@ function () {
         email: 'foobar@com',
         firstName: 'Foo',
         lastName: 'Bar',
-        password: 'Abcderg13#isfg',
-        type: 'Client'
+        password: 'Abcderg13#isfg'
       };
       this.testUserTwo = {
         id: 2020202020,
         email: 'barfoo@com',
         firstName: 'Bar',
         lastName: 'Foo',
-        password: 'Abcderg13#isfg',
-        type: 'Client'
+        password: 'Abcderg13#isfg'
       };
       this.userDataList = [this.testUserOne, this.testUserTwo];
 
@@ -196,14 +194,12 @@ function () {
         id: 3030303030,
         username: 'FooBar',
         password: '12345ABC#',
-        type: 'staff',
         isAdmin: false
       };
       this.testStaffTwo = {
         id: 4040404040,
         username: 'BarFoo',
         password: '12345ABC#',
-        type: 'staff',
         isAdmin: false
       };
       this.testStaffList = [this.testStaffOne, this.testStaffTwo];

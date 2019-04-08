@@ -14,7 +14,7 @@ class Banka {
       firstName: String(data.userFirstName),
       lastName: String(data.userLastName),
       password: String(data.userPassword),
-      type: String(data.accountType),
+      type: 'Client',
       isAdmin: false,
     };
     return this.userReqData;
@@ -96,7 +96,7 @@ class Banka {
       id: Math.floor(Math.random() * 1000000000),
       username: String(data.username),
       password: String(data.password),
-      type: String(data.accountType),
+      type: 'Staff',
       isAdmin: false,
     };
     return this.staffInfo;
@@ -109,7 +109,6 @@ class Banka {
       firstName: 'Foo',
       lastName: 'Bar',
       password: 'Abcderg13#isfg',
-      type: 'Client',
     };
 
     this.testUserTwo = {
@@ -118,7 +117,6 @@ class Banka {
       firstName: 'Bar',
       lastName: 'Foo',
       password: 'Abcderg13#isfg',
-      type: 'Client',
     };
 
     this.userDataList = [this.testUserOne, this.testUserTwo];
@@ -155,7 +153,6 @@ class Banka {
       id: 3030303030,
       username: 'FooBar',
       password: '12345ABC#',
-      type: 'staff',
       isAdmin: false,
     };
 
@@ -163,7 +160,6 @@ class Banka {
       id: 4040404040,
       username: 'BarFoo',
       password: '12345ABC#',
-      type: 'staff',
       isAdmin: false,
     };
     this.testStaffList = [this.testStaffOne, this.testStaffTwo];
