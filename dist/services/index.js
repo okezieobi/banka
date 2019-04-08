@@ -43,12 +43,12 @@ function () {
       return this.amountPattern.test(amount);
     }
   }, {
-    key: "findUser",
-    value: function findUser(array, param) {
-      this.foundUser = array.find(function (foundUser) {
-        return foundUser.email === param.userEmail;
+    key: "findOne",
+    value: function findOne(array, param, arrayAny, paramAny) {
+      this.foundItem = array.find(function (found) {
+        return found[arrayAny] === param[paramAny];
       });
-      return this.foundUser;
+      return this.foundItem;
     }
   }, {
     key: "errorResponse",

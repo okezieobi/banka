@@ -19,9 +19,9 @@ class Banka {
     return this.amountPattern.test(amount);
   }
 
-  findUser(array, param) {
-    this.foundUser = array.find(foundUser => foundUser.email === param.userEmail);
-    return this.foundUser;
+  findOne(array, param, arrayAny, paramAny) {
+    this.foundItem = array.find(found => found[arrayAny] === param[paramAny]);
+    return this.foundItem;
   }
 
   errorResponse(res, status, error) {
