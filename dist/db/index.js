@@ -36,7 +36,7 @@ function () {
     key: "userData",
     value: function userData(data) {
       this.userReqData = {
-        id: Math.floor(Math.random() * 1000000000000000),
+        id: Math.floor(Math.random() * 1000000000),
         email: String(data.userEmail),
         firstName: String(data.userFirstName),
         lastName: String(data.userLastName),
@@ -61,8 +61,8 @@ function () {
     key: "bankAccount",
     value: function bankAccount(data) {
       this.bankAccountData = {
-        id: Math.floor(Math.random() * 1000000000000000),
-        accountNumber: Math.floor(1000000000 + Math.random() * 9000000000),
+        id: Math.floor(Math.random() * 1000000000),
+        accountNumber: Math.floor(100000000 + Math.random() * 900000000),
         createdOn: new Date(),
         owner: parseInt(data.ownerId, 10),
         type: String(data.bankAccountType),
@@ -73,22 +73,22 @@ function () {
     }
   }, {
     key: "createBankAccountResponse",
-    value: function createBankAccountResponse(data) {
-      this.newBankAccountData = {
-        accountNumber: parseInt(data.userId, 10),
-        firstName: String(data.userFirstName),
-        lastName: String(data.userLastName),
-        email: String(data.userEmail),
-        type: String(data.bankAccountType),
-        openingBalance: parseFloat(data.bankAccountBalance)
+    value: function createBankAccountResponse(dataOne, dataTwo) {
+      this.newBankAccountRes = {
+        accountNumber: parseInt(dataOne.userId, 10),
+        firstName: String(dataTwo.userFirstName),
+        lastName: String(dataTwo.userLastName),
+        email: String(dataTwo.userEmail),
+        type: String(dataOne.bankAccountType),
+        openingBalance: parseFloat(dataOne.bankAccountBalance)
       };
-      return this.newBankAccountData;
+      return this.newBankAccountRes;
     }
   }, {
     key: "transaction",
     value: function transaction(data) {
       this.transactionData = {
-        id: Math.floor(Math.random() * 1000000000000000),
+        id: Math.floor(Math.random() * 1000000000),
         createdOn: new Date(),
         type: String(data.transactionType),
         accountNumber: parseInt(data.accountNumber, 10),
@@ -116,7 +116,7 @@ function () {
     key: "adminStaffData",
     value: function adminStaffData(data) {
       this.adminStaff = {
-        id: Math.floor(Math.random() * 1000000000000000),
+        id: Math.floor(Math.random() * 1000000000),
         username: String(data.username),
         password: String(data.password),
         isAdmin: true
@@ -127,7 +127,7 @@ function () {
     key: "staffData",
     value: function staffData(data) {
       this.staffInfo = {
-        id: Math.floor(Math.random() * 1000000000000000),
+        id: Math.floor(Math.random() * 1000000000),
         username: String(data.username),
         password: String(data.password),
         type: String(data.accountType),
@@ -141,22 +141,22 @@ function () {
       var _this$users;
 
       this.testUserOne = {
-        userEmail: 'foobar@com',
-        userFirstName: 'Foo',
-        userLastName: 'Bar',
-        userPassword: 'Abcderg13#isfg',
-        accountType: 'Client'
+        id: 1010101010,
+        email: 'foobar@com',
+        firstName: 'Foo',
+        lastName: 'Bar',
+        password: 'Abcderg13#isfg',
+        type: 'Client'
       };
       this.testUserTwo = {
-        userEmail: 'barfoo@com',
-        userFirstName: 'Bar',
-        userLastName: 'Foo',
-        userPassword: 'Abcderg13#isfg',
-        accountType: 'Client'
+        id: 2020202020,
+        email: 'barfoo@com',
+        firstName: 'Bar',
+        lastName: 'Foo',
+        password: 'Abcderg13#isfg',
+        type: 'Client'
       };
-      this.testUserOneData = this.userData(this.testUserOne);
-      this.testUserTwoData = this.userData(this.testUserTwo);
-      this.userDataList = [this.testUserOneData, this.testUserTwoData];
+      this.userDataList = [this.testUserOne, this.testUserTwo];
 
       (_this$users = this.users).push.apply(_this$users, _toConsumableArray(this.userDataList));
     }
@@ -165,20 +165,24 @@ function () {
     value: function bankAccountList() {
       var _this$bankAccounts;
 
-      this.testBankAccountOneData = {
-        ownerId: this.testUserOneData.id,
-        bankAccountType: 'Savings',
-        bankAccountStatus: 'Active',
-        bankAccountBalance: '1000000'
+      this.testBankAccountOne = {
+        id: 1111111111,
+        accountNumber: 1212121212,
+        createdOn: new Date(),
+        owner: this.testUserOne.id,
+        type: 'Savings',
+        status: 'Active',
+        balance: 1000000
       };
-      this.testBankAccountTwoData = {
-        ownerId: this.testUserTwoData.id,
-        bankAccountType: 'Current',
-        bankAccountStatus: 'Active',
-        bankAccountBalance: '150000'
+      this.testBankAccountTwo = {
+        id: 3333333333,
+        accountNumber: 1313131313,
+        createdOn: new Date(),
+        owner: this.testUserOne.id,
+        type: 'Current',
+        status: 'Active',
+        balance: 1000000
       };
-      this.testBankAccountOne = this.bankAccount(this.testBankAccountOneData);
-      this.testBankAccountTwo = this.bankAccount(this.testBankAccountTwoData);
       this.testBankAccountList = [this.testBankAccountOne, this.testBankAccountTwo];
 
       (_this$bankAccounts = this.bankAccounts).push.apply(_this$bankAccounts, _toConsumableArray(this.testBankAccountList));
@@ -188,18 +192,20 @@ function () {
     value: function staffList() {
       var _this$staff;
 
-      this.testStaffOneData = {
+      this.testStaffOne = {
+        id: 3030303030,
         username: 'FooBar',
         password: '12345ABC#',
-        accountType: 'staff'
+        type: 'staff',
+        isAdmin: false
       };
-      this.testStaffTwoData = {
+      this.testStaffTwo = {
+        id: 4040404040,
         username: 'BarFoo',
         password: '12345ABC#',
-        accountType: 'staff'
+        type: 'staff',
+        isAdmin: false
       };
-      this.testStaffOne = this.staffData(this.testStaffOneData);
-      this.testStaffTwo = this.staffData(this.testStaffTwoData);
       this.testStaffList = [this.testStaffOne, this.testStaffTwo];
 
       (_this$staff = this.staff).push.apply(_this$staff, _toConsumableArray(this.testStaffList));
@@ -209,16 +215,18 @@ function () {
     value: function adminList() {
       var _this$admins;
 
-      this.testAdminOneData = {
+      this.testAdminOne = {
+        id: 5050505050,
         username: 'FooBar',
-        password: '12345ABC#'
+        password: '12345ABC#',
+        isAdmin: true
       };
-      this.testAdminTwoData = {
+      this.testAdminTwo = {
+        id: 6060606060,
         username: 'BarFoo',
-        password: '12345ABC#'
+        password: '12345ABC#',
+        isAdmin: true
       };
-      this.testAdminOne = this.adminStaffData(this.testAdminOneData);
-      this.testAdminTwo = this.adminStaffData(this.testAdminTwoData);
       this.testAdminList = [this.testAdminOne, this.testAdminTwo];
 
       (_this$admins = this.admins).push.apply(_this$admins, _toConsumableArray(this.testAdminList));
@@ -228,22 +236,26 @@ function () {
     value: function transactionList() {
       var _this$transactions;
 
-      this.testTransactionOneData = {
-        transactionType: 'Credit',
+      this.testTransactionOne = {
+        id: 7777777777,
+        createdOn: new Date(),
+        type: 'Credit',
         accountNumber: this.testBankAccountOne.accountNumber,
-        cashierId: this.testStaffOne.id,
-        transactionAmount: '10000',
-        accountBalance: this.testBankAccountOne.balance
+        cashier: this.testStaffOne.id,
+        amount: 1000,
+        oldBalance: 11000,
+        newBalance: 10000
       };
-      this.testTransactionTwoData = {
-        transactionType: 'Debit',
+      this.testTransactionTwo = {
+        id: 8888888888,
+        createdOn: new Date(),
+        type: 'Credit',
         accountNumber: this.testBankAccountTwo.accountNumber,
-        cashierId: this.testStaffTwo.id,
-        transactionAmount: '14000',
-        accountBalance: this.testBankAccountTwo.balance
+        cashier: this.testStaffTwo.id,
+        amount: 2000,
+        oldBalance: 12000,
+        newBalance: 10000
       };
-      this.testTransactionOne = this.transaction(this.testTransactionOneData);
-      this.testTransactionTwo = this.transaction(this.testTransactionTwoData);
       this.testTransactionList = [this.testTransactionOne, this.testTransactionTwo];
 
       (_this$transactions = this.transactions).push.apply(_this$transactions, _toConsumableArray(this.testTransactionList));
