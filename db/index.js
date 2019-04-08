@@ -22,10 +22,10 @@ class Banka {
 
   createUserDataResponse(data) {
     this.userResData = {
-      id: parseInt(data.userId, 10),
-      firstName: String(data.userFirstName),
-      lastName: String(data.userLastName),
-      email: String(data.userEmail),
+      id: parseInt(data.id, 10),
+      firstName: String(data.firstName),
+      lastName: String(data.lastName),
+      email: String(data.email),
     };
     return this.userResData;
   }
@@ -45,12 +45,12 @@ class Banka {
 
   createBankAccountResponse(dataOne, dataTwo) {
     this.newBankAccountRes = {
-      accountNumber: parseInt(dataOne.userId, 10),
-      firstName: String(dataTwo.userFirstName),
-      lastName: String(dataTwo.userLastName),
-      email: String(dataTwo.userEmail),
-      type: String(dataOne.bankAccountType),
-      openingBalance: parseFloat(dataOne.bankAccountBalance),
+      accountNumber: parseInt(dataOne.id, 10),
+      firstName: String(dataTwo.firstName),
+      lastName: String(dataTwo.lastName),
+      email: String(dataTwo.email),
+      type: String(dataOne.type),
+      openingBalance: parseFloat(dataOne.balance),
     };
     return this.newBankAccountRes;
   }
@@ -71,12 +71,12 @@ class Banka {
 
   processTransaction(data) {
     this.transactionResData = {
-      transactionId: parseInt(data.transactionId, 10),
+      transactionId: parseInt(data.id, 10),
       accountNumber: String(data.accountNumber),
-      amount: parseFloat(data.transactionAmount),
+      amount: parseFloat(data.amount),
       cashier: parseInt(data.cashierId, 10),
-      transactionType: String(data.transactionType),
-      accountBalance: String(data.accountBalance - data.transactionAmount),
+      transactionType: String(data.type),
+      accountBalance: String(data.newBalance),
     };
     return this.transactionResData;
   }
