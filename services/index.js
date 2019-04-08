@@ -14,6 +14,11 @@ class Banka {
     return this.namePattern.test(name);
   }
 
+  async checkAmount(amount) {
+    this.amountPattern = /^[0-9]+$/;
+    return this.amountPattern.test(amount);
+  }
+
   findUser(array, param) {
     this.foundUser = array.find(foundUser => foundUser.userEmail === param.userEmail);
     return this.foundUser;
