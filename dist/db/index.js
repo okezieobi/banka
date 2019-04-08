@@ -142,14 +142,14 @@ function () {
 
       this.testUserOne = {
         id: 1010101010,
-        email: 'foobar@com',
+        email: 'foobar@mail.com',
         firstName: 'Foo',
         lastName: 'Bar',
         password: 'Abcderg13#isfg'
       };
       this.testUserTwo = {
         id: 2020202020,
-        email: 'barfoo@com',
+        email: 'barfoo@mail.com',
         firstName: 'Bar',
         lastName: 'Foo',
         password: 'Abcderg13#isfg'

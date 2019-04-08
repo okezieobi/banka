@@ -1,26 +1,26 @@
 class Banka {
-  async validateEmail(email) {
+  validateEmail(email) {
     this.emailPattern = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     return this.emailPattern.test(email);
   }
 
-  async validatePassword(password) {
+  validatePassword(password) {
     this.passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return this.passwordPattern.test(password);
   }
 
-  async checkName(name) {
+  checkName(name) {
     this.namePattern = /^[A-Za-z\s]+$/;
     return this.namePattern.test(name);
   }
 
-  async checkAmount(amount) {
+  checkAmount(amount) {
     this.amountPattern = /^[0-9]+$/;
     return this.amountPattern.test(amount);
   }
 
   findUser(array, param) {
-    this.foundUser = array.find(foundUser => foundUser.userEmail === param.userEmail);
+    this.foundUser = array.find(foundUser => foundUser.email === param.userEmail);
     return this.foundUser;
   }
 
