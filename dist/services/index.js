@@ -104,6 +104,33 @@ function () {
       return checkName;
     }()
   }, {
+    key: "checkAmount",
+    value: function () {
+      var _checkAmount = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(amount) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                this.amountPattern = /^[0-9]+$/;
+                return _context4.abrupt("return", this.amountPattern.test(amount));
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function checkAmount(_x4) {
+        return _checkAmount.apply(this, arguments);
+      }
+
+      return checkAmount;
+    }()
+  }, {
     key: "findUser",
     value: function findUser(array, param) {
       this.foundUser = array.find(function (foundUser) {
