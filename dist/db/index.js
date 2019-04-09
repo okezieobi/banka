@@ -145,14 +145,14 @@ function () {
         email: 'foobar@mail.com',
         firstName: 'Foo',
         lastName: 'Bar',
-        password: 'Abcderg13#isfg'
+        password: 'AbcDFer123*@is!'
       };
       this.testUserTwo = {
         id: 2020202020,
         email: 'barfoo@mail.com',
         firstName: 'Bar',
         lastName: 'Foo',
-        password: 'Abcderg13#isfg'
+        password: 'AbcDFer123*@is!'
       };
       this.userDataList = [this.testUserOne, this.testUserTwo];
 
@@ -193,13 +193,13 @@ function () {
       this.testStaffOne = {
         id: 3030303030,
         username: 'FooBar',
-        password: '12345ABC#',
+        password: 'AbcDFer123*@is!',
         isAdmin: false
       };
       this.testStaffTwo = {
         id: 4040404040,
         username: 'BarFoo',
-        password: '12345ABC#',
+        password: 'AbcDFer123*@is!',
         isAdmin: false
       };
       this.testStaffList = [this.testStaffOne, this.testStaffTwo];
@@ -214,13 +214,13 @@ function () {
       this.testAdminOne = {
         id: 5050505050,
         username: 'FooBar',
-        password: '12345ABC#',
+        password: 'AbcDFer123*@is!',
         isAdmin: true
       };
       this.testAdminTwo = {
         id: 6060606060,
         username: 'BarFoo',
-        password: '12345ABC#',
+        password: 'AbcDFer123*@is!',
         isAdmin: true
       };
       this.testAdminList = [this.testAdminOne, this.testAdminTwo];
