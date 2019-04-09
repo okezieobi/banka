@@ -109,6 +109,8 @@ class Banka {
       firstName: 'Foo',
       lastName: 'Bar',
       password: 'AbcDFer123*@is!',
+      type: 'Client',
+      isAdmin: false,
     };
 
     this.testUserTwo = {
@@ -117,6 +119,8 @@ class Banka {
       firstName: 'Bar',
       lastName: 'Foo',
       password: 'AbcDFer123*@is!',
+      type: 'Client',
+      isAdmin: false,
     };
 
     this.userDataList = [this.testUserOne, this.testUserTwo];
