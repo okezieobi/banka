@@ -145,14 +145,18 @@ function () {
         email: 'foobar@mail.com',
         firstName: 'Foo',
         lastName: 'Bar',
-        password: 'AbcDFer123*@is!'
+        password: 'AbcDFer123*@is!',
+        type: 'Client',
+        isAdmin: false
       };
       this.testUserTwo = {
         id: 2020202020,
         email: 'barfoo@mail.com',
         firstName: 'Bar',
         lastName: 'Foo',
-        password: 'AbcDFer123*@is!'
+        password: 'AbcDFer123*@is!',
+        type: 'Client',
+        isAdmin: false
       };
       this.userDataList = [this.testUserOne, this.testUserTwo];
 

@@ -24,8 +24,10 @@ _index.default.userSignIn = function (req, res) {
 
   if (!registeredUser) return _services.default.errorResponse(res, 400, 'User does not exist, please sign up');
   if (registeredUser.password !== req.body.userPassword) return _services.default.errorResponse(res, 400, 'Password does not match user');
-  delete registeredUser.password;
-  return _services.default.successResponse(res, 200, registeredUser);
+
+  var responseUserData = _db.default.createUserDataResponse(registeredUser);
+
+  return _services.default.successResponse(res, 200, responseUserData);
 };
 
 var _default = _index.default.userSignIn;

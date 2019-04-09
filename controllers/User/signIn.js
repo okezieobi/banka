@@ -11,8 +11,8 @@ logic.userSignIn = (req, res) => {
   const registeredUser = services.findOne(data.users, req.body, 'email', 'userEmail');
   if (!registeredUser) return services.errorResponse(res, 400, 'User does not exist, please sign up');
   if (registeredUser.password !== req.body.userPassword) return services.errorResponse(res, 400, 'Password does not match user');
-  delete registeredUser.password;
-  return services.successResponse(res, 200, registeredUser);
+  const responseUserData = data.createUserDataResponse(registeredUser);
+  return services.successResponse(res, 200, responseUserData);
 };
 
 export default logic.userSignIn;
