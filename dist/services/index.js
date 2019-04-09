@@ -54,7 +54,7 @@ function () {
     key: "errorResponse",
     value: function errorResponse(res, codeStatus, error) {
       this.errRes = {
-        codeStatus: codeStatus,
+        status: codeStatus,
         error: error
       };
       res.status(codeStatus).send(this.errRes);
@@ -63,7 +63,7 @@ function () {
     key: "successResponse",
     value: function successResponse(res, codeStatus, data) {
       this.successRes = {
-        codeStatus: codeStatus,
+        status: codeStatus,
         data: data
       };
       res.status(codeStatus).send(this.successRes);
