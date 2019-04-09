@@ -26,7 +26,7 @@ class Banka {
 
   errorResponse(res, codeStatus, error) {
     this.errRes = {
-      codeStatus,
+      status: codeStatus,
       error,
     };
     res.status(codeStatus).send(this.errRes);
@@ -34,7 +34,7 @@ class Banka {
 
   successResponse(res, codeStatus, data) {
     this.successRes = {
-      codeStatus,
+      status: codeStatus,
       data,
     };
     res.status(codeStatus).send(this.successRes);
