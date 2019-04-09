@@ -52,21 +52,21 @@ function () {
     }
   }, {
     key: "errorResponse",
-    value: function errorResponse(res, status, error) {
+    value: function errorResponse(res, codeStatus, error) {
       this.errRes = {
-        status: status,
+        codeStatus: codeStatus,
         error: error
       };
-      res.send(this.errRes);
+      res.status(codeStatus).send(this.errRes);
     }
   }, {
     key: "successResponse",
-    value: function successResponse(res, status, data) {
+    value: function successResponse(res, codeStatus, data) {
       this.successRes = {
-        status: status,
+        codeStatus: codeStatus,
         data: data
       };
-      res.send(this.successRes);
+      res.status(codeStatus).send(this.successRes);
     }
   }]);
 
