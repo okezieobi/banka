@@ -108,7 +108,7 @@ class Banka {
       email: 'foobar@mail.com',
       firstName: 'Foo',
       lastName: 'Bar',
-      password: 'Abcderg13#isfg',
+      password: 'AbcDFer123*@is!',
     };
 
     this.testUserTwo = {
@@ -116,7 +116,7 @@ class Banka {
       email: 'barfoo@mail.com',
       firstName: 'Bar',
       lastName: 'Foo',
-      password: 'Abcderg13#isfg',
+      password: 'AbcDFer123*@is!',
     };
 
     this.userDataList = [this.testUserOne, this.testUserTwo];
@@ -152,14 +152,14 @@ class Banka {
     this.testStaffOne = {
       id: 3030303030,
       username: 'FooBar',
-      password: '12345ABC#',
+      password: 'AbcDFer123*@is!',
       isAdmin: false,
     };
 
     this.testStaffTwo = {
       id: 4040404040,
       username: 'BarFoo',
-      password: '12345ABC#',
+      password: 'AbcDFer123*@is!',
       isAdmin: false,
     };
     this.testStaffList = [this.testStaffOne, this.testStaffTwo];
@@ -170,14 +170,14 @@ class Banka {
     this.testAdminOne = {
       id: 5050505050,
       username: 'FooBar',
-      password: '12345ABC#',
+      password: 'AbcDFer123*@is!',
       isAdmin: true,
     };
 
     this.testAdminTwo = {
       id: 6060606060,
       username: 'BarFoo',
-      password: '12345ABC#',
+      password: 'AbcDFer123*@is!',
       isAdmin: true,
     };
 
