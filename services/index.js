@@ -24,20 +24,20 @@ class Banka {
     return this.foundItem;
   }
 
-  errorResponse(res, status, error) {
+  errorResponse(res, codeStatus, error) {
     this.errRes = {
-      status,
+      codeStatus,
       error,
     };
-    res.send(this.errRes);
+    res.status(codeStatus).send(this.errRes);
   }
 
-  successResponse(res, status, data) {
+  successResponse(res, codeStatus, data) {
     this.successRes = {
-      status,
+      codeStatus,
       data,
     };
-    res.send(this.successRes);
+    res.status(codeStatus).send(this.successRes);
   }
 }
 
