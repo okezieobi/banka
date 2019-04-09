@@ -198,12 +198,14 @@ function () {
         id: 3030303030,
         username: 'FooBar',
         password: 'AbcDFer123*@is!',
+        type: 'Staff',
         isAdmin: false
       };
       this.testStaffTwo = {
         id: 4040404040,
         username: 'BarFoo',
         password: 'AbcDFer123*@is!',
+        type: 'Staff',
         isAdmin: false
       };
       this.testStaffList = [this.testStaffOne, this.testStaffTwo];
