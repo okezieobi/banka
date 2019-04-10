@@ -14,9 +14,14 @@ class Banka {
     return this.namePattern.test(name);
   }
 
-  checkAmount(amount) {
+  checkNumber(amount) {
     this.amountPattern = /^[0-9]+$/;
     return this.amountPattern.test(amount);
+  }
+
+  checkUserName(username) {
+    this.usernamePattern = /^[a-zA-Z0-9\s.-]+$/;
+    return this.usernamePattern.test(username);
   }
 
   findOne(array, param, arrayAny, paramAny) {
