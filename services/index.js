@@ -25,8 +25,12 @@ class Banka {
   }
 
   findOne(array, param, arrayAny, paramAny) {
-    this.foundItem = array.find(found => found[arrayAny] === param[paramAny]);
-    return this.foundItem;
+    if (typeof parseInt(param[paramAny], 10) !== 'number') {
+      this.NotANumber = array.find(found => found[arrayAny] === param[paramAny]);
+      return this.NotANumber;
+    }
+    this.number = array.find(found => found[arrayAny] === parseInt(param[paramAny], 10));
+    return this.number;
   }
 
   errorResponse(res, codeStatus, error) {
