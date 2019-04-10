@@ -95,7 +95,7 @@ function () {
         cashier: parseInt(data.cashierId, 10),
         amount: parseFloat(data.transactionAmount),
         oldBalance: parseFloat(data.accountBalance),
-        newBalance: (parseFloat(data.accountBalance) - parseFloat(data.transactionAmount)).toFixed(2)
+        newBalance: parseFloat((parseFloat(data.accountBalance) - parseFloat(data.transactionAmount)).toFixed(2))
       };
       return this.transactionData;
     }
