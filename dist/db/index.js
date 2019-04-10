@@ -75,7 +75,7 @@ function () {
     key: "createBankAccountResponse",
     value: function createBankAccountResponse(dataOne, dataTwo) {
       this.newBankAccountRes = {
-        accountNumber: parseInt(dataOne.id, 10),
+        accountNumber: parseInt(dataOne.accountNumber, 10),
         firstName: String(dataTwo.firstName),
         lastName: String(dataTwo.lastName),
         email: String(dataTwo.email),
