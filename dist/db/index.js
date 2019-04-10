@@ -66,8 +66,8 @@ function () {
         createdOn: new Date(),
         owner: parseInt(data.ownerId, 10),
         type: String(data.bankAccountType),
-        status: String(data.bankAccountStatus),
-        balance: parseFloat(data.bankAccountBalance)
+        status: 'Active',
+        balance: 0.00
       };
       return this.bankAccountData;
     }
@@ -95,7 +95,7 @@ function () {
         cashier: parseInt(data.cashierId, 10),
         amount: parseFloat(data.transactionAmount),
         oldBalance: parseFloat(data.accountBalance),
-        newBalance: parseFloat(data.accountBalance) - parseFloat(data.transactionAmount)
+        newBalance: (parseFloat(data.accountBalance) - parseFloat(data.transactionAmount)).toFixed(2)
       };
       return this.transactionData;
     }
@@ -174,7 +174,7 @@ function () {
         owner: this.testUserOne.id,
         type: 'Savings',
         status: 'Active',
-        balance: 1000000
+        balance: 11000.00
       };
       this.testBankAccountTwo = {
         id: 3333333333,
@@ -183,7 +183,7 @@ function () {
         owner: this.testUserOne.id,
         type: 'Current',
         status: 'Active',
-        balance: 1000000
+        balance: 12000.00
       };
       this.testBankAccountList = [this.testBankAccountOne, this.testBankAccountTwo];
 
@@ -244,9 +244,9 @@ function () {
         type: 'Credit',
         accountNumber: this.testBankAccountOne.accountNumber,
         cashier: this.testStaffOne.id,
-        amount: 1000,
-        oldBalance: 11000,
-        newBalance: 10000
+        amount: 1000.00,
+        oldBalance: 11000.00,
+        newBalance: 10000.00
       };
       this.testTransactionTwo = {
         id: 8888888888,
@@ -254,9 +254,9 @@ function () {
         type: 'Credit',
         accountNumber: this.testBankAccountTwo.accountNumber,
         cashier: this.testStaffTwo.id,
-        amount: 2000,
-        oldBalance: 12000,
-        newBalance: 10000
+        amount: 2000.00,
+        oldBalance: 12000.00,
+        newBalance: 10000.00
       };
       this.testTransactionList = [this.testTransactionOne, this.testTransactionTwo];
 

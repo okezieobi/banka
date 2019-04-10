@@ -37,10 +37,16 @@ function () {
       return this.namePattern.test(name);
     }
   }, {
-    key: "checkAmount",
-    value: function checkAmount(amount) {
+    key: "checkNumber",
+    value: function checkNumber(amount) {
       this.amountPattern = /^[0-9]+$/;
       return this.amountPattern.test(amount);
+    }
+  }, {
+    key: "checkUserName",
+    value: function checkUserName(username) {
+      this.usernamePattern = /^[a-zA-Z0-9\s.-]+$/;
+      return this.usernamePattern.test(username);
     }
   }, {
     key: "findOne",
