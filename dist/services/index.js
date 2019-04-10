@@ -51,10 +51,17 @@ function () {
   }, {
     key: "findOne",
     value: function findOne(array, param, arrayAny, paramAny) {
-      this.foundItem = array.find(function (found) {
-        return found[arrayAny] === param[paramAny];
+      if (typeof parseInt(param[paramAny], 10) !== 'number') {
+        this.NotANumber = array.find(function (found) {
+          return found[arrayAny] === param[paramAny];
+        });
+        return this.NotANumber;
+      }
+
+      this.number = array.find(function (found) {
+        return found[arrayAny] === parseInt(param[paramAny], 10);
       });
-      return this.foundItem;
+      return this.number;
     }
   }, {
     key: "errorResponse",

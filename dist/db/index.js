@@ -75,7 +75,7 @@ function () {
     key: "createBankAccountResponse",
     value: function createBankAccountResponse(dataOne, dataTwo) {
       this.newBankAccountRes = {
-        accountNumber: parseInt(dataOne.id, 10),
+        accountNumber: parseInt(dataOne.accountNumber, 10),
         firstName: String(dataTwo.firstName),
         lastName: String(dataTwo.lastName),
         email: String(dataTwo.email),
@@ -95,7 +95,7 @@ function () {
         cashier: parseInt(data.cashierId, 10),
         amount: parseFloat(data.transactionAmount),
         oldBalance: parseFloat(data.accountBalance),
-        newBalance: (parseFloat(data.accountBalance) - parseFloat(data.transactionAmount)).toFixed(2)
+        newBalance: parseFloat((parseFloat(data.accountBalance) - parseFloat(data.transactionAmount)).toFixed(2))
       };
       return this.transactionData;
     }
