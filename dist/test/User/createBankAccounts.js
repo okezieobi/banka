@@ -108,7 +108,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       }
     }, _callee3);
   })));
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is undefined ',
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user or owner id is null',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -119,9 +119,9 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
         switch (_context4.prev = _context4.next) {
           case 0:
             testData = {
-              bankAccountType: undefined
+              bankAccountType: 'Savings'
             };
-            testHeader = '1010101010';
+            testHeader = null;
             _context4.next = 4;
             return _index.chai.request(_index.app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
 
@@ -130,7 +130,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
             (0, _index.expect)(response).to.have.status(400);
             (0, _index.expect)(response.body).to.be.an('object');
             (0, _index.expect)(response.body).to.have.property('status').equal(400);
-            (0, _index.expect)(response.body).to.have.property('error').equal('Bank account type is required');
+            (0, _index.expect)(response.body).to.have.property('error').equal('User id must be numbers');
 
           case 9:
           case "end":
@@ -139,7 +139,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       }
     }, _callee4);
   })));
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is an empty string ',
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is undefined ',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -150,7 +150,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
         switch (_context5.prev = _context5.next) {
           case 0:
             testData = {
-              bankAccountType: ''
+              bankAccountType: undefined
             };
             testHeader = '1010101010';
             _context5.next = 4;
@@ -170,7 +170,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       }
     }, _callee5);
   })));
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is null',
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is an empty string ',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -181,7 +181,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
         switch (_context6.prev = _context6.next) {
           case 0:
             testData = {
-              bankAccountType: null
+              bankAccountType: ''
             };
             testHeader = '1010101010';
             _context6.next = 4;
@@ -201,7 +201,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       }
     }, _callee6);
   })));
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type does not exist',
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is null',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -211,7 +211,9 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            testData = {};
+            testData = {
+              bankAccountType: null
+            };
             testHeader = '1010101010';
             _context7.next = 4;
             return _index.chai.request(_index.app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
@@ -230,7 +232,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       }
     }, _callee7);
   })));
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type are not letters',
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type does not exist',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -240,9 +242,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            testData = {
-              bankAccountType: '1234@567'
-            };
+            testData = {};
             testHeader = '1010101010';
             _context8.next = 4;
             return _index.chai.request(_index.app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
@@ -252,7 +252,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
             (0, _index.expect)(response).to.have.status(400);
             (0, _index.expect)(response.body).to.be.an('object');
             (0, _index.expect)(response.body).to.have.property('status').equal(400);
-            (0, _index.expect)(response.body).to.have.property('error').equal('Bank account type must be letters');
+            (0, _index.expect)(response.body).to.have.property('error').equal('Bank account type is required');
 
           case 9:
           case "end":
@@ -261,7 +261,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       }
     }, _callee8);
   })));
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type does not equal "Savings" or "savings" or "Current" or "current" ',
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type are not letters',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -272,7 +272,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
         switch (_context9.prev = _context9.next) {
           case 0:
             testData = {
-              bankAccountType: 'SavingCurren'
+              bankAccountType: '1234@567'
             };
             testHeader = '1010101010';
             _context9.next = 4;
@@ -283,7 +283,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
             (0, _index.expect)(response).to.have.status(400);
             (0, _index.expect)(response.body).to.be.an('object');
             (0, _index.expect)(response.body).to.have.property('status').equal(400);
-            (0, _index.expect)(response.body).to.have.property('error').equal('Bank account type must be savings or current');
+            (0, _index.expect)(response.body).to.have.property('error').equal('Bank account type must be letters');
 
           case 9:
           case "end":
@@ -292,7 +292,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       }
     }, _callee9);
   })));
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user is not registered',
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type does not equal "Savings" or "savings" or "Current" or "current" ',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -303,9 +303,9 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
         switch (_context10.prev = _context10.next) {
           case 0:
             testData = {
-              bankAccountType: 'Savings'
+              bankAccountType: 'SavingCurren'
             };
-            testHeader = '101010101000';
+            testHeader = '1010101010';
             _context10.next = 4;
             return _index.chai.request(_index.app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
 
@@ -314,7 +314,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
             (0, _index.expect)(response).to.have.status(400);
             (0, _index.expect)(response.body).to.be.an('object');
             (0, _index.expect)(response.body).to.have.property('status').equal(400);
-            (0, _index.expect)(response.body).to.have.property('error').equal('Only registered users can create bank accounts, please sign up');
+            (0, _index.expect)(response.body).to.have.property('error').equal('Bank account type must be savings or current');
 
           case 9:
           case "end":
@@ -322,6 +322,37 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
         }
       }
     }, _callee10);
+  })));
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user is not registered',
+  /*#__PURE__*/
+  _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee11() {
+    var testData, testHeader, response;
+    return regeneratorRuntime.wrap(function _callee11$(_context11) {
+      while (1) {
+        switch (_context11.prev = _context11.next) {
+          case 0:
+            testData = {
+              bankAccountType: 'Savings'
+            };
+            testHeader = '101010101000';
+            _context11.next = 4;
+            return _index.chai.request(_index.app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+
+          case 4:
+            response = _context11.sent;
+            (0, _index.expect)(response).to.have.status(400);
+            (0, _index.expect)(response.body).to.be.an('object');
+            (0, _index.expect)(response.body).to.have.property('status').equal(400);
+            (0, _index.expect)(response.body).to.have.property('error').equal('Only registered users can create bank accounts, please sign up');
+
+          case 9:
+          case "end":
+            return _context11.stop();
+        }
+      }
+    }, _callee11);
   })));
 });
 //# sourceMappingURL=createBankAccounts.js.map

@@ -53,6 +53,19 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response.body).to.have.property('error').equal('User id must be numbers');
   });
 
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user or owner id is null', async () => {
+    const testData = {
+      bankAccountType: 'Savings',
+    };
+
+    const testHeader = null;
+    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal('User id must be numbers');
+  });
+
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is undefined ', async () => {
     const testData = {
       bankAccountType: undefined,
