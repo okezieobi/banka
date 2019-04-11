@@ -35,7 +35,7 @@ class Banka {
       id: Math.floor(Math.random() * 1000000000),
       accountNumber: Math.floor(100000000 + Math.random() * 900000000),
       createdOn: new Date(),
-      owner: parseInt(data.ownerId, 10),
+      owner: parseInt(data['owner-id'], 10),
       type: String(data.bankAccountType),
       status: 'Active',
       balance: 0.00,
@@ -55,27 +55,42 @@ class Banka {
     return this.newBankAccountRes;
   }
 
-  transaction(data) {
+  debitAccountTransaction(dataOne, dataTwo, dataThree) {
     this.transactionData = {
       id: Math.floor(Math.random() * 1000000000),
       createdOn: new Date(),
-      type: String(data.transactionType),
-      accountNumber: parseInt(data.accountNumber, 10),
-      cashier: parseInt(data.cashierId, 10),
-      amount: parseFloat(data.transactionAmount),
-      oldBalance: parseFloat(data.accountBalance),
-      newBalance: parseFloat((parseFloat(data.accountBalance)
-        - parseFloat(data.transactionAmount)).toFixed(2)),
+      type: 'Debit',
+      accountNumber: parseInt(dataTwo.account_number, 10),
+      cashier: parseInt(dataThree['cashier-id'], 10),
+      amount: parseFloat(dataOne.transactionAmount),
+      oldBalance: parseFloat(dataTwo.accountBalance),
+      newBalance: parseFloat((parseFloat(dataTwo.accountBalance)
+        - parseFloat(dataOne.transactionAmount)).toFixed(2)),
     };
     return this.transactionData;
   }
 
-  processTransaction(data) {
+  creditAccountTransaction(dataOne, dataTwo, dataThree) {
+    this.transactionData = {
+      id: Math.floor(Math.random() * 1000000000),
+      createdOn: new Date(),
+      type: 'Credit',
+      accountNumber: parseInt(dataTwo.account_number, 10),
+      cashier: parseInt(dataThree['cashier-id'], 10),
+      amount: parseFloat(dataOne.transactionAmount),
+      oldBalance: parseFloat(dataTwo.accountBalance),
+      newBalance: parseFloat((parseFloat(dataTwo.accountBalance)
+        + parseFloat(dataOne.transactionAmount)).toFixed(2)),
+    };
+    return this.transactionData;
+  }
+
+  transactionResponse(data) {
     this.transactionResData = {
       transactionId: parseInt(data.id, 10),
       accountNumber: String(data.accountNumber),
       amount: parseFloat(data.amount),
-      cashier: parseInt(data.cashierId, 10),
+      cashier: parseInt(data.cashier, 10),
       transactionType: String(data.type),
       accountBalance: String(data.newBalance),
     };
