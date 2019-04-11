@@ -251,7 +251,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
     expect(response.body).to.have.property('error').equal('Email format is wrong');
   });
 
-  it('Should NOT create a User at "/api/v1/auth/signup" if user email is has already been registered', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email has already been registered', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',

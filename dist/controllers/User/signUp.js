@@ -23,7 +23,7 @@ _index.default.userSignUp = function (req, res) {
   if (!_services.default.validateEmail(req.body.userEmail)) return _services.default.errorResponse(res, 400, 'Email format is wrong');
   if (!req.body.userPassword) return _services.default.errorResponse(res, 400, 'Password is required');
   if (!_services.default.validatePassword(req.body.userPassword)) return _services.default.errorResponse(res, 400, 'Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
-  if (_services.default.findOne(_db.default.users, req.body, 'email', 'userEmail')) return _services.default.errorResponse(res, 400, 'User exists, please sign in');
+  if (_services.default.findByValue(_db.default.users, req.body, 'email', 'userEmail')) return _services.default.errorResponse(res, 400, 'User exists, please sign in');
 
   var newUser = _db.default.userData(req.body);
 

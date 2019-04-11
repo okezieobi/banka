@@ -24,13 +24,15 @@ class Banka {
     return this.usernamePattern.test(username);
   }
 
-  findOne(array, param, arrayAny, paramAny) {
-    if (typeof parseInt(param[paramAny], 10) !== 'number') {
-      this.NotANumber = array.find(found => found[arrayAny] === param[paramAny]);
-      return this.NotANumber;
-    }
-    this.number = array.find(found => found[arrayAny] === parseInt(param[paramAny], 10));
-    return this.number;
+  findById(array, param, arrayAny, paramAny) {
+    this.foundById = array.find(found => found[arrayAny] === parseInt(param[paramAny], 10));
+    return this.foundById;
+  }
+
+
+  findByValue(array, param, arrayAny, paramAny) {
+    this.foundByValue = array.find(found => found[arrayAny] === param[paramAny]);
+    return this.foundByValue;
   }
 
   errorResponse(res, codeStatus, error) {

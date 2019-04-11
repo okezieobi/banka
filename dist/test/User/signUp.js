@@ -556,7 +556,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', f
       }
     }, _callee16);
   })));
-  it('Should NOT create a User at "/api/v1/auth/signup" if user email is has already been registered',
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email has already been registered',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
