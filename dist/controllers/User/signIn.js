@@ -20,7 +20,7 @@ _index.default.userSignIn = function (req, res) {
   if (!req.body.userPassword) return _services.default.errorResponse(res, 400, 'Password is required');
   if (!_services.default.validatePassword(req.body.userPassword)) return _services.default.errorResponse(res, 400, 'Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
 
-  var registeredUser = _services.default.findOne(_db.default.users, req.body, 'email', 'userEmail');
+  var registeredUser = _services.default.findByValue(_db.default.users, req.body, 'email', 'userEmail');
 
   if (!registeredUser) return _services.default.errorResponse(res, 400, 'User does not exist, please sign up');
   if (registeredUser.password !== req.body.userPassword) return _services.default.errorResponse(res, 400, 'Password does not match user');
