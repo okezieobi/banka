@@ -49,19 +49,20 @@ function () {
       return this.usernamePattern.test(username);
     }
   }, {
-    key: "findOne",
-    value: function findOne(array, param, arrayAny, paramAny) {
-      if (typeof parseInt(param[paramAny], 10) !== 'number') {
-        this.NotANumber = array.find(function (found) {
-          return found[arrayAny] === param[paramAny];
-        });
-        return this.NotANumber;
-      }
-
-      this.number = array.find(function (found) {
+    key: "findById",
+    value: function findById(array, param, arrayAny, paramAny) {
+      this.foundById = array.find(function (found) {
         return found[arrayAny] === parseInt(param[paramAny], 10);
       });
-      return this.number;
+      return this.foundById;
+    }
+  }, {
+    key: "findByValue",
+    value: function findByValue(array, param, arrayAny, paramAny) {
+      this.foundByValue = array.find(function (found) {
+        return found[arrayAny] === param[paramAny];
+      });
+      return this.foundByValue;
     }
   }, {
     key: "errorResponse",
