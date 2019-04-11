@@ -11,7 +11,7 @@ logic.createBankAccount = (req, res) => {
   if (req.body.bankAccountType !== 'current' && req.body.bankAccountType !== 'savings'
     && req.body.bankAccountType !== 'Current' && req.body.bankAccountType !== 'Savings') return services.errorResponse(res, 400, 'Bank account type must be savings or current');
   const findUser = services.findById(data.users, req.body, 'id', 'ownerId');
-  if (!findUser) return services.errorResponse(res, 400, 'Only users can create bank accounts, please sign up');
+  if (!findUser) return services.errorResponse(res, 400, 'Only registered users can create bank accounts, please sign up');
   const newBankAccount = data.bankAccount(req.body);
   const bankAccountRes = data.createBankAccountResponse(newBankAccount, findUser);
   return services.successResponse(res, 201, bankAccountRes);
