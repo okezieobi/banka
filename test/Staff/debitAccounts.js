@@ -156,7 +156,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Account number must be numbers');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not a number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not found', async () => {
     const testData = {
       transactionAmount: '1000',
     };

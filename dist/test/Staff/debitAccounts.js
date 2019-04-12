@@ -365,7 +365,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee11);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not a number',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not found',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
