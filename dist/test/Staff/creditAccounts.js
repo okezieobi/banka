@@ -365,7 +365,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
       }
     }, _callee11);
   })));
-  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if account number is not a number',
+  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if account number is not found',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
