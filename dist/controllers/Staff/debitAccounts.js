@@ -33,7 +33,7 @@ _index.default.debitAccount = function (req, res) {
 
   var responseTransaction = _db.default.transactionResponse(newTransaction);
 
-  findAccountNumber.balance -= req.body.transactionAmount;
+  findAccountNumber.balance -= parseFloat(req.body.transactionAmount);
   return _services.default.successResponse(res, 201, responseTransaction);
 };
 

@@ -16,7 +16,7 @@ logic.debitAccount = (req, res) => {
   req.params.accountBalance = findAccountNumber.balance;
   const newTransaction = data.debitAccountTransaction(req.body, req.params, req.headers);
   const responseTransaction = data.transactionResponse(newTransaction);
-  findAccountNumber.balance -= req.body.transactionAmount;
+  findAccountNumber.balance -= parseFloat(req.body.transactionAmount);
   return services.successResponse(res, 201, responseTransaction);
 };
 
