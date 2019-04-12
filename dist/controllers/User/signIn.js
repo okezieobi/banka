@@ -22,7 +22,7 @@ _index.default.userSignIn = function (req, res) {
 
   var registeredUser = _services.default.findByValue(_db.default.users, req.body, 'email', 'userEmail');
 
-  if (!registeredUser) return _services.default.errorResponse(res, 400, 'User does not exist, please sign up');
+  if (!registeredUser) return _services.default.errorResponse(res, 404, 'User does not exist, please sign up');
   if (registeredUser.password !== req.body.userPassword) return _services.default.errorResponse(res, 400, 'Password does not match user');
 
   var responseUserData = _db.default.createUserDataResponse(registeredUser);

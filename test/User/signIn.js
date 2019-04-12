@@ -83,9 +83,9 @@ describe('Test endpoints at "/api/v1/auth/signin" to sign in a User with POST', 
     };
     testData.userEmail = 'haha@mail.com';
     const response = await chai.request(app).post('/api/v1/auth/signin').send(testData);
-    expect(response).to.have.status(400);
+    expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('status').equal(404);
     expect(response.body).to.have.property('error').equal('User does not exist, please sign up');
   });
 

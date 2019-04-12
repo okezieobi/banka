@@ -192,9 +192,9 @@ describe('Test endpoints at "/api/v1/auth/signin" to sign in a User with POST', 
 
           case 4:
             response = _context6.sent;
-            (0, _index.expect)(response).to.have.status(400);
+            (0, _index.expect)(response).to.have.status(404);
             (0, _index.expect)(response.body).to.be.an('object');
-            (0, _index.expect)(response.body).to.have.property('status').equal(400);
+            (0, _index.expect)(response.body).to.have.property('status').equal(404);
             (0, _index.expect)(response.body).to.have.property('error').equal('User does not exist, please sign up');
 
           case 9:
