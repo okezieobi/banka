@@ -9,7 +9,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 _index.chai.use(_index.chaiHttp);
 
 describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debit a bank account with an amount as a signed in Staff with POST', function () {
-  it('Should debit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/debit" with POST if all request inputs, headers and params are valid',
+  it('Should debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" with POST if all request inputs, headers and params are valid',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -47,7 +47,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is undefined',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is undefined',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -79,7 +79,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee2);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is an empty string',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is an empty string',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -111,7 +111,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee3);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is null',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is null',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -143,7 +143,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee4);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount does not exist',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount does not exist',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -173,7 +173,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee5);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is not a number',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is not a number',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -205,7 +205,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee6);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is an empty string',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is an empty string',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -237,7 +237,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee7);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is not a number',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is not a number',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -269,7 +269,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee8);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is null',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is null',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -301,7 +301,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee9);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is not registered',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is not registered',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -324,7 +324,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
             (0, _index.expect)(response).to.have.status(404);
             (0, _index.expect)(response.body).to.be.an('object');
             (0, _index.expect)(response.body).to.have.property('status').equal(404);
-            (0, _index.expect)(response.body).to.have.property('error').equal('Staff not found, only registered staff can debit or credit an bank account');
+            (0, _index.expect)(response.body).to.have.property('error').equal('Staff not found, only registered staff can debit or credit a bank account');
 
           case 10:
           case "end":
@@ -333,7 +333,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee10);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if account number is not a number',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not a number',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
@@ -365,7 +365,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
       }
     }, _callee11);
   })));
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if account number is not a number',
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not a number',
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/

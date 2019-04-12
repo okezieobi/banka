@@ -26,7 +26,7 @@ _index.default.debitAccount = function (req, res) {
   var verifyCashier = _services.default.findById(_db.default.staff, req.headers, 'id', 'cashier-id');
 
   if (!findAccountNumber) return _services.default.errorResponse(res, 404, 'Account number not found');
-  if (!verifyCashier) return _services.default.errorResponse(res, 404, 'Staff not found, only registered staff can debit or credit an bank account');
+  if (!verifyCashier) return _services.default.errorResponse(res, 404, 'Staff not found, only registered staff can debit or credit a bank account');
   req.params.accountBalance = findAccountNumber.balance;
 
   var newTransaction = _db.default.debitAccountTransaction(req.body, req.params, req.headers);

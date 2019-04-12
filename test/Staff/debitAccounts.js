@@ -8,7 +8,7 @@ import {
 chai.use(chaiHttp);
 
 describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debit a bank account with an amount as a signed in Staff with POST', () => {
-  it('Should debit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/debit" with POST if all request inputs, headers and params are valid', async () => {
+  it('Should debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" with POST if all request inputs, headers and params are valid', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -28,7 +28,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
   });
 
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is undefined', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is undefined', async () => {
     const testData = {
       transactionAmount: undefined,
     };
@@ -41,7 +41,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Transaction amount is required');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is an empty string', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is an empty string', async () => {
     const testData = {
       transactionAmount: '',
     };
@@ -54,7 +54,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Transaction amount is required');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is null', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is null', async () => {
     const testData = {
       transactionAmount: null,
     };
@@ -67,7 +67,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Transaction amount is required');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount does not exist', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount does not exist', async () => {
     const testData = {};
     const testHeader = '3030303030';
     const accountNumber = '1212121212';
@@ -78,7 +78,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Transaction amount is required');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if transaction amount is not a number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is not a number', async () => {
     const testData = {
       transactionAmount: 'haha@Iamlaffing123',
     };
@@ -91,7 +91,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Transaction amount must be numbers');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is an empty string', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is an empty string', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -104,7 +104,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Cashier id is required');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is not a number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is not a number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -117,7 +117,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Cashier id must be numbers');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is null', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is null', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -130,7 +130,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Cashier id must be numbers');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if cashier id is not registered', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if cashier id is not registered', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -140,10 +140,10 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(404);
-    expect(response.body).to.have.property('error').equal('Staff not found, only registered staff can debit or credit an bank account');
+    expect(response.body).to.have.property('error').equal('Staff not found, only registered staff can debit or credit a bank account');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if account number is not a number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not a number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -156,7 +156,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').equal('Account number must be numbers');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/accounts" if account number is not a number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is not a number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
