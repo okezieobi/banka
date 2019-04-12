@@ -48,4 +48,14 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     expect(response.body).to.have.property('status').equal(400);
     expect(response.body).to.have.property('error').equal('Admin id must be numbers');
   });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if admin id is not found', async () => {
+    const testHeader = '84933948939398';
+    const accountNumber = '1212121212';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-id', testHeader);
+    expect(response).to.have.status(404);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(404);
+    expect(response.body).to.have.property('error').equal('Admin not found, only registered admins can delete a bank account');
+  });
 });
