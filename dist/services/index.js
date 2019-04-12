@@ -82,6 +82,15 @@ function () {
       };
       res.status(codeStatus).send(this.successRes);
     }
+  }, {
+    key: "successResMessage",
+    value: function successResMessage(res, codeStatus, message) {
+      this.successRes = {
+        status: codeStatus,
+        message: message
+      };
+      res.status(codeStatus).send(this.successRes);
+    }
   }]);
 
   return Banka;
