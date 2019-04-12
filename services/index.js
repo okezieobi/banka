@@ -50,6 +50,14 @@ class Banka {
     };
     res.status(codeStatus).send(this.successRes);
   }
+
+  successResMessage(res, codeStatus, message) {
+    this.successRes = {
+      status: codeStatus,
+      message,
+    };
+    res.status(codeStatus).send(this.successRes);
+  }
 }
 
 const banka = new Banka();
