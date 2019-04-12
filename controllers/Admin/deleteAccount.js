@@ -14,7 +14,7 @@ logic.deleteAccount = (req, res) => {
   data.transactions = data.transactions.filter(
     transaction => transaction.accountNumber !== bankAccount.accountNumber,
   );
-  return services.successResponse(res, 200, 'Account successfully deleted');
+  return services.successResMessage(res, 200, 'Account successfully deleted');
 };
 
 export default logic.deleteAccount;
