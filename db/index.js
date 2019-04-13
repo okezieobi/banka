@@ -55,6 +55,13 @@ class Banka {
     return this.newBankAccountRes;
   }
 
+  updateAccountStatus(data) {
+    this.updateStatus = {
+      accountNumber: data.accountNumber,
+      status: data.status,
+    }
+  }
+
   debitAccountTransaction(dataOne, dataTwo, dataThree) {
     this.transactionData = {
       id: Math.floor(Math.random() * 1000000000),
