@@ -60,6 +60,7 @@ class Banka {
       accountNumber: data.accountNumber,
       status: data.status,
     }
+    return this.updateStatus;
   }
 
   debitAccountTransaction(dataOne, dataTwo, dataThree) {
