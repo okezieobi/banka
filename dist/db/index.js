@@ -85,6 +85,15 @@ function () {
       return this.newBankAccountRes;
     }
   }, {
+    key: "updateAccountStatus",
+    value: function updateAccountStatus(data) {
+      this.updateStatus = {
+        accountNumber: data.accountNumber,
+        status: data.status
+      };
+      return this.updateStatus;
+    }
+  }, {
     key: "debitAccountTransaction",
     value: function debitAccountTransaction(dataOne, dataTwo, dataThree) {
       this.transactionData = {
