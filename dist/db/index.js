@@ -91,7 +91,6 @@ function () {
         accountNumber: data.accountNumber,
         status: data.status
       };
-      return this.updateStatus;
     }
   }, {
     key: "debitAccountTransaction",

@@ -7,119 +7,118 @@ class Banka {
     this.staff = [];
   }
 
-  userData( data ) {
+  userData(data) {
     this.userReqData = {
-      id: Math.floor( Math.random() * 1000000000 ),
-      email: String( data.userEmail ),
-      firstName: String( data.userFirstName ),
-      lastName: String( data.userLastName ),
-      password: String( data.userPassword ),
+      id: Math.floor(Math.random() * 1000000000),
+      email: String(data.userEmail),
+      firstName: String(data.userFirstName),
+      lastName: String(data.userLastName),
+      password: String(data.userPassword),
       type: 'Client',
       isAdmin: false,
     };
     return this.userReqData;
   }
 
-  createUserDataResponse( data ) {
+  createUserDataResponse(data) {
     this.userResData = {
-      id: parseInt( data.id, 10 ),
-      firstName: String( data.firstName ),
-      lastName: String( data.lastName ),
-      email: String( data.email ),
+      id: parseInt(data.id, 10),
+      firstName: String(data.firstName),
+      lastName: String(data.lastName),
+      email: String(data.email),
     };
     return this.userResData;
   }
 
-  bankAccount( data ) {
+  bankAccount(data) {
     this.bankAccountData = {
-      id: Math.floor( Math.random() * 1000000000 ),
-      accountNumber: Math.floor( 100000000 + Math.random() * 900000000 ),
+      id: Math.floor(Math.random() * 1000000000),
+      accountNumber: Math.floor(100000000 + Math.random() * 900000000),
       createdOn: new Date(),
-      owner: parseInt( data[ 'owner-id' ], 10 ),
-      type: String( data.bankAccountType ),
+      owner: parseInt(data['owner-id'], 10),
+      type: String(data.bankAccountType),
       status: 'Active',
       balance: 0.00,
     };
     return this.bankAccountData;
   }
 
-  createBankAccountResponse( dataOne, dataTwo ) {
+  createBankAccountResponse(dataOne, dataTwo) {
     this.newBankAccountRes = {
-      accountNumber: parseInt( dataOne.accountNumber, 10 ),
-      firstName: String( dataTwo.firstName ),
-      lastName: String( dataTwo.lastName ),
-      email: String( dataTwo.email ),
-      type: String( dataOne.type ),
-      openingBalance: parseFloat( dataOne.balance ),
+      accountNumber: parseInt(dataOne.accountNumber, 10),
+      firstName: String(dataTwo.firstName),
+      lastName: String(dataTwo.lastName),
+      email: String(dataTwo.email),
+      type: String(dataOne.type),
+      openingBalance: parseFloat(dataOne.balance),
     };
     return this.newBankAccountRes;
   }
 
-  updateAccountStatus( data ) {
+  updateAccountStatus(data) {
     this.updateStatus = {
       accountNumber: data.accountNumber,
       status: data.status,
     }
-    return this.updateStatus;
   }
 
-  debitAccountTransaction( dataOne, dataTwo, dataThree ) {
+  debitAccountTransaction(dataOne, dataTwo, dataThree) {
     this.transactionData = {
-      id: Math.floor( Math.random() * 1000000000 ),
+      id: Math.floor(Math.random() * 1000000000),
       createdOn: new Date(),
       type: 'Debit',
-      accountNumber: parseInt( dataTwo.account_number, 10 ),
-      cashier: parseInt( dataThree[ 'cashier-id' ], 10 ),
-      amount: parseFloat( dataOne.transactionAmount ),
-      oldBalance: parseFloat( dataTwo.accountBalance ),
-      newBalance: parseFloat( ( parseFloat( dataTwo.accountBalance )
-        - parseFloat( dataOne.transactionAmount ) ).toFixed( 2 ) ),
+      accountNumber: parseInt(dataTwo.account_number, 10),
+      cashier: parseInt(dataThree['cashier-id'], 10),
+      amount: parseFloat(dataOne.transactionAmount),
+      oldBalance: parseFloat(dataTwo.accountBalance),
+      newBalance: parseFloat((parseFloat(dataTwo.accountBalance)
+        - parseFloat(dataOne.transactionAmount)).toFixed(2)),
     };
     return this.transactionData;
   }
 
-  creditAccountTransaction( dataOne, dataTwo, dataThree ) {
+  creditAccountTransaction(dataOne, dataTwo, dataThree) {
     this.transactionData = {
-      id: Math.floor( Math.random() * 1000000000 ),
+      id: Math.floor(Math.random() * 1000000000),
       createdOn: new Date(),
       type: 'Credit',
-      accountNumber: parseInt( dataTwo.account_number, 10 ),
-      cashier: parseInt( dataThree[ 'cashier-id' ], 10 ),
-      amount: parseFloat( dataOne.transactionAmount ),
-      oldBalance: parseFloat( dataTwo.accountBalance ),
-      newBalance: parseFloat( ( parseFloat( dataTwo.accountBalance )
-        + parseFloat( dataOne.transactionAmount ) ).toFixed( 2 ) ),
+      accountNumber: parseInt(dataTwo.account_number, 10),
+      cashier: parseInt(dataThree['cashier-id'], 10),
+      amount: parseFloat(dataOne.transactionAmount),
+      oldBalance: parseFloat(dataTwo.accountBalance),
+      newBalance: parseFloat((parseFloat(dataTwo.accountBalance)
+        + parseFloat(dataOne.transactionAmount)).toFixed(2)),
     };
     return this.transactionData;
   }
 
-  transactionResponse( data ) {
+  transactionResponse(data) {
     this.transactionResData = {
-      transactionId: parseInt( data.id, 10 ),
-      accountNumber: String( data.accountNumber ),
-      amount: parseFloat( data.amount ),
-      cashier: parseInt( data.cashier, 10 ),
-      transactionType: String( data.type ),
-      accountBalance: String( data.newBalance ),
+      transactionId: parseInt(data.id, 10),
+      accountNumber: String(data.accountNumber),
+      amount: parseFloat(data.amount),
+      cashier: parseInt(data.cashier, 10),
+      transactionType: String(data.type),
+      accountBalance: String(data.newBalance),
     };
     return this.transactionResData;
   }
 
-  adminStaffData( data ) {
+  adminStaffData(data) {
     this.adminStaff = {
-      id: Math.floor( Math.random() * 1000000000 ),
-      username: String( data.username ),
-      password: String( data.password ),
+      id: Math.floor(Math.random() * 1000000000),
+      username: String(data.username),
+      password: String(data.password),
       isAdmin: true,
     };
     return this.adminStaff;
   }
 
-  staffData( data ) {
+  staffData(data) {
     this.staffInfo = {
-      id: Math.floor( Math.random() * 1000000000 ),
-      username: String( data.username ),
-      password: String( data.password ),
+      id: Math.floor(Math.random() * 1000000000),
+      username: String(data.username),
+      password: String(data.password),
       type: 'Staff',
       isAdmin: false,
     };
@@ -147,8 +146,8 @@ class Banka {
       isAdmin: false,
     };
 
-    this.userDataList = [ this.testUserOne, this.testUserTwo ];
-    this.users.push( ...this.userDataList );
+    this.userDataList = [this.testUserOne, this.testUserTwo];
+    this.users.push(...this.userDataList);
   }
 
   bankAccountList() {
@@ -172,8 +171,8 @@ class Banka {
       balance: 12000.00,
     };
 
-    this.testBankAccountList = [ this.testBankAccountOne, this.testBankAccountTwo ];
-    this.bankAccounts.push( ...this.testBankAccountList );
+    this.testBankAccountList = [this.testBankAccountOne, this.testBankAccountTwo];
+    this.bankAccounts.push(...this.testBankAccountList);
   }
 
   staffList() {
@@ -192,8 +191,8 @@ class Banka {
       type: 'Staff',
       isAdmin: false,
     };
-    this.testStaffList = [ this.testStaffOne, this.testStaffTwo ];
-    this.staff.push( ...this.testStaffList );
+    this.testStaffList = [this.testStaffOne, this.testStaffTwo];
+    this.staff.push(...this.testStaffList);
   }
 
   adminList() {
@@ -211,8 +210,8 @@ class Banka {
       isAdmin: true,
     };
 
-    this.testAdminList = [ this.testAdminOne, this.testAdminTwo ];
-    this.admins.push( ...this.testAdminList );
+    this.testAdminList = [this.testAdminOne, this.testAdminTwo];
+    this.admins.push(...this.testAdminList);
   }
 
   transactionList() {
@@ -238,8 +237,8 @@ class Banka {
       newBalance: 10000.00,
     };
 
-    this.testTransactionList = [ this.testTransactionOne, this.testTransactionTwo ];
-    this.transactions.push( ...this.testTransactionList );
+    this.testTransactionList = [this.testTransactionOne, this.testTransactionTwo];
+    this.transactions.push(...this.testTransactionList);
   }
 }
 
