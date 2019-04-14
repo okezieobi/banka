@@ -1,5 +1,5 @@
 class Banka {
-  constructor () {
+  constructor() {
     this.users = [];
     this.bankAccounts = [];
     this.transactions = [];
@@ -59,7 +59,7 @@ class Banka {
     this.updateStatus = {
       accountNumber: data.accountNumber,
       status: data.status,
-    }
+    };
     return this.updateStatus;
   }
 
