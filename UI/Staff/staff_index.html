@@ -38,31 +38,40 @@
         </nav>
     </header>
     <main class="userIndexMain">
-        <section class="userSideBar">
-            <section><a class="userBankAccounts activeIcon" href="manageAccounts.html">
-                    <h5><i class="fas fa-users userSideBarIcons"></i><br>Process<br>accounts</h5>
-                </a>
-            </section>
-        </section>
         <section class="userMainContent">
             <section class="createAdminStaffForm">
                 <form>
                     <fieldset class="userFieldsetInput">
                         <legend class="userSubheading">
-                            <h3>Credit or Debit user bank accounts</h3>
+                            <h3>Debit user bank accounts</h3>
                         </legend>
                         <div class="userInputContainer">
-                            <div class="userLabels"><label>Bank account name:</label></div>
-                            <div><input class="userInputs" type="text" /></div>
                             <div class="userLabels"><label>Bank account no:</label></div>
                             <div><input class="userInputs" type="text" /></div>
                             <div class="userLabels"><label>Amount:</label></div>
                             <div><input class="userInputs" type="number" /></div>
                         </div>
                         <div class="userButtonArea">
-                            <button type="button" onclick="location.href='manageAccounts.html'"
-                                class="adminStaffBankButton rightMargin">Debit</button>
-                            <button type="button" onclick="location.href='manageAccounts.html'"
+                            <button type="button" onclick="location.href='../Admin_Staff/admin_staff_index.html'"
+                                class="adminStaffBankButton staffDebitButton">Debit</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </section>
+            <section class="createAdminStaffForm">
+                <form>
+                    <fieldset class="userFieldsetInput">
+                        <legend class="userSubheading">
+                            <h3>Credit user bank accounts</h3>
+                        </legend>
+                        <div class="userInputContainer">
+                            <div class="userLabels"><label>Bank account no:</label></div>
+                            <div><input class="userInputs" type="text" /></div>
+                            <div class="userLabels"><label>Amount:</label></div>
+                            <div><input class="userInputs" type="number" /></div>
+                        </div>
+                        <div class="userButtonArea">
+                            <button type="button" onclick="location.href='../Admin_Staff/admin_staff_index.html'"
                                 class="adminStaffBankButton">Credit</button>
                         </div>
                     </fieldset>

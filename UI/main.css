@@ -129,6 +129,25 @@
     border-radius: 3px;
 }
 
+.userSignInButton {
+    margin-right: 5px;
+    padding: 10px 22px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+
+.userSignUpButton {
+    margin-right: 8px;
+    padding: 10px 17px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
 .adminStaffButton {
     margin-right: 3px;
     padding: 10px 72px;
@@ -148,7 +167,8 @@
 }
 
 .adminStaffBankButton {
-    padding: 10px 24px;
+    margin-right: 3px;
+    padding: 10px 75px;
     background: white;
     color: blue;
     border: none;
@@ -255,6 +275,12 @@
     justify-content: space-around;
 }
 
+.staffIndexMain {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
 .userSideBar {
     display: flex;
     flex-flow: column nowrap;
@@ -270,9 +296,22 @@
 }
 
 .userSideBarIcons {
-    font-size: 30px;
+    font-size: 50px;
 }
 
+
+.profilePicIcon {
+    font-size: 100px;
+    color: blue;
+}
+
+.profilePic {
+    margin: 0 120px 10px 0;
+}
+
+.staffSideBarIcons {
+    font-size: 50px;
+}
 .userMainContent {
     display: flex;
     flex-flow: row wrap;
@@ -322,7 +361,6 @@
 }
 
 .userAccountDataTableMain {
-    padding: 12px 303px;
     color: white;
     width: 100%;
 }
@@ -331,6 +369,22 @@
 
     .userAccountDataTableMain {
         padding: 12px 3px;
+    }
+
+    .staffSideBarIcons {
+        font-size: 30px;
+    }
+
+    .userSideBarIcons {
+        font-size: 30px;
+    }
+}
+
+
+@media screen and (min-width: 970px) {
+
+    .userAccountTableInfo {
+        margin: 0 140px;
     }
 }
 
@@ -341,17 +395,17 @@
         font-size: 10px;
     }
 
-    .userAccountDataTableMain {
-        padding: 12px 3px;
-    }
-
     .userAccountCardInfoProfile {
         font-size: 14px;
     }
 }
 
 .userAccountContainer {
-    margin: 0 13px 10px 0
+    margin: 0 13px 10px 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .userCreateAccount {
@@ -416,10 +470,15 @@ td {
     color: white;
     border-radius: 10px;
     background: blue;
-    flex-grow: 8;
     padding: 0 5px 0 0;
+    flex-grow: 2;
 }
 
+.userAccountMain {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
 
 .bankAccountType {
     margin: 0 0 20px 0;
@@ -431,6 +490,18 @@ td {
     justify-content: space-around;
 }
 
-.rightMargin {
-    margin-right: 25px;
+.staffDebitButton {
+    padding-left: 80px;
+}
+
+.creditAccountColor {
+    background: yellow;
+    color: white
+}
+
+
+@media screen and (max-width: 650px) {
+    .profilePic {
+        margin: 0 10px 10px 0;
+    }
 }
