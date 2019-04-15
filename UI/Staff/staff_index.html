@@ -1,0 +1,85 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Banka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="../main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicons/">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicons/favicon-16x16.png">
+    <link rel="manifest" href="../favicons/site.webmanifest">
+    <script src="main.js"></script>
+</head>
+
+<body class="dashboardIndexBody">
+    <header>
+        <nav class="dashboardIndexHeader">
+            <section>
+                <a class="dashboardHomeLink" href="../Admin_Staff/admin_staff_index.html">
+                    <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
+                </a>
+            </section>
+            <section class="mobileIcon">
+                <h2><i class="fas fa-university mobileIconProperties"></i></h2>
+            </section>
+            <section class="largeScreenIcon">
+                <h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1>
+            </section>
+            <section>
+                <a class="userHomeSignOut" href="../Admin_Staff/admin_staff_signin.html">
+                    <h5><i class="fas fa-sign-out-alt signoutIcon"></i><br>Sign Out</h5>
+                </a>
+            </section>
+        </nav>
+    </header>
+    <main class="userIndexMain">
+        <section class="userMainContent">
+            <section class="createAdminStaffForm">
+                <form>
+                    <fieldset class="userFieldsetInput">
+                        <legend class="userSubheading">
+                            <h3>Debit user bank accounts</h3>
+                        </legend>
+                        <div class="userInputContainer">
+                            <div class="userLabels"><label>Bank account no:</label></div>
+                            <div><input class="userInputs" type="text" /></div>
+                            <div class="userLabels"><label>Amount:</label></div>
+                            <div><input class="userInputs" type="number" /></div>
+                        </div>
+                        <div class="userButtonArea">
+                            <button type="button" onclick="location.href='../Admin_Staff/admin_staff_index.html'"
+                                class="adminStaffBankButton staffDebitButton">Debit</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </section>
+            <section class="createAdminStaffForm">
+                <form>
+                    <fieldset class="userFieldsetInput">
+                        <legend class="userSubheading">
+                            <h3>Credit user bank accounts</h3>
+                        </legend>
+                        <div class="userInputContainer">
+                            <div class="userLabels"><label>Bank account no:</label></div>
+                            <div><input class="userInputs" type="text" /></div>
+                            <div class="userLabels"><label>Amount:</label></div>
+                            <div><input class="userInputs" type="number" /></div>
+                        </div>
+                        <div class="userButtonArea">
+                            <button type="button" onclick="location.href='../Admin_Staff/admin_staff_index.html'"
+                                class="adminStaffBankButton">Credit</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </section>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+
+</html>

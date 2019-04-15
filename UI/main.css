@@ -1,0 +1,507 @@
+.indexBody {
+    font-family: 'Segoe UI', Tahoma, Geneva;
+}
+
+.indexHeader {
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+
+.indexMain {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.indexDescription {
+    text-align: center;
+    align-self: center;
+    color: blue;
+}
+
+.indexUserLinkContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.indexUserLink {
+    margin: 0 10px 20px 10px;
+    background: blue;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.indexUserLink>a {
+    text-decoration: none;
+}
+
+.indexLinkSubHeading {
+    color: white;
+}
+
+.indexUserContainer {
+    color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    align-items: center;
+}
+
+.indexUserIcon {
+    font-size: 200px;
+}
+
+.userInBody {
+    font-family: 'Segoe UI', Tahoma, Geneva;
+}
+
+.userInHeader {
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+
+.userMain {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.userDescription {
+    color: blue;
+    text-align: center;
+    align-self: center;
+}
+
+.userForm {
+    background: blue;
+    color: white;
+    border-radius: 6px;
+    margin: 10px 5px;
+}
+
+
+.createAdminStaffForm {
+    background: blue;
+    color: white;
+    border-radius: 6px;
+    margin: 10px 5px;
+}
+
+@media screen and (max-width: 458px) {
+    .createAdminStaffForm {
+        font-size: 10px;
+    }
+}
+
+.userFieldsetInput {
+    border: none;
+}
+
+.userSubheading {
+    text-align: center;
+}
+
+.userInputContainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+}
+
+.userLabels {
+    text-align: right;
+    align-self: center;
+}
+
+.userInputs {
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.userButton {
+    margin-right: 3px;
+    padding: 10px 24px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.userSignInButton {
+    margin-right: 5px;
+    padding: 10px 22px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+
+.userSignUpButton {
+    margin-right: 8px;
+    padding: 10px 17px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.adminStaffButton {
+    margin-right: 3px;
+    padding: 10px 72px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.adminStaffRegisterButton {
+    margin-right: 3px;
+    padding: 10px 69px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.adminStaffBankButton {
+    margin-right: 3px;
+    padding: 10px 75px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+.manageAccountButton {
+    margin-right: 3px;
+    padding: 10px 24px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 3px;
+}
+
+
+.userAccountButton {
+    margin-right: 3px;
+    padding: 10px 24px;
+    background: white;
+    color: blue;
+    border: none;
+    border-radius: 10px;
+}
+
+.userButtonArea {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.manageAccountsButtonArea {
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.adminStaffButtonArea {
+    padding: 15px 10px 0 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.userLink {
+    text-decoration: none;
+    color: white;
+}
+
+.dashboardIndexBody {
+    font-family: 'Segoe UI', Tahoma, Geneva;
+}
+
+.dashboardIndexHeader {
+    display: flex;
+    justify-content: space-between;
+    color: blue;
+}
+
+.activeIcon {
+    color: black;
+}
+
+.userHomeSignOut,
+.dashboardHomeLink {
+    text-decoration: none;
+    text-align: center;
+}
+
+.homeIcon,
+.signoutIcon {
+    font-size: 40px;
+}
+
+.mobileIcon {
+    display: none;
+}
+
+.largeScreenIcon {
+    font-size: 25px;
+}
+
+.mobileIconProperties {
+    font-size: 50px;
+}
+
+.accountIconProperties {
+    font-size: 40px;
+}
+
+@media screen and (max-width: 500px) {
+    .largeScreenIcon {
+        display: none;
+    }
+
+    .mobileIcon {
+        display: block;
+    }
+
+}
+
+.userIndexMain {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.staffIndexMain {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.userSideBar {
+    display: flex;
+    flex-flow: column nowrap;
+    color: blue;
+    justify-content: flex-start;
+    margin-right: 5px;
+}
+
+.userProfile,
+.userBankAccounts {
+    text-decoration: none;
+    text-align: center;
+}
+
+.userSideBarIcons {
+    font-size: 50px;
+}
+
+
+.profilePicIcon {
+    font-size: 100px;
+    color: blue;
+}
+
+.profilePic {
+    margin: 0 120px 10px 0;
+}
+
+.staffSideBarIcons {
+    font-size: 50px;
+}
+.userMainContent {
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 8;
+    justify-content: space-around;
+}
+
+.userAccountDetailsLink {
+    text-decoration: none;
+}
+
+.userAccountCardInfoProfile {
+    color: white;
+    border-radius: 10px;
+    background: blue;
+    padding: 0 10px 10px 5px;
+}
+
+.userAccountCardInfo {
+    color: white;
+    border-radius: 10px;
+    background: blue;
+}
+
+.manageAccountCardInfo {
+    color: white;
+    border-radius: 10px;
+    background: blue;
+    padding-bottom: 20px;
+}
+
+.userAccountDataLabel {
+    padding: 10px;
+    text-align: right;
+}
+
+.userAccountData {
+    padding: 15px;
+    color: white;
+    width: 100%;
+}
+
+.userAccountDataTable {
+    padding: 12px 3px;
+    color: white;
+    width: 100%;
+}
+
+.userAccountDataTableMain {
+    color: white;
+    width: 100%;
+}
+
+@media screen and (max-width: 970px) {
+
+    .userAccountDataTableMain {
+        padding: 12px 3px;
+    }
+
+    .staffSideBarIcons {
+        font-size: 30px;
+    }
+
+    .userSideBarIcons {
+        font-size: 30px;
+    }
+}
+
+
+@media screen and (min-width: 970px) {
+
+    .userAccountTableInfo {
+        margin: 0 140px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+
+    .userAccountDataTable,
+    .userAccountDataTableMain {
+        font-size: 10px;
+    }
+
+    .userAccountCardInfoProfile {
+        font-size: 14px;
+    }
+}
+
+.userAccountContainer {
+    margin: 0 13px 10px 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.userCreateAccount {
+    background: blue;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 10px 13px 10px;
+    margin: 0 10px 10px 0;
+}
+
+.userTableStyling {
+    padding: 0 10px;
+    text-align: right;
+}
+
+.userTableElement {
+    padding-right: 10px;
+}
+
+.userTableRowStyle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userTableHeadingStyle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userTableMainHeadingStyle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottomPadding {
+    padding-bottom: 10px;
+}
+
+.summary {
+    text-align: center;
+    outline: none;
+}
+
+
+th,
+td {
+    display: block
+}
+
+
+.userAccountTableInfo {
+    color: white;
+    border-radius: 10px;
+    background: blue;
+    padding: 0 5px 0 0;
+    flex-grow: 2;
+}
+
+.userAccountMain {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+.bankAccountType {
+    margin: 0 0 20px 0;
+}
+
+.radioButtons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.staffDebitButton {
+    padding-left: 80px;
+}
+
+.creditAccountColor {
+    background: yellow;
+    color: white
+}
+
+
+@media screen and (max-width: 650px) {
+    .profilePic {
+        margin: 0 10px 10px 0;
+    }
+}
