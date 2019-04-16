@@ -1,22 +1,71 @@
 .indexBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
+    margin: 0;
+    background-image: url('/UI/images/bak-image-2.jpg');
+  background-size: 100% 100%;
+  opacity: 0.7;
+  width: 100%;
+    }
+
+.userSignUpBody {
+    font-family: 'Segoe UI', Tahoma, Geneva;
+    margin: 0;
+    background-image: url('/UI/images/bak-3.jpg');
+  background-size: 100% 100%;
+  opacity: 0.7;
+  width: 100%;
 }
 
 .indexHeader {
     display: flex;
     justify-content: center;
     color: blue;
+    margin: 0.1% 0;
 }
 
 .indexMain {
-    display: flex;
-    flex-flow: column nowrap;
+    padding-top: 10px;
+    background: blue;
+    height: 100%;
 }
 
+
+@media screen and (max-width: 694px) {
+.indexMain {
+    padding-bottom: 40%;
+}
+    
+ }
+
+.indexDescriptionAndLinks {
+    margin: 20px 10px;
+    background: blue;
+    border-radius: 8px;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.signUpDescriptionAndLinks {
+    margin: 20px 10px;
+    background: white;
+    border-radius: 8px;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.fullHeight {
+    height: 100%;
+    background: blue;
+}
+
+.footer {
+    background:whitesmoke;
+    padding: 1% 0;
+}
 .indexDescription {
     text-align: center;
     align-self: center;
-    color: blue;
+    color: white;
 }
 
 .indexUserLinkContainer {
@@ -27,7 +76,7 @@
 
 .indexUserLink {
     margin: 0 10px 20px 10px;
-    background: blue;
+    background: white;
     border-radius: 10px;
     padding: 0 10px;
 }
@@ -41,7 +90,7 @@
 }
 
 .indexUserContainer {
-    color: white;
+    color: blue;
     display: flex;
     flex-flow: column nowrap;
     text-align: center;
@@ -54,37 +103,47 @@
 
 .userInBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
+    margin: 0;
+    background-image: url('/UI/images/bak-3.jpg');
+  background-size: 100% 100%;
+  opacity: 0.7;
+  width: 100%;
 }
 
 .userInHeader {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     color: blue;
+    margin: 0 1%;
+    align-items: center;
 }
 
 .userMain {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    background: blue;
+    padding: 2% 0;
 }
 
 .userDescription {
-    color: blue;
+    color: whitesmoke;
     text-align: center;
     align-self: center;
+    min-width: 10%;
 }
 
 .userForm {
-    background: blue;
-    color: white;
+    background: white;
+    color: blue;
     border-radius: 6px;
     margin: 10px 5px;
 }
 
 
 .createAdminStaffForm {
-    background: blue;
-    color: white;
+    background: white;
+    color: blue;
     border-radius: 6px;
     margin: 10px 5px;
 }
@@ -97,6 +156,7 @@
 
 .userFieldsetInput {
     border: none;
+    min-width: 20%;
 }
 
 .userSubheading {
@@ -107,7 +167,9 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 10px;
+    padding-right: 10px;
 }
+
 
 .userLabels {
     text-align: right;
@@ -117,7 +179,8 @@
 .userInputs {
     border: none;
     border-radius: 3px;
-    padding: 10px;
+    padding: 10px 10px;
+    background: lightgrey;
 }
 
 .userButton {
@@ -131,19 +194,20 @@
 
 .userSignInButton {
     margin-right: 5px;
-    padding: 10px 22px;
-    background: white;
-    color: blue;
+    padding: 10px 74px;
+    background: blue;
+    color: white;
     border: none;
     border-radius: 3px;
+
 }
 
 
 .userSignUpButton {
     margin-right: 8px;
-    padding: 10px 17px;
-    background: white;
-    color: blue;
+    padding: 10px 72px;
+    background: blue;
+    color: white;
     border: none;
     border-radius: 3px;
 }
@@ -157,20 +221,29 @@
     border-radius: 3px;
 }
 
-.adminStaffRegisterButton {
+.adminStaffSignInButton {
     margin-right: 3px;
-    padding: 10px 69px;
-    background: white;
-    color: blue;
+    padding: 10px 74px;
+    background: blue;
+    color:white;
+    border: none;
+    border-radius: 3px;
+}
+
+.adminStaffRegisterButton {
+    margin-right: 10px;
+    padding: 10px 70px;
+    background: blue;
+    color: white;
     border: none;
     border-radius: 3px;
 }
 
 .adminStaffBankButton {
-    margin-right: 3px;
-    padding: 10px 75px;
-    background: white;
-    color: blue;
+    margin-right: 10px;
+    padding: 10px 77px;
+    background: blue;
+    color: white;
     border: none;
     border-radius: 3px;
 }
@@ -178,8 +251,8 @@
 .manageAccountButton {
     margin-right: 3px;
     padding: 10px 24px;
-    background: white;
-    color: blue;
+    background: blue;
+    color: white;
     border: none;
     border-radius: 3px;
 }
@@ -200,6 +273,23 @@
     justify-content: flex-end;
 }
 
+.createAminStaffButtonArea {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.staffAdminSignInButtonArea {
+    padding: 10px 7px 0 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.userSignInButtonArea {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px
+}
+
 .manageAccountsButtonArea {
     padding-left: 10px;
     display: flex;
@@ -214,17 +304,37 @@
 
 .userLink {
     text-decoration: none;
-    color: white;
+    color: blue;
 }
 
 .dashboardIndexBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
+    margin: 0;
+    background-image: url('/UI/images/bak-image-2.jpg');
+  background-size: 100% 100%;
+  opacity: 0.7;
+  width: 100%;
 }
 
 .dashboardIndexHeader {
     display: flex;
     justify-content: space-between;
     color: blue;
+    padding: 0 10px;
+}
+
+.adminStaffDashboardIndexHeader {
+    display: flex;
+    justify-content: space-between;
+    color: blue;
+    padding: 0 8px 0 10px;
+}
+
+.adminDashboardIndexHeader {
+    display: flex;
+    justify-content: space-between;
+    color: blue;
+    padding: 0 10px 0 20px
 }
 
 .activeIcon {
@@ -239,7 +349,7 @@
 
 .homeIcon,
 .signoutIcon {
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .mobileIcon {
@@ -258,7 +368,7 @@
     font-size: 40px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .largeScreenIcon {
         display: none;
     }
@@ -286,7 +396,7 @@
     flex-flow: column nowrap;
     color: blue;
     justify-content: flex-start;
-    margin-right: 5px;
+    margin: 0 10px;
 }
 
 .userProfile,
@@ -317,6 +427,35 @@
     flex-flow: row wrap;
     flex-grow: 8;
     justify-content: space-around;
+    align-items: flex-start;
+    background: blue;
+    border-radius: 8px 0 0 0;
+    padding: 20px 0 0 11px;
+    height: 100%;
+}
+
+.adminStaffMainContent {
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 8;
+    justify-content: space-around;
+    align-items: flex-start;
+    background: blue;
+    border-radius: 8px 0 0 0;
+    padding: 20px 0 0 11px;
+    height: 100%;
+}
+
+.adminMainContent {
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 8;
+    justify-content: space-around;
+    align-items: flex-start;
+    background: blue;
+    border-radius: 8px 0 0 0;
+    padding: 20px 0 0 11px;
+    height: 100%;
 }
 
 .userAccountDetailsLink {
@@ -331,38 +470,49 @@
 }
 
 .userAccountCardInfo {
-    color: white;
+    color: blue;
     border-radius: 10px;
-    background: blue;
+    background: white;
 }
 
 .manageAccountCardInfo {
-    color: white;
+    color: blue;
     border-radius: 10px;
-    background: blue;
+    background: white;
     padding-bottom: 20px;
 }
 
 .userAccountDataLabel {
-    padding: 10px;
+    padding: 10px 250px 10px 0;
     text-align: right;
 }
 
 .userAccountData {
     padding: 15px;
-    color: white;
+    color: blue;
     width: 100%;
 }
 
 .userAccountDataTable {
     padding: 12px 3px;
-    color: white;
-    width: 100%;
+    color: blue;
+    background: white;
+    width: 90%;
+    align-self: center;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding-right: 12px
+    
 }
 
 .userAccountDataTableMain {
-    color: white;
-    width: 100%;
+    color: blue;
+    background: white;
+    width: 60%;
+    align-self: center;
+    margin: 10px 0;
+    border-radius: 8px;
+    padding: 10px;
 }
 
 @media screen and (max-width: 970px) {
@@ -378,14 +528,20 @@
     .userSideBarIcons {
         font-size: 30px;
     }
+
+    .homeIcon, .signoutIcon {
+        font-size: 30px
+    }
+
+    .dashboardIndexHeader {
+        padding-left: 20px;
+    }
 }
 
 
 @media screen and (min-width: 970px) {
 
-    .userAccountTableInfo {
-        margin: 0 140px;
-    }
+    
 }
 
 @media screen and (max-width: 640px) {
@@ -395,22 +551,29 @@
         font-size: 10px;
     }
 
-    .userAccountCardInfoProfile {
-        font-size: 14px;
-    }
 }
 
 .userAccountContainer {
     margin: 0 13px 10px 0;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
     align-items: center;
 }
 
+.userAccountProfileContainer {
+    margin: 0 20px 10px 0;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 10px ;
+    border-radius: 8px;
+}
+
 .userCreateAccount {
-    background: blue;
-    color: white;
+    background: white;
+    color: blue;
     border-radius: 20px;
     display: flex;
     flex-flow: column nowrap;
@@ -468,10 +631,12 @@ td {
 
 .userAccountTableInfo {
     color: white;
-    border-radius: 10px;
     background: blue;
-    padding: 0 5px 0 0;
-    flex-grow: 2;
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    border-radius: 10px 0 0 0;
+    height: 100%;
 }
 
 .userAccountMain {
@@ -482,6 +647,10 @@ td {
 
 .bankAccountType {
     margin: 0 0 20px 0;
+}
+
+.createBankAccountRadioBtns {
+    margin: 0 100px 0 0;
 }
 
 .radioButtons {
@@ -500,8 +669,73 @@ td {
 }
 
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 790px) {
     .profilePic {
-        margin: 0 10px 10px 0;
+        margin: 0 5px 10px 0;
     }
 }
+
+@media screen and (max-width: 600px) {
+   .userMobileIcon {
+       font-size: 50px;
+   }
+
+   .userInputs {
+       padding: 10px 10px;
+   }
+
+   .userSignUpButton {
+       padding: 10px 72px;
+   }
+
+}
+
+
+@media screen and (max-width: 690px) {
+    .userSignInButton {
+        padding: 10px 74px;
+    }
+ }
+
+
+@media screen and (max-width: 580px) {
+
+    .userAccountDataLabel {
+        padding: 10px;
+    }
+ }
+
+ .userAccountProfileLabel {
+    padding: 10px 100px 30px 0;
+ }
+
+
+ @media screen and (max-width: 400px) {
+
+    .userAccountProfileLabel {
+        padding: 10px 10px 30px 0;
+     }
+ }
+
+ @media screen and (max-width: 500px) {
+
+    .userAccountCardInfoProfile {
+        font-size: 10px;
+    }
+ }
+
+
+ @media screen and (max-width: 1100px) {
+
+    .adminStaffMainContent {
+        padding-bottom: 260px;
+    }
+
+    .adminMainContent {
+        padding-bottom: 230px;
+    }
+ }
+
+ button:hover {
+     cursor: pointer;
+ }
