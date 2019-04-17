@@ -1,4 +1,3 @@
-import data from '../db';
 import services from '../services';
 
 class Banka {
@@ -11,7 +10,6 @@ class Banka {
     if (!services.validateEmail(req.body.userEmail)) return services.errorResponse(res, 400, 'Email format is wrong');
     if (!req.body.userPassword) return services.errorResponse(res, 400, 'Password is required');
     if (!services.validatePassword(req.body.userPassword)) return services.errorResponse(res, 400, 'Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
-    if (services.findByValue(data.users, req.body, 'email', 'userEmail')) return services.errorResponse(res, 400, 'User exists, please sign in');
     this.next = next();
     return this.next;
   }
@@ -52,6 +50,14 @@ class Banka {
     if (!services.checkNumber(req.params.account_number)) return services.errorResponse(res, 400, 'Account number must be numbers');
     if (!req.headers['cashier-id']) return services.errorResponse(res, 400, 'Cashier id is required');
     if (!services.checkNumber(req.headers['cashier-id'])) return services.errorResponse(res, 400, 'Cashier id must be numbers');
+    this.next = next();
+    return this.next;
+  }
+
+  deleteAccountInputs(req, res, next) {
+    if (!req.headers['admin-id']) return services.errorResponse(res, 400, 'Admin id is required');
+    if (!services.checkNumber(req.headers['admin-id'])) return services.errorResponse(res, 400, 'Admin id must be numbers');
+    if (!services.checkNumber(req.params.account_number)) return services.errorResponse(res, 400, 'Account number must be numbers');
     this.next = next();
     return this.next;
   }
