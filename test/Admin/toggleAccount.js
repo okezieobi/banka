@@ -13,7 +13,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
       accountStatus: 'active',
     };
     const testHeader = '5050505050';
-    const accountNumber = '1313131313';
+    const accountNumber = '1414141414';
     const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
     expect(response).to.have.status(200);
     expect(response.body).to.be.an('object');
@@ -21,6 +21,19 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response.body).to.have.property('data');
     expect(response.body.data).to.have.property('accountNumber');
     expect(response.body.data).to.have.property('status').equal(testData.accountStatus);
+  });
+
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account status equals status in request', async () => {
+    const testData = {
+      accountStatus: 'active',
+    };
+    const testHeader = '5050505050';
+    const accountNumber = '1313131313';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal(`Account status is already ${testData.accountStatus}`);
   });
 
   it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account status is undefined', async () => {

@@ -178,7 +178,7 @@ class Banka {
       createdOn: new Date(),
       owner: this.testUserOne.id,
       type: 'Current',
-      status: 'Draft',
+      status: 'dormant',
       balance: 12000.00,
     };
 

@@ -61,6 +61,18 @@ class Banka {
     this.next = next();
     return this.next;
   }
+
+  toggleAccountStatusInput(req, res, next) {
+    if (!req.body.accountStatus) return services.errorResponse(res, 400, 'Account status is required');
+    if (!services.checkName(req.body.accountStatus)) return services.errorResponse(res, 400, 'Account status must be letters');
+    if (req.body.accountStatus !== 'active' && req.body.accountStatus !== 'Active'
+            && req.body.accountStatus !== 'dormant' && req.body.accountStatus !== 'Dormant') return services.errorResponse(res, 400, 'Account status must equal active or dormant');
+    if (!req.headers['admin-id']) return services.errorResponse(res, 400, 'Admin id is required');
+    if (!services.checkNumber(req.headers['admin-id'])) return services.errorResponse(res, 400, 'Admin id must be numbers');
+    if (!services.checkNumber(req.params.account_number)) return services.errorResponse(res, 400, 'Account number must be a number');
+    this.next = next();
+    return this.next;
+  }
 }
 
 const banka = new Banka();
