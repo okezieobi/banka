@@ -24,6 +24,17 @@ class Banka {
     this.next = next();
     return this.next;
   }
+
+  createBankAccountInputs(req, res, next) {
+    if (!req.headers['owner-id']) return services.errorResponse(res, 400, 'User Id is required');
+    if (!services.checkNumber(req.headers['owner-id'])) return services.errorResponse(res, 400, 'User id must be numbers');
+    if (!req.body.bankAccountType) return services.errorResponse(res, 400, 'Bank account type is required');
+    if (!services.checkName(req.body.bankAccountType)) return services.errorResponse(res, 400, 'Bank account type must be letters');
+    if (req.body.bankAccountType !== 'current' && req.body.bankAccountType !== 'savings'
+            && req.body.bankAccountType !== 'Current' && req.body.bankAccountType !== 'Savings') return services.errorResponse(res, 400, 'Bank account type must be savings or current');
+    this.next = next();
+    return this.next;
+  }
 }
 
 const banka = new Banka();
