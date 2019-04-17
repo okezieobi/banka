@@ -3,7 +3,7 @@ import router from '../router';
 import validate from '../../controllers';
 
 router.post('/transactions/:account_number/credit', (...args) => {
-  validate.debitAccountInputs(...args);
+  validate.creditAccountInputs(...args);
 }, creditAccount);
 
 export default router;
