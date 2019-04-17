@@ -479,9 +479,13 @@
 .userMainContainer {
     display: flex;
     justify-content: center;
+    align-content: flex-start;
     align-items: flex-start;
     background: auto;
     padding: 7vw 0 0 0;
+    flex-grow: 2;
+    flex-flow: row wrap;
+    min-height: 100vh;
 }
 
 
