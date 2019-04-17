@@ -35,6 +35,16 @@ class Banka {
     this.next = next();
     return this.next;
   }
+
+  debitAccountInputs(req, res, next) {
+    if (!req.body.transactionAmount) return services.errorResponse(res, 400, 'Transaction amount is required');
+    if (!services.checkNumber(req.body.transactionAmount)) return services.errorResponse(res, 400, 'Transaction amount must be numbers');
+    if (!services.checkNumber(req.params.account_number)) return services.errorResponse(res, 400, 'Account number must be numbers');
+    if (!req.headers['cashier-id']) return services.errorResponse(res, 400, 'Cashier id is required');
+    if (!services.checkNumber(req.headers['cashier-id'])) return services.errorResponse(res, 400, 'Cashier id must be numbers');
+    this.next = next();
+    return this.next;
+  }
 }
 
 const banka = new Banka();
