@@ -1,18 +1,16 @@
 .indexBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
     margin: 0;
-    background-image: url("./images/bak-image-2.jpg");
+    background-image: url("./images/bank-5.jpg");
   background-size: 100% 100%;
-  opacity: 0.7;
   width: 100%;
     }
 
 .userSignUpBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
     margin: 0;
-    background-image: url("./images/bak-3.jpg");
+    background-image: url("./images/bank-6.jpg");
   background-size: 100% 100%;
-  opacity: 0.7;
   width: 100%;
 }
 
@@ -104,9 +102,8 @@
 .userInBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
     margin: 0;
-    background-image: url('./images/bak-3.jpg');
+    background-image: url('./images/bank-7.jpg');
   background-size: 100% 100%;
-  opacity: 0.7;
   width: 100%;
 }
 
@@ -282,7 +279,7 @@
     background: blue;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 0.4vw;
 }
 
 
@@ -348,9 +345,8 @@
 .dashboardIndexBody {
     font-family: 'Segoe UI', Tahoma, Geneva;
     margin: 0;
-    background-image: url('./images/bak-image-2.jpg');
+    background-image: url('./images/bank-8.jpg');
   background-size: 100% 100%;
-  opacity: 0.7;
   width: 100%;
 }
 
@@ -438,6 +434,10 @@
     padding: 0 4px;
     margin-right: 4px;
     background: rgb(190, 189, 189);
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    height: 100vh;
 }
 
 .userProfile,
@@ -473,6 +473,7 @@
     align-items: flex-start;
     background: auto;
     padding: 7vw 0 0 0;
+    min-height: 100vh;
 }
 
 .userMainContainer {
@@ -814,4 +815,8 @@ td {
 
  .adminStaffBottomPadding {
      padding-bottom: 2vw;
+ }
+
+ .nonCardOpacity {
+     opacity: 0.7;
  }
