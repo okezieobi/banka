@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../controllers/index.js"],"names":["Banka","banka"],"mappings":";;;;;;;;;IAAMA,K;;;;AAEN,IAAMC,KAAK,GAAG,IAAID,KAAJ,EAAd;eAEeC,K","sourcesContent":["class Banka {}\n\nconst banka = new Banka();\n\nexport default banka;\n"],"file":"index.js"}

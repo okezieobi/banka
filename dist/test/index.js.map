@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../test/index.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;AAGA;;AACA","sourcesContent":["import chai, {\n  expect,\n} from 'chai';\nimport chaiHttp from 'chai-http';\nimport app from '../index';\n\nexport {\n  expect,\n  chai,\n  chaiHttp,\n  app,\n};\n"],"file":"index.js"}
