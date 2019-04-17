@@ -15,6 +15,15 @@ class Banka {
     this.next = next();
     return this.next;
   }
+
+  signInInputs(req, res, next) {
+    if (!req.body.userEmail) return services.errorResponse(res, 400, 'Email is required');
+    if (!services.validateEmail(req.body.userEmail)) return services.errorResponse(res, 400, 'Email format is wrong');
+    if (!req.body.userPassword) return services.errorResponse(res, 400, 'Password is required');
+    if (!services.validatePassword(req.body.userPassword)) return services.errorResponse(res, 400, 'Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    this.next = next();
+    return this.next;
+  }
 }
 
 const banka = new Banka();
