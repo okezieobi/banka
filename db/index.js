@@ -172,7 +172,18 @@ class Banka {
       balance: 12000.00,
     };
 
-    this.testBankAccountList = [this.testBankAccountOne, this.testBankAccountTwo];
+    this.testBankAccountThree = {
+      id: 444444444444,
+      accountNumber: 1414141414,
+      createdOn: new Date(),
+      owner: this.testUserOne.id,
+      type: 'Current',
+      status: 'dormant',
+      balance: 12000.00,
+    };
+
+    this.testBankAccountList = [this.testBankAccountOne,
+      this.testBankAccountTwo, this.testBankAccountThree];
     this.bankAccounts.push(...this.testBankAccountList);
   }
 

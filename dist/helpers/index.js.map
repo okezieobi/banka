@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../helpers/index.js"],"names":["Helper","helper"],"mappings":";;;;;;;;;IAAMA,M;;;;AAEN,IAAMC,MAAM,GAAG,IAAID,MAAJ,EAAf;eACeC,M","sourcesContent":["class Helper {}\n\nconst helper = new Helper();\nexport default helper;\n"],"file":"index.js"}

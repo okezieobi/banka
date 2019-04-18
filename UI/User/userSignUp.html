@@ -17,38 +17,35 @@
 </head>
 
 <body class="userInBody">
-    <header class="userInHeader">
-        <h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1>
+    <header class="userInHeader nonCardOpacity">
+    <section class="mobileIcon"><a class="userLink" href="../../index.html"><h1><i class="fas fa-university userMobileIcon"></i></h1></a></section>
+    <section class="largeScreenIcon"><a class="userLink" href="../../index.html"><h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1></a></section>
+    <section><a href="userSignIn.html" class="userLink"><h4>Registered ? Please sign in</h4></a></section>
     </header>
     <main class="userMain">
-        <section class="userDescription">
-            <h2>Hello and welcome again to Banka, a unique banking experience<br>
-                is just a few clicks away, please sign in or sign up</h2>
-        </section>
-        <section class="userForm">
-            <form>
-                <fieldset class="userFieldsetInput">
-                    <legend class="userSubheading">
-                        <h3>Please Sign Up</h3>
-                    </legend>
-                    <div class="userInputContainer">
-                        <div class="userLabels"><label>First Name(s):</label></div>
-                        <div><input class="userInputs" type="text" /></div>
-                        <div class="userLabels"><label>Last Name:</label></div>
-                        <div><input class="userInputs" type="text" /></div>
-                        <div class="userLabels"><label>Email:</label></div>
-                        <div><input class="userInputs" type="text" /></div>
-                        <div class="userLabels"><label>Password:</label></div>
-                        <div><input class="userInputs" type="password" /></div>
-                    </div>
-                    <div class="userButtonArea">
-                        <button type="button" onclick="location.href='userIndex.html'" class="userSignUpButton">Sign
-                            Up</button>
-                        <a href="userSignIn.html" class="userLink">Registered ?<br>Please sign up</a>
-                    </div>
-                </fieldset>
-            </form>
-        </section>
+            <section class="userForm">
+                    <form class="signUpForm">
+                        <fieldset class="userFieldsetInput">
+                            <div class="userInputContainer">
+                                <dv>&nbsp</dv>
+                                <legend>
+                                        <b>Please Sign up</b>
+                                    </legend>
+                                <div class="userInputLabels"><label>First Name(s):</label></div>
+                                <div><input class="userInputs" type="text" /></div>
+                                <div class="userInputLabels"><label>Surname:</label></div>
+                                <div><input class="userInputs" type="text" /></div>
+                                <div class="userInputLabels"><label>Email:</label></div>
+                                <div><input class="userInputs" type="text" /></div>
+                                <div class="userInputLabels"><label>Password:</label></div>
+                                <div><input class="userInputs" type="password" /></div>
+                                <dv>&nbsp</dv>
+                                <button type="button" onclick="location.href='userIndex.html'" class="userSignInButton">Sign
+                                        Up</button>
+                                </div>                              
+                      </fieldset>
+                    </form>
+                </section>       
     </main>
     <footer></footer>
 

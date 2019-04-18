@@ -18,17 +18,12 @@
 
 <body class="dashboardIndexBody">
     <header>
-        <nav class="dashboardIndexHeader">
-            <section>
-                <a class="dashboardHomeLink" href="../Admin_Staff/admin_staff_index.html">
-                    <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
-                </a>
-            </section>
+        <nav class="dashboardIndexHeader nonCardOpacity">
             <section class="mobileIcon">
-                <h2><i class="fas fa-university mobileIconProperties"></i></h2>
+                    <a class="userLink" href="../../index.html"><h2><i class="fas fa-university mobileIconProperties"></i></h2></a>
             </section>
             <section class="largeScreenIcon">
-                <h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1>
+                    <a class="userLink" href="../../index.html"><h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1></a>
             </section>
             <section>
                 <a class="userHomeSignOut" href="../Admin_Staff/admin_staff_signin.html">
@@ -38,44 +33,46 @@
         </nav>
     </header>
     <main class="userIndexMain">
-        <section class="userSideBar">
-            <section><a class="userBankAccounts activeIcon" href="manageAccounts.html">
-                    <h5><i class="fas fa-users userSideBarIcons"></i><br>Manage<br>accounts</h5>
+        <section class="userSideBar nonCardOpacity">
+                <section>
+                        <a class="dashboardHomeLink activeIcon" href="../Admin_Staff/admin_staff_index.html">
+                            <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
+                        </a>
+                    </section>
+            <section><a class="userBankAccounts" href="./manageAccounts.html">
+                    <h5><i class="fas fa-user-cog userSideBarIcons"></i><br>Admin</h5>
                 </a>
             </section>
-            <section><a class="userProfile" href="createAdminStaff.html">
-                    <h5><i class="fas fa-plus userSideBarIcons"></i><br>Create<br>Admin|Staff</h5>
+            <section><a class="userProfile" href="./createAdminStaff.html">
+                    <h5><i class="far fa-id-card userSideBarIcons"></i><br>Add Staff</h5>
                 </a></section>
         </section>
         <section class="userMainContent">
-            <section class="createAdminStaffForm">
-                <form>
-                    <fieldset class="userFieldsetInput">
-                        <legend class="userSubheading">
-                            <h3>Register Admin or Staff</h3>
-                        </legend>
-                        <div class="userInputContainer">
-                            <div class="userLabels"><label>Username:</label></div>
-                            <div><input class="userInputs" type="text" /></div>
-                            <div class="userLabels"><label>Password:</label></div>
-                            <div><input class="userInputs" type="password" /></div>
-                            <div class="userLabels"><label>Account type:</label></div>
-                            <div class="radioButtons">
-                                <div>
-                                    <label><input name="account" class="userInputs" type="radio" />Staff</label>
-                                </div>
-                                <div>
-                                    <label><input name="account" class="userInputs" type="radio" />Admin</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="userButtonArea">
-                            <button type="button" onclick="location.href='manageAccounts.html'"
-                                class="adminStaffRegisterButton">Sign Up</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </section>
+                <section class="userAccountContainer">
+                        <section class="adminStaffForm">
+                                <form class="accountCardFontSize">
+                                    <fieldset class="userFieldsetInput">
+                                        <div class="userInputContainer">
+                                            <dv>&nbsp</dv>
+                                            <legend>
+                                                    <b>Add Admin or Staff account</b>
+                                                </legend>
+                                            <div class="userInputLabels"><label>Username:</label></div>
+                                            <div><input class="userInputs" type="text" /></div>
+                                            <div class="userInputLabels"><label>Password:</label></div>
+                                            <div><input class="userInputs" type="password" /></div>
+                                            <div class="userInputLabels"><label>Staff:</label></div>
+                                            <div><input name="adminStaff" class="userInputs" type="radio" /></div>
+                                            <div class="userInputLabels"><label>Admin:</label></div>
+                                            <div><input name="adminStaff" class="userInputs" type="radio" /></div>
+                                            <dv>&nbsp</dv>
+                                            <button type="button" onclick="location.href='userIndex.html'" class="userSignInButton">Sign
+                                                    Up</button>
+                                            </div>                              
+                                  </fieldset>
+                                </form>
+                            </section>       
+                </section>
         </section>
     </main>
     <footer></footer>

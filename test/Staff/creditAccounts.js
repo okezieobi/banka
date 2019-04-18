@@ -168,4 +168,17 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
     expect(response.body).to.have.property('status').equal(404);
     expect(response.body).to.have.property('error').equal('Account number not found');
   });
+
+  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account is not active', async () => {
+    const testData = {
+      transactionAmount: '1000',
+    };
+    const testHeader = '3030303030';
+    const accountNumber = '1414141414';
+    const response = await chai.request(app).post(`/api/v1/transactions/${accountNumber}/credit`).set('cashier-id', testHeader).send(testData);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal('Only active accounts can be credited');
+  });
 });

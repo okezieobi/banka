@@ -18,17 +18,12 @@
 
 <body class="dashboardIndexBody">
     <header>
-        <nav class="dashboardIndexHeader">
-            <section>
-                <a class="dashboardHomeLink" href="../Admin_Staff/admin_staff_index.html">
-                    <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
-                </a>
-            </section>
+        <nav class="dashboardIndexHeader nonCardOpacity">
             <section class="mobileIcon">
-                <h2><i class="fas fa-university mobileIconProperties"></i></h2>
+                    <a class="userLink" href="../../index.html"><h2><i class="fas fa-university mobileIconProperties"></i></h2></a>
             </section>
             <section class="largeScreenIcon">
-                <h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1>
+                    <a class="userLink" href="../../index.html"><h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1></a>
             </section>
             <section>
                 <a class="userHomeSignOut" href="../Admin_Staff/admin_staff_signin.html">
@@ -38,92 +33,97 @@
         </nav>
     </header>
     <main class="userIndexMain">
-        <section class="userSideBar">
-            <section><a class="userBankAccounts activeIcon" href="manageAccounts.html">
-                    <h5><i class="fas fa-users userSideBarIcons"></i><br>Manage<br>accounts</h5>
+        <section class="userSideBar nonCardOpacity">
+                <section>
+                        <a class="dashboardHomeLink activeIcon" href="../Admin_Staff/admin_staff_index.html">
+                            <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
+                        </a>
+                    </section>
+            <section><a class="userBankAccounts" href="./manageAccounts.html">
+                    <h5><i class="fas fa-user-cog userSideBarIcons"></i><br>Admin</h5>
                 </a>
             </section>
-            <section><a class="userProfile" href="createAdminStaff.html">
-                    <h5><i class="fas fa-plus userSideBarIcons"></i><br>Create<br>Admin|Staff</h5>
+            <section><a class="userProfile" href="./createAdminStaff.html">
+                    <h5><i class="far fa-id-card userSideBarIcons"></i><br>Add Staff</h5>
                 </a></section>
         </section>
         <section class="userMainContent">
             <section class="userAccountContainer">
-                <section class="manageAccountCardInfo">
-                    <table class="userAccountData">
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Id No:</th>
-                            <td>1016398383</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Account No:</th>
-                            <td>1016398383</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Created On:</th>
-                            <td>12 Mar 2019</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Owner:</th>
-                            <td>09073403943699077</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Account type:</th>
-                            <td>Savings</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Status:</th>
-                            <td>Active</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Current Balance:</th>
-                            <td>1000</td>
-                        </tr>
-                    </table>
-                    <div class="manageAccountsButtonArea">
-                        <button class="manageAccountButton" disabled>Activate</button>
-                        <button class="manageAccountButton">Deactivate</button>
-                    </div>
+                <section class="userAccountCardInfo adminAccountToggle">                    
+                        <table class="userAccountData accountCardFontSize ">
+                                <tr class="userTableHeadingStyle">
+                                        <th class="userAccountDataLabel">Id:</th>
+                                        <td>1016398383</td>
+                                    </tr>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Account No:</th>
+                                <td>1016386343</td>
+                            </tr>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Created On:</th>
+                                <td>12 Mar 2019</td>
+                            </tr>
+                            <tr class="userTableHeadingStyle">
+                                    <th class="userAccountDataLabel">Owner:</th>
+                                    <td>0404404040</td>
+                                </tr>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Account type:</th>
+                                <td>Current</td>
+                            </tr>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Status:</th>
+                                <td>Active</td>
+                            </tr>
+                            <tr class="userTableHeadingStyle">
+                                <th class="userAccountDataLabel">Current Balance:</th>
+                                <td>1000</td>
+                            </tr>
+                        </table>
+                        <div class="manageAccountsButtonArea">
+                                <button class="manageAccountButton accountCardFontSize" disabled>Activate</button>
+                                <button class="manageAccountButton accountCardFontSize">Deactivate</button>
+                            </div>
                 </section>
             </section>
             <section class="userAccountContainer">
-                <section class="manageAccountCardInfo">
-                    <table class="userAccountData">
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Id No:</th>
-                            <td>1016398873</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Account No:</th>
-                            <td>1016398098</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Created On:</th>
-                            <td>12 Mar 2019</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Owner:</th>
-                            <td>09073403943699077</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Account type:</th>
-                            <td>Savings</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Status:</th>
-                            <td>Active</td>
-                        </tr>
-                        <tr class="userTableHeadingStyle">
-                            <th class="userAccountDataLabel">Current Balance:</th>
-                            <td>1700</td>
-                        </tr>
-                    </table>
-                    <div class="manageAccountsButtonArea">
-                        <button class="manageAccountButton" disabled>Activate</button>
-                        <button class="manageAccountButton">Deactivate</button>
-                    </div>
+                    <section class="userAccountCardInfo adminAccountToggle">                    
+                            <table class="userAccountData accountCardFontSize ">
+                                    <tr class="userTableHeadingStyle">
+                                            <th class="userAccountDataLabel">Id:</th>
+                                            <td>1016398383</td>
+                                        </tr>
+                                <tr class="userTableHeadingStyle">
+                                    <th class="userAccountDataLabel">Account No:</th>
+                                    <td>1016386343</td>
+                                </tr>
+                                <tr class="userTableHeadingStyle">
+                                    <th class="userAccountDataLabel">Created On:</th>
+                                    <td>12 Mar 2019</td>
+                                </tr>
+                                <tr class="userTableHeadingStyle">
+                                        <th class="userAccountDataLabel">Owner:</th>
+                                        <td>0404404040</td>
+                                    </tr>
+                                <tr class="userTableHeadingStyle">
+                                    <th class="userAccountDataLabel">Account type:</th>
+                                    <td>Current</td>
+                                </tr>
+                                <tr class="userTableHeadingStyle">
+                                    <th class="userAccountDataLabel">Status:</th>
+                                    <td>Active</td>
+                                </tr>
+                                <tr class="userTableHeadingStyle">
+                                    <th class="userAccountDataLabel">Current Balance:</th>
+                                    <td>1000</td>
+                                </tr>
+                            </table>
+                            <div class="manageAccountsButtonArea">
+                                    <button class="manageAccountButton accountCardFontSize" disabled>Activate</button>
+                                    <button class="manageAccountButton accountCardFontSize">Deactivate</button>
+                                </div>
+                    </section>
                 </section>
-            </section>
         </section>
     </main>
     <footer></footer>
