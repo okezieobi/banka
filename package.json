@@ -12,7 +12,7 @@
     "release": "npm run clean && npm run build-app && npm run start",
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && npm run build-app",
-    "build-app": "babel . -s -d dist --presets=@babel/env --ignore node_modules",
+    "build-app": "babel . -s -d dist --ignore node_modules",
     "start": "node --require @babel/polyfill dist/index.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "codeClimate": "nyc --reporter=lcov npm test",
