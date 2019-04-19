@@ -2,7 +2,8 @@
   "name": "banka",
   "version": "1.0.0",
   "engines": {
-    "node": "10.14.1"
+    "node": "10.14.1",
+    "npm": "6.6.0-next.0"
   },
   "description": "Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where\r users can signup and create bank accounts online, but must visit the branch to withdraw or\r deposit money",
   "main": "index.js",
