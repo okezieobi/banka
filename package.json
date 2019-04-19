@@ -19,7 +19,7 @@
     "codeClimate": "nyc --reporter=lcov npm test",
     "test": "mocha --recursive --require @babel/register --require @babel/polyfill test/User/signIn.js test/User/signUp.js test/User/createBankAccounts.js test/Staff/debitAccounts.js test/Staff/creditAccounts.js test/Admin/toggleAccount.js test/Admin/deleteAccount.js --exit",
     "test-branch": "mocha --require @babel/register --require @babel/polyfill --exit",
-    "postinstall": "npm run clean && npm run build-app"
+    "heroku-postbuild": "npm run clean && npm run build-app"
   },
   "repository": {
     "type": "git",
