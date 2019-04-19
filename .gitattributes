@@ -4,3 +4,4 @@
 *.sql text eol=lf
 *.json text eol=lf
 *.yml text eol=lf
+*.babelrc text eol=lf
