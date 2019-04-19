@@ -54,6 +54,7 @@
     "@babel/polyfill": "^7.2.5",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
+    "@babel/parser": "^7.4.3",
     "chai-http": "^4.2.0",
     "core-js": "^3.0.1",
     "dotenv": "^6.2.0",
