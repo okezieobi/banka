@@ -1,14 +1,3 @@
-require('@babel/parser').parse('code', {
-  // parse in strict mode and allow module declarations
-  sourceType: 'unambiguous',
-
-  plugins: [
-    // enable jsx and flow syntax
-    'jsx',
-    'flow',
-  ],
-});
-
 const presets = [
   [
     '@babel/env',
