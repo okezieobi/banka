@@ -60,6 +60,5 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-promise-router": "^3.0.3"
-  },
-  "heroku-run-build-script": true
+  }
 }
