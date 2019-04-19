@@ -9,11 +9,11 @@
   "main": "index.js",
   "scripts": {
     "views": "browser-sync -s -w",
-    "dev": "nodemon --exec babel-node index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
     "release": "npm run clean && npm run build-app && npm run start",
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && npm run build-app",
-    "build-app": "babel . -s -d ./dist --presets=@babel/env --ignore node_modules --ignore test",
+    "build-app": "babel src -s -d dist --presets=@babel/env",
     "start": "npm run build && node --require @babel/polyfill ./dist/index.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "codeClimate": "nyc --reporter=lcov npm test",
