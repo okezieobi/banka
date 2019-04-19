@@ -12,8 +12,8 @@
     "dev": "nodemon --exec babel-node index.js",
     "release": "npm run clean && npm run build-app && npm run start",
     "clean": "rm -rf dist && mkdir dist",
-    "build": "rm -rf ./dist && mkdir dist && babel . --out-dir dist",
-    "build-app": "babel . -s -d dist --presets=@babel/env --ignore node_modules",
+    "build": "npm run clean && npm run build-app",
+    "build-app": "babel . -s -d dist --presets=@babel/env --ignore node_modules --ignore test",
     "start": "node --require @babel/polyfill dist/index.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "codeClimate": "nyc --reporter=lcov npm test",
@@ -60,5 +60,6 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-promise-router": "^3.0.3"
-  }
+  },
+  "heroku-run-build-script": true
 }
