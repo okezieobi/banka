@@ -19,13 +19,13 @@
 <body class="dashboardIndexBody">
     <header>
         <nav class="dashboardIndexHeader nonCardOpacity">
-            <section class="mobileIcon">
+            <section class="mobileIcon navItem">
                     <a class="userLink" href="../../index.html"><h2><i class="fas fa-university mobileIconProperties"></i></h2></a>
             </section>
-            <section class="largeScreenIcon">
+            <section class="largeScreenIcon navItem">
                     <a class="userLink" href="../../index.html"><h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1></a>
             </section>
-            <section>
+            <section class="navItem">
                 <a class="userHomeSignOut" href="../../index.html">
                     <h5><i class="fas fa-sign-out-alt signoutIcon"></i><br>Sign Out</h5>
                 </a>
@@ -34,22 +34,24 @@
     </header>
     <main class="userIndexMain">
         <section class="userSideBar nonCardOpacity">
-                <section>
+                <section class="navItem">
                         <a class="dashboardHomeLink" href="userIndex.html">
                             <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
                         </a>
                     </section>
-            <section><a class="userBankAccounts activeIcon" href="userBankAccounts.html">
+            <section class="navItem">
+                <a class="userBankAccounts activeIcon" href="userBankAccounts.html">
                     <h5><i class="fas fa-money-check-alt userSideBarIcons"></i><br>Accounts</h5>
                 </a>
             </section>
-            <section><a class="userProfile" href="userProfile.html">
+            <section class="navItem">
+                <a class="userProfile" href="userProfile.html">
                     <h5><i class="far fa-user userSideBarIcons"></i><br>Profile</h5>
                 </a></section>
         </section>
         <section class="userMainContent">
             <section>
-                <form class="userCreateAccount resizeCreateAccountForm accountCardFontSize">
+                <form class="userCreateAccount resizeCreateAccountForm accountCardFontSize cards">
                     <div>
                         <h4>Create account here</h4>
                     </div>
@@ -58,7 +60,7 @@
                         <label><input name="account_type" type="radio" required>Current</label>
                     </div>
                     <div>
-                        <button type="button" onclick="location.href='userIndex.html'" class="createBankAccountButton accountCardFontSize">Send</button>
+                        <button type="button" onclick="location.href='userIndex.html'" class="createBankAccountButton accountCardFontSize formFontSize">Send</button>
                     </div>
                 </form>
             </section>

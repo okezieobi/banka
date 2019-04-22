@@ -1,19 +1,11 @@
-import userSignUp from './User/signUp';
-import userSignIn from './User/signIn';
-import createBankAccount from './User/createBankAccount';
-import creditAccount from './Staff/creditAccount';
-import debitAccount from './Staff/debitAccount';
-import toggleAccount from './Admin/toggleAccounts';
-import deleteAccount from './Admin/deleteAccount';
+import userRouter from './users';
+import accountRouter from './accounts';
+import transactionRouter from './transactions';
 
 const versionNumber = '/api/v1';
 
 export default (app) => {
-  app.use(versionNumber, userSignUp);
-  app.use(versionNumber, userSignIn);
-  app.use(versionNumber, createBankAccount);
-  app.use(versionNumber, debitAccount);
-  app.use(versionNumber, creditAccount);
-  app.use(versionNumber, deleteAccount);
-  app.use(versionNumber, toggleAccount);
+  app.use(versionNumber, userRouter);
+  app.use(versionNumber, accountRouter);
+  app.use(versionNumber, transactionRouter);
 };
