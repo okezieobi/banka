@@ -19,13 +19,13 @@
 <body class="dashboardIndexBody">
     <header>
         <nav class="dashboardIndexHeader nonCardOpacity">
-            <section class="mobileIcon">
+            <section class="mobileIcon navItem">
                     <a class="userLink" href="../../index.html"><h2><i class="fas fa-university mobileIconProperties"></i></h2></a>
             </section>
-            <section class="largeScreenIcon">
+            <section class="largeScreenIcon navItem">
                     <a class="userLink" href="../../index.html"><h1><i class="fas fa-university"></i> Banka <i class="fas fa-university"></i></h1></a>
             </section>
-            <section>
+            <section class="navItem">
                 <a class="userHomeSignOut" href="../Admin_Staff/admin_staff_signin.html">
                     <h5><i class="fas fa-sign-out-alt signoutIcon"></i><br>Sign Out</h5>
                 </a>
@@ -34,21 +34,23 @@
     </header>
     <main class="userIndexMain">
         <section class="userSideBar nonCardOpacity">
-                <section>
+                <section class="navItem">
                         <a class="dashboardHomeLink activeIcon" href="../Admin_Staff/admin_staff_index.html">
                             <h5><i class="fas fa-home homeIcon"></i><br>Home</h5>
                         </a>
                     </section>
-            <section><a class="userBankAccounts" href="./manageAccounts.html">
+            <section class="navItem">
+                <a class="userBankAccounts" href="./manageAccounts.html">
                     <h5><i class="fas fa-user-cog userSideBarIcons"></i><br>Admin</h5>
                 </a>
             </section>
-            <section><a class="userProfile" href="./createAdminStaff.html">
+            <section class="navItem">
+                <a class="userProfile" href="./createAdminStaff.html">
                     <h5><i class="far fa-id-card userSideBarIcons"></i><br>Add Staff</h5>
                 </a></section>
         </section>
         <section class="userMainContent">
-                <section class="userAccountContainer">
+                <section class="userAccountContainer cards">
                         <section class="adminStaffForm">
                                 <form class="accountCardFontSize">
                                     <fieldset class="userFieldsetInput">
@@ -61,10 +63,10 @@
                                             <div><input class="userInputs" type="text" /></div>
                                             <div class="userInputLabels"><label>Password:</label></div>
                                             <div><input class="userInputs" type="password" /></div>
-                                            <div class="userInputLabels"><label>Staff:</label></div>
-                                            <div><input name="adminStaff" class="userInputs" type="radio" /></div>
-                                            <div class="userInputLabels"><label>Admin:</label></div>
-                                            <div><input name="adminStaff" class="userInputs" type="radio" /></div>
+                                            <div class="userInputLabels"><label>Type:</label></div>
+                                            <div><input name="adminStaff" class="userInputs" type="radio" /><i> Staff</i></div>
+                                            <div>&nbsp</div>
+                                            <div><input name="adminStaff" class="userInputs" type="radio" /><i> Admin</i></div>
                                             <dv>&nbsp</dv>
                                             <button type="button" onclick="location.href='userIndex.html'" class="userSignInButton">Sign
                                                     Up</button>

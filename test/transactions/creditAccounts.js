@@ -3,7 +3,7 @@ import {
   chai,
   chaiHttp,
   app,
-} from '../index';
+} from '../test';
 
 chai.use(chaiHttp);
 
