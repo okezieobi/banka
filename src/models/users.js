@@ -14,13 +14,14 @@ export default class Users {
 
   static createUserDataResponse(data) {
     const userResData = {
-      id: parseInt(data.id, 10),
+      id: data.id,
       firstName: String(data.firstName),
       lastName: String(data.lastName),
       email: String(data.email),
     };
     return userResData;
   }
+
 
   static adminStaffData(data) {
     const adminStaff = {

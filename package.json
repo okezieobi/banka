@@ -58,7 +58,9 @@
     "core-js": "",
     "dotenv": "",
     "express": "",
-    "express-promise-router": ""
+    "express-promise-router": "",
+    "jsonwebtoken": "",
+    "bcryptjs": ""
   },
   "heroku-run-build-script": true
 }

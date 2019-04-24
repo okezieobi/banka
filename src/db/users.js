@@ -7,6 +7,10 @@ class Users {
     };
   }
 
+  addToArray(array, data) {
+    this.data = data;
+    array.push(...data);
+  }
 
   UserList() {
     this.testUserOne = {
