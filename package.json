@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "",
+    "bcryptjs": "",
     "body-parser": "",
     "chai": "",
     "chai-http": "",
@@ -59,8 +60,8 @@
     "dotenv": "",
     "express": "",
     "express-promise-router": "",
-    "jsonwebtoken": "",
-    "bcryptjs": ""
+    "jsonwebtoken": "^8.5.1",
+    "pg": ""
   },
   "heroku-run-build-script": true
 }

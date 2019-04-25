@@ -9,6 +9,13 @@ export default class Helper {
     return passwordPattern.test(password);
   }
 
+  static multipleChecks(test, arrayData) {
+    arrayData.forEach((data) => {
+      const result = test(data);
+      return result;
+    });
+  }
+
   static checkName(name) {
     const namePattern = /^[A-Za-z\s]+$/;
     return namePattern.test(name);
