@@ -22,7 +22,6 @@ export default class Users {
     return userResData;
   }
 
-
   static adminStaffData(data) {
     const adminStaff = {
       id: Math.floor(Math.random() * 1000000000),

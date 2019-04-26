@@ -12,7 +12,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
-      userEmail: 'haha@mail.com',
+      userEmail: 'mama@mail.com',
       userPassword: '1234AOdBcd!',
     };
     const response = await chai.request(app).post('/api/v1/auth/signup').send(testData);

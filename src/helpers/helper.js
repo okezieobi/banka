@@ -9,13 +9,6 @@ export default class Helper {
     return passwordPattern.test(password);
   }
 
-  static multipleChecks(test, arrayData) {
-    arrayData.forEach((data) => {
-      const result = test(data);
-      return result;
-    });
-  }
-
   static checkName(name) {
     const namePattern = /^[A-Za-z\s]+$/;
     return namePattern.test(name);
@@ -42,27 +35,11 @@ export default class Helper {
     return foundByValue;
   }
 
-  static errorResponse(res, codeStatus, error) {
+  static response(res, codeStatus, resKey, resValue) {
     const errRes = {
       status: codeStatus,
-      error,
+      [resKey]: resValue,
     };
     res.status(codeStatus).send(errRes);
-  }
-
-  static successResponse(res, codeStatus, data) {
-    const successRes = {
-      status: codeStatus,
-      data,
-    };
-    res.status(codeStatus).send(successRes);
-  }
-
-  static successResMessage(res, codeStatus, message) {
-    const successRes = {
-      status: codeStatus,
-      message,
-    };
-    res.status(codeStatus).send(successRes);
   }
 }
