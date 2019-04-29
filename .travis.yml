@@ -14,7 +14,8 @@ before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - "./cc-test-reporter before-build"
-- psql '\i src/db/buildDB.sql' -U postgres
+- psql -c 'CREATE  ROLE bootcamp43 WITH LOGIN PASSWORD 'lovely' CREATEDB SUPERUSER;' -U postgres
+- psql -c 'create database banka' -U bootcamp43
 script:
 script:
 - npm test
