@@ -1,5 +1,5 @@
 /*
-RUN psql -d postgres -U bootcamp43 and connect with \c banka if not connected
+RUN psql -U postgres if not connected
 RUN \i src/models/tables/transactions.sql
 */
 

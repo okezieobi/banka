@@ -1,14 +1,6 @@
-/*
-RUN psql -U postgres -a -f "src/db/buildDB.sql"
-*/
+import pool from '../../db/pgConnect';
 
-
-DROP DATABASE IF EXISTS banka;
-CREATE DATABASE banka;
-
-\c banka
-
-CREATE EXTENSION
+const allTables = `CREATE EXTENSION
 IF NOT EXISTS "pgcrypto";
 
 DROP TABLE IF EXISTS clients;
@@ -38,7 +30,6 @@ CREATE TABLE staff
     create_date TIMESTAMP    DEFAULT NOW(),
     modify_date TIMESTAMP    DEFAULT NOW()
 );
-
 
 DROP TABLE IF EXISTS admins;
 
@@ -79,3 +70,6 @@ CREATE TABLE transactions
     old_balance NUMERIC      NOT NULL,
     new_balance NUMERIC      NOT NULL
 );
+`;
+
+pool.query(allTables);
