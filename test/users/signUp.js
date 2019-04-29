@@ -13,13 +13,13 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
   before(async () => {
     await pool.query(resetDatabase);
     setTimeout(async () => {
-    }, 4000);
+    }, 8000);
   });
 
   after(async () => {
     await pool.query(resetDatabase);
     setTimeout(async () => {
-    }, 4000);
+    }, 8000);
   });
 
   it('Should create a User at "/api/v1/auth/signup" with POST if all request inputs are valid', async () => {
