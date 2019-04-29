@@ -14,7 +14,7 @@ before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - "./cc-test-reporter before-build"
-- psql -c 'drop database if exists banka; create database banka;' -U postgres
+- psql -c 'create database banka;' -U postgres
 - psql -c '\c banka \i src/models/tables/users.sql' -U postgres
 - psql -c '\c banka \i src/models/tables/accounts.sql' -U postgres
 - psql -c '\c banka \i src/models/tables/transactions.sql' -U postgres
