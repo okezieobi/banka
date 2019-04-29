@@ -7,11 +7,6 @@ class Users {
     };
   }
 
-  addToArray(array, data) {
-    this.data = data;
-    array.push(...data);
-  }
-
   UserList() {
     this.testUserOne = {
       id: 1010101010,

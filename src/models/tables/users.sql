@@ -49,7 +49,7 @@ CREATE TABLE admins
     modify_date TIMESTAMP    DEFAULT NOW()
 );
 
-
+/*
 INSERT INTO clients
     (first_name, last_name, email, "password")
 VALUES
@@ -85,3 +85,4 @@ SELECT
     *
 FROM
     admins;
+*/

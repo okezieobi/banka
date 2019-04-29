@@ -18,6 +18,7 @@ CREATE TABLE accounts
 );
 
 
+/*
 INSERT INTO accounts
 	("number", "owner", "type")
 VALUES
@@ -26,3 +27,4 @@ VALUES
 
 SELECT *
 FROM accounts;
+*/

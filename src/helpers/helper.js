@@ -42,4 +42,16 @@ export default class Helper {
     };
     res.status(codeStatus).send(errRes);
   }
+
+  static authResponse(res, codeStatus, resKey, resValue, token, ownerId, id) {
+    const errRes = {
+      status: codeStatus,
+      [resKey]: resValue,
+      headers: {
+        [ownerId]: id,
+        'access-token': token,
+      },
+    };
+    res.status(codeStatus).set(errRes.headers).send(errRes);
+  }
 }

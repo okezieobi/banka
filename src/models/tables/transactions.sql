@@ -17,6 +17,7 @@ CREATE TABLE transactions
     new_balance NUMERIC      NOT NULL
 );
 
+/*
 INSERT INTO transactions
     ("type", account_no, cashier, amount, old_balance, new_balance)
 VALUES
@@ -26,3 +27,4 @@ SELECT
     *
 FROM
     transactions;
+*/

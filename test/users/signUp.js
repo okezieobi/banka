@@ -3,11 +3,21 @@ import {
   chai,
   chaiHttp,
   app,
+  resetDatabase,
+  pool,
 } from '../test';
 
 chai.use(chaiHttp);
 
 describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', () => {
+  before(async () => {
+    await pool.query(resetDatabase);
+  });
+
+  after(async () => {
+    await pool.query(resetDatabase);
+  });
+
   it('Should create a User at "/api/v1/auth/signup" with POST if all request inputs are valid', async () => {
     const testData = {
       userFirstName: 'Frank',
@@ -24,6 +34,11 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
     expect(response.body.data).to.have.property('firstName').equal(testData.userFirstName);
     expect(response.body.data).to.have.property('lastName').equal(testData.userLastName);
     expect(response.body.data).to.have.property('email').equal(testData.userEmail);
+    expect(response.body).to.have.property('headers');
+    expect(response.body.headers).to.have.property('owner-id');
+    expect(response.body.headers).to.have.property('access-token');
+    expect(response.header).to.have.property('owner-id');
+    expect(response.header).to.have.property('access-token');
   });
 
   it('Should NOT create a User at "/api/v1/auth/signup" if user first name is undefined', async () => {
@@ -258,7 +273,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
       userEmail: 'haha@mail.com',
       userPassword: '1234AOdBcd!',
     };
-    testData.userEmail = 'foobar@mail.com';
+    testData.userEmail = 'mama@mail.com';
     const response = await chai.request(app).post('/api/v1/auth/signup').send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');

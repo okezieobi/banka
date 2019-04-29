@@ -22,6 +22,17 @@ export default class Users {
     return userResData;
   }
 
+  static createUserDataResPostgre(data) {
+    const userResData = {
+      id: data.id,
+      firstName: String(data.first_name),
+      lastName: String(data.last_name),
+      email: String(data.email),
+      headers: data.headers,
+    };
+    return userResData;
+  }
+
   static adminStaffData(data) {
     const adminStaff = {
       id: Math.floor(Math.random() * 1000000000),
