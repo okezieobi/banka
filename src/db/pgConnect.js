@@ -6,8 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const string = process.env.DATABASE_URL || process.env.DATABASE_URL_DEV;
-
+const string = process.env.DATABASE_URL;
 
 const pool = new Pool({
   connectionString: string,
