@@ -1,12 +1,13 @@
 /*
-RUN psql -d postgres -U bootcamp43
-RUN \i src/db/buildDB.sql
+RUN psql -U postgres -a -f "src/db/buildDB.sql"
 */
 
 
 DROP DATABASE IF EXISTS banka;
 CREATE DATABASE banka;
+
 \c banka
+
 CREATE EXTENSION
 IF NOT EXISTS "pgcrypto";
 
