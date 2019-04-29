@@ -14,7 +14,7 @@ before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - "./cc-test-reporter before-build"
-- psql -c '\i src/db/database.sql \c banka \i src/models/tables/users.sql src/models/tables/accounts.sql src/models/tables/transactions.sql' -U postgres
+- psql \i src/db/buildDB.sql -U postgres
 script:
 script:
 - npm test
