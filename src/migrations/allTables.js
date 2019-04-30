@@ -1,4 +1,4 @@
-import pool from '../../db/pgConnect';
+import pool from '../db/pgConnect';
 
 const allTables = `CREATE EXTENSION
 IF NOT EXISTS "pgcrypto";
