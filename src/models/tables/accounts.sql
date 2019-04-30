@@ -1,5 +1,5 @@
 /*
-RUN psql -U postgres if not connected
+RUN psql -d postgres -U bootcamp43 \c banka if not connected
 RUN \i src/models/tables/accounts.sql
 */
 

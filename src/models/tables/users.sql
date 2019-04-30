@@ -1,5 +1,5 @@
 /*
-RUN psql -U postgres
+RUN psql -d postgres -U bootcamp43
 RUN  \c banka \i src/models/tables/users.sql
 */
 
