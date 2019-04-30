@@ -14,7 +14,6 @@ before_script:
 - "./cc-test-reporter before-build"
 - psql -c 'create database banka;' -U postgres
 - psql -c "CREATE USER bootcamp43 WITH PASSWORD 'lovely' CREATEDB SUPERUSER;" -U postgres
-- npm run tables
 script:
 - npm test
 - npm run coveralls

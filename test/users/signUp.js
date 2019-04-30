@@ -12,14 +12,10 @@ chai.use(chaiHttp);
 describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', () => {
   before(async () => {
     await pool.query(resetDatabase);
-    setTimeout(async () => {
-    }, 8000);
   });
 
   after(async () => {
     await pool.query(resetDatabase);
-    setTimeout(async () => {
-    }, 8000);
   });
 
   it('Should create a User at "/api/v1/auth/signup" with POST if all request inputs are valid', async () => {
@@ -420,4 +416,4 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
     expect(response.body).to.have.property('status').equal(400);
     expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
-});
+}).timeout(10000);
