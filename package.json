@@ -10,7 +10,6 @@
   "scripts": {
     "views": "browser-sync -s -w",
     "dev": "nodemon --exec babel-node src/index.js",
-    "migrations": "babel-node src/migrations/allTables.js",
     "release": "npm run clean && npm run build-app && npm run start",
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && npm run build-app",
