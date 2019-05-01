@@ -14,10 +14,21 @@ export default class Users {
 
   static createUserDataResponse(data) {
     const userResData = {
-      id: parseInt(data.id, 10),
+      id: data.id,
       firstName: String(data.firstName),
       lastName: String(data.lastName),
       email: String(data.email),
+    };
+    return userResData;
+  }
+
+  static createUserDataResPostgre(data) {
+    const userResData = {
+      id: data.id,
+      firstName: String(data.first_name),
+      lastName: String(data.last_name),
+      email: String(data.email),
+      headers: data.headers,
     };
     return userResData;
   }

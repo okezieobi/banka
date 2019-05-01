@@ -7,7 +7,6 @@ class Users {
     };
   }
 
-
   UserList() {
     this.testUserOne = {
       id: 1010101010,

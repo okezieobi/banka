@@ -35,27 +35,23 @@ export default class Helper {
     return foundByValue;
   }
 
-  static errorResponse(res, codeStatus, error) {
+  static response(res, codeStatus, resKey, resValue) {
     const errRes = {
       status: codeStatus,
-      error,
+      [resKey]: resValue,
     };
     res.status(codeStatus).send(errRes);
   }
 
-  static successResponse(res, codeStatus, data) {
-    const successRes = {
+  static authResponse(res, codeStatus, resKey, resValue, token, ownerId, id) {
+    const errRes = {
       status: codeStatus,
-      data,
+      [resKey]: resValue,
+      headers: {
+        [ownerId]: id,
+        'access-token': token,
+      },
     };
-    res.status(codeStatus).send(successRes);
-  }
-
-  static successResMessage(res, codeStatus, message) {
-    const successRes = {
-      status: codeStatus,
-      message,
-    };
-    res.status(codeStatus).send(successRes);
+    res.status(codeStatus).set(errRes.headers).send(errRes);
   }
 }
