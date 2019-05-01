@@ -3,7 +3,8 @@ RUN psql -d postgres -U bootcamp43
 RUN  \c banka \i src/tables/users.sql
 */
 
-CREATE EXTENSION "pgcrypto";
+CREATE EXTENSION
+IF NOT EXISTS "pgcrypto";
 
 DROP TABLE IF EXISTS clients;
 
