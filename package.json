@@ -39,7 +39,7 @@
     "@babel/node": "",
     "@babel/preset-env": "",
     "@babel/register": "",
-    "browser-sync": "",
+    "browser-sync": "^2.26.5",
     "coveralls": "",
     "eslint": "",
     "eslint-config-airbnb-base": "",
@@ -52,6 +52,7 @@
   "dependencies": {
     "@babel/polyfill": "",
     "bcryptjs": "",
+    "bluebird": "^3.5.4",
     "body-parser": "",
     "chai": "",
     "chai-http": "",
@@ -60,7 +61,9 @@
     "express": "",
     "express-promise-router": "",
     "jsonwebtoken": "^8.5.1",
-    "pg": ""
+    "pg": "",
+    "pg-promise": "^8.6.5",
+    "pgtools": "^0.3.0"
   },
   "heroku-run-build-script": true
 }
