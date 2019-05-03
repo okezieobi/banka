@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 
 describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', () => {
   before(async () => {
-    pool.query(Test.deleteData());
+    pool.queryNone(Test.deleteData());
   });
 
   it('Should create a User at "/api/v1/auth/signup" with POST if all request inputs are valid', async () => {
@@ -34,7 +34,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
     expect(response.body.headers).to.have.property('access-token');
     expect(response.header).to.have.property('owner-id');
     expect(response.header).to.have.property('access-token');
-  });
+  }).timeout(4000);
 
   it('Should NOT create a User at "/api/v1/auth/signup" if user first name is undefined', async () => {
     const testData = {

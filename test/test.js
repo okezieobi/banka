@@ -7,9 +7,7 @@ import pool from '../src/db/pgConnect';
 
 export default class Test {
   static deleteData() {
-    const deleteData = `CREATE EXTENSION
-IF NOT EXISTS "pgcrypto";
-
+    const deleteData = `
 TRUNCATE clients CASCADE;
 TRUNCATE staff CASCADE;
 TRUNCATE admins CASCADE;

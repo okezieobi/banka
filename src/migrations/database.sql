@@ -10,6 +10,8 @@ CREATE DATABASE banka;
 \i src/tables/accounts.sql 
 \i src/tables/transactions.sql
 
+/*
 \i src/seeders/users.sql
 \i src/seeders/accounts.sql
 \i src/seeders/transactions.sql
+*/

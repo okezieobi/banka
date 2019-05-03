@@ -59,9 +59,7 @@
     "core-js": "",
     "dotenv": "",
     "express": "",
-    "express-promise-router": "",
     "jsonwebtoken": "^8.5.1",
-    "pg": "",
     "pg-promise": "^8.6.5",
     "pgtools": "^0.3.0"
   },
