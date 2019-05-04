@@ -4,9 +4,9 @@ RUN  \c banka \i src/seeders/users.sql
 */
 
 INSERT INTO clients
-    (first_name, last_name, email, "password")
+    (id, first_name, last_name, email, "password")
 VALUES
-    ('Frank', 'Okezie', 'frank@email.com', '1234AOdBcd!');
+    (1010101010101, 'Frank', 'Okezie', 'frank@email.com', '1234AOdBcd!');
 
 SELECT
     *
@@ -15,9 +15,9 @@ FROM
 
 
 INSERT INTO staff
-    (username, "password")
+    (id, username, "password")
 VALUES
-    ('okezie', '12345');
+    (3030303030303, 'okezie', '12345');
 
 SELECT
     *
@@ -26,9 +26,9 @@ FROM
 
 
 INSERT INTO admins
-    (username, "password", "type")
+    (id, username, "password", "type")
 VALUES
-    ('obiedere', '12345', 'Admin');
+    (5050505050505, 'obiedere', '12345', 'Admin');
 
 SELECT
     *

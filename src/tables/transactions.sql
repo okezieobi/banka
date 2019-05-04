@@ -7,12 +7,12 @@ DROP TABLE IF EXISTS transactions;
 
 CREATE TABLE transactions
 (
-    id          UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
-    created_on  TIMESTAMP    DEFAULT NOW(),
+    id          BIGINT       PRIMARY KEY NOT NULL,
+    created_on  TIMESTAMPTZ  DEFAULT NOW(),
     "type"      VARCHAR(128) NOT NULL,
-    account_no  INTEGER      NOT NULL REFERENCES accounts ("number") ON DELETE CASCADE,
-    cashier     UUID         NOT NULL REFERENCES staff (id),
+    account_no  BIGINT       NOT NULL REFERENCES accounts ("number") ON DELETE CASCADE,
+    cashier     BIGINT       NOT NULL REFERENCES staff (id),
     amount      NUMERIC      NOT NULL,
-    old_balance NUMERIC      NOT NULL,
+    old_balance NUMERIC      NOT NULL REFERENCES accounts (balance),
     new_balance NUMERIC      NOT NULL
 );

@@ -4,9 +4,20 @@ RUN  \c banka \i src/seeders/accounts.sql
 */
 
 INSERT INTO accounts
-    ("number", "owner", "type")
+    (id, "number", "owner", "type", balance)
 VALUES
-    (669296470, 'b46f0f47-51fc-4b54-a0a2-cf6997a46f6c', 'current');
+    (1111111111111, 12121212121,
+        (SELECT id
+        FROM clients
+        WHERE email = 'frank@email.com'), 'current', 10000);
+
+INSERT INTO accounts
+    (id, "number", "owner", "type", "status")
+VALUES
+    (4444444444444, 14141414141,
+        (SELECT id
+        FROM clients
+        WHERE email = 'frank@email.com'), 'savings', 'Dormant');
 
 
 SELECT *

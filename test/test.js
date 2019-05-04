@@ -4,14 +4,11 @@ import chai, {
 import chaiHttp from 'chai-http';
 import app from '../src';
 import pool from '../src/db/pgConnect';
+import seeder from '../src/seeders/seeder';
 
 export default class Test {
   static deleteData() {
-    const deleteData = `
-TRUNCATE clients CASCADE;
-TRUNCATE staff CASCADE;
-TRUNCATE admins CASCADE;
-`;
+    const deleteData = seeder.deleteAll;
     return deleteData;
   }
 }
