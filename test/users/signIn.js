@@ -35,6 +35,11 @@ describe('Test endpoints at "/api/v1/auth/signin" to sign in a User with POST', 
     expect(response.body.data).to.have.property('firstName');
     expect(response.body.data).to.have.property('lastName');
     expect(response.body.data).to.have.property('email').equal(testData.userEmail);
+    expect(response.body).to.have.property('headers');
+    expect(response.body.headers).to.have.property('owner-id');
+    expect(response.body.headers).to.have.property('access-token');
+    expect(response.header).to.have.property('owner-id');
+    expect(response.header).to.have.property('access-token');
   });
 
   it('Should NOT sign in a User at "/api/v1/auth/signin" if user email is undefined', async () => {
