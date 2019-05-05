@@ -1,13 +1,26 @@
-import {
+import Test, {
   expect,
   chai,
   chaiHttp,
   app,
+  pool,
 } from '../test';
 
 chai.use(chaiHttp);
 
 describe('Test endpoints at "/api/v1/auth/signin" to sign in a User with POST', () => {
+  before(async () => {
+    await pool.queryNone(Test.deleteData());
+  });
+
+  before(async () => {
+    await pool.queryAny(Test.users());
+  });
+
+  after(async () => {
+    await pool.queryNone(Test.deleteData());
+  });
+
   it('Should create a User at "/api/v1/auth/signin" with POST if all request inputs are valid', async () => {
     const testData = {
       userEmail: 'foobar@mail.com',

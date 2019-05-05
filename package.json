@@ -61,7 +61,6 @@
     "express": "",
     "jsonwebtoken": "^8.5.1",
     "pg-promise": "^8.6.5",
-    "pgtools": "^0.3.0",
     "unique-random": "^2.1.0"
   },
   "heroku-run-build-script": true

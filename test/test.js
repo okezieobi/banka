@@ -11,6 +11,11 @@ export default class Test {
     const deleteData = seeder.deleteAll;
     return deleteData;
   }
+
+  static users() {
+    const userData = seeder.users.insertData;
+    return userData;
+  }
 }
 
 require('./users/signIn');
@@ -20,6 +25,7 @@ require('./transactions/debitAccounts');
 require('./transactions/creditAccounts');
 require('./accounts/updateAccountStatus');
 require('./accounts/deleteAccount');
+
 
 export {
   expect,

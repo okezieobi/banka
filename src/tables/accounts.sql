@@ -14,5 +14,5 @@ CREATE TABLE accounts
 	"owner"    BIGINT       NOT NULL REFERENCES clients (id) ON DELETE CASCADE,
 	"type"     VARCHAR(128) NOT NULL,
 	"status"   VARCHAR(128) DEFAULT 'Active',
-	balance    NUMERIC      DEFAULT 0.00
+	balance    NUMERIC      UNIQUE DEFAULT 0.00
 );
