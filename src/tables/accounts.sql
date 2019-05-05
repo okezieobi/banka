@@ -8,11 +8,11 @@ DROP TABLE IF EXISTS accounts;
 
 CREATE TABLE accounts
 (
-	id         UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
-	"number"   INTEGER      NOT NULL UNIQUE,
-	created_on TIMESTAMP    DEFAULT NOW(),
-	"owner"    UUID         NOT NULL REFERENCES clients (id) ON DELETE CASCADE,
+	id         BIGINT       PRIMARY KEY NOT NULL,
+	"number"   BIGINT       NOT NULL UNIQUE,
+	created_on TIMESTAMPTZ  DEFAULT NOW(),
+	"owner"    BIGINT       NOT NULL REFERENCES clients (id) ON DELETE CASCADE,
 	"type"     VARCHAR(128) NOT NULL,
 	"status"   VARCHAR(128) DEFAULT 'Active',
-	balance    NUMERIC      DEFAULT 0.00
+	balance    NUMERIC      UNIQUE DEFAULT 0.00
 );

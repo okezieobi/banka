@@ -2,8 +2,8 @@
   "name": "banka",
   "version": "1.0.0",
   "engines": {
-    "node": "10.14.1",
-    "npm": "6.6.0-next.0"
+    "node": "10.15.3",
+    "npm": "6.4.1"
   },
   "description": "Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where\r users can signup and create bank accounts online, but must visit the branch to withdraw or\r deposit money",
   "main": "index.js",
@@ -39,7 +39,7 @@
     "@babel/node": "",
     "@babel/preset-env": "",
     "@babel/register": "",
-    "browser-sync": "",
+    "browser-sync": "^2.26.5",
     "coveralls": "",
     "eslint": "",
     "eslint-config-airbnb-base": "",
@@ -52,15 +52,16 @@
   "dependencies": {
     "@babel/polyfill": "",
     "bcryptjs": "",
+    "bluebird": "^3.5.4",
     "body-parser": "",
     "chai": "",
     "chai-http": "",
     "core-js": "",
     "dotenv": "",
     "express": "",
-    "express-promise-router": "",
     "jsonwebtoken": "^8.5.1",
-    "pg": ""
+    "pg-promise": "^8.6.5",
+    "unique-random": "^2.1.0"
   },
   "heroku-run-build-script": true
 }

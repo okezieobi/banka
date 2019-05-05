@@ -8,16 +8,16 @@ import Test, {
 
 chai.use(chaiHttp);
 
-describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', async () => {
-  await before(async () => {
-    await pool.query(Test.deleteData());
+describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', () => {
+  before(async () => {
+    await pool.queryNone(Test.deleteData());
   });
 
-  await after(async () => {
-    await pool.query(Test.deleteData());
+  after(async () => {
+    await pool.queryNone(Test.deleteData());
   });
 
-  await it('Should create a User at "/api/v1/auth/signup" with POST if all request inputs are valid', async () => {
+  it('Should create a User at "/api/v1/auth/signup" with POST if all request inputs are valid', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -38,9 +38,9 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body.headers).to.have.property('access-token');
     expect(response.header).to.have.property('owner-id');
     expect(response.header).to.have.property('access-token');
-  }).timeout(5000);
+  });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user first name is undefined', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user first name is undefined', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -55,7 +55,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('First name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user first name is an empty string', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user first name is an empty string', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -70,7 +70,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('First name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user first name is null', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user first name is null', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -85,7 +85,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('First name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user first name does not exist', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user first name does not exist', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -100,7 +100,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('First name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user first name are not letters', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user first name are not letters', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -115,7 +115,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('First name must be letters');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user last name is undefined', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user last name is undefined', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -130,7 +130,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Last name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user last name is an empty string', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user last name is an empty string', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -145,7 +145,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Last name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user last name is null', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user last name is null', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -160,7 +160,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Last name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user last name does not exist', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user last name does not exist', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -175,7 +175,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Last name is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user last name are not letters', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user last name are not letters', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -190,7 +190,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Last name must be letters');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user email is undefined', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email is undefined', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -205,7 +205,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Email is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user email is an empty string', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email is an empty string', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -220,7 +220,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Email is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user email is null', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email is null', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -235,7 +235,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Email is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user email does not exist', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email does not exist', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -250,7 +250,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Email is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user email format is wrong', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email format is wrong', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -265,7 +265,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Email format is wrong');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user email has already been registered', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user email has already been registered', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -280,7 +280,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('User exists, please sign in');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password is undefined', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password is undefined', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -295,7 +295,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Password is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password is an empty string', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password is an empty string', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -310,7 +310,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Password is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password is null', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password is null', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -325,7 +325,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Password is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password does not exist', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password does not exist', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -340,7 +340,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Password is required');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password is not a minimum of 8 characters', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password is not a minimum of 8 characters', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -356,7 +356,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
   });
 
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 upper case letter', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 upper case letter', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -371,7 +371,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 lower case letter', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 lower case letter', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -386,7 +386,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 number', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 number', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
@@ -401,7 +401,7 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', a
     expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 
-  await it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 special character', async () => {
+  it('Should NOT create a User at "/api/v1/auth/signup" if user password does not have at least 1 special character', async () => {
     const testData = {
       userFirstName: 'Frank',
       userLastName: 'Okezie',
