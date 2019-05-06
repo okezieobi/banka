@@ -35,6 +35,31 @@ export default class Helper {
     return foundByValue;
   }
 
+  static isRequired(title) {
+    const isRequiredErrMessage = `${title} is required`;
+    return isRequiredErrMessage;
+  }
+
+  static notLetters(title) {
+    const notLettersErrMessage = `${title} must be letters`;
+    return notLettersErrMessage;
+  }
+
+  static notNumbers(title) {
+    const notNumbersErrMessage = `${title} must be numbers`;
+    return notNumbersErrMessage;
+  }
+
+  static notEmail() {
+    const notEmailErrMessage = 'Email format is wrong';
+    return notEmailErrMessage;
+  }
+
+  static notPassword() {
+    const notPasswordErrMessage = 'Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character';
+    return notPasswordErrMessage;
+  }
+
   static response(res, codeStatus, resKey, resValue) {
     const errRes = {
       status: codeStatus,

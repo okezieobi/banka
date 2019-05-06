@@ -1,33 +1,43 @@
 import helpers from '../helpers/helper';
 
 export default class Valdiate {
+  static checkEmailAndPassword(email, password) {
+    const validateEmail = helpers.validateEmail(email);
+    const validatePassword = helpers.validatePassword(password);
+    let errMessage;
+    if (!email) errMessage = helpers.isRequired('Email');
+    else if (!validateEmail) errMessage = helpers.notEmail();
+    else if (!password) errMessage = helpers.isRequired('Password');
+    else if (!validatePassword) errMessage = helpers.notPassword();
+    return errMessage;
+  }
+
+  static checkFirstAndLastName(firstName, lastName) {
+    const checkFirstName = helpers.checkName(firstName);
+    const checkLastName = helpers.checkName(lastName);
+    let errMessage;
+    if (!firstName) errMessage = helpers.isRequired('First name');
+    else if (!checkFirstName) errMessage = helpers.notLetters('First name');
+    else if (!lastName) errMessage = helpers.isRequired('Last name');
+    else if (!checkLastName) errMessage = helpers.notLetters('Last name');
+    return errMessage;
+  }
+
   static signUpInputs(req, res, next) {
     const {
       userFirstName, userLastName, userEmail, userPassword,
     } = req.body;
-    const checkFirstName = helpers.checkName(userFirstName);
-    const checkLastName = helpers.checkName(userLastName);
-    const validateEmail = helpers.validateEmail(userEmail);
-    const validatePassword = helpers.validatePassword(userPassword);
-    if (!userFirstName) helpers.response(res, 400, 'error', 'First name is required');
-    else if (!checkFirstName) helpers.response(res, 400, 'error', 'First name must be letters');
-    else if (!userLastName) helpers.response(res, 400, 'error', 'Last name is required');
-    else if (!checkLastName) helpers.response(res, 400, 'error', 'Last name must be letters');
-    else if (!userEmail) helpers.response(res, 400, 'error', 'Email is required');
-    else if (!validateEmail) helpers.response(res, 400, 'error', 'Email format is wrong');
-    else if (!userPassword) helpers.response(res, 400, 'error', 'Password is required');
-    else if (!validatePassword) helpers.response(res, 400, 'error', 'Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    const errResFirstAndLastName = this.checkFirstAndLastName(userFirstName, userLastName);
+    const errResEmailAndPassword = this.checkEmailAndPassword(userEmail, userPassword);
+    if (errResFirstAndLastName) helpers.response(res, 400, 'error', errResFirstAndLastName);
+    else if (errResEmailAndPassword) helpers.response(res, 400, 'error', errResEmailAndPassword);
     else next();
   }
 
   static signInInputs(req, res, next) {
     const { userEmail, userPassword } = req.body;
-    const validateEmail = helpers.validateEmail(userEmail);
-    const validatePassword = helpers.validatePassword(userPassword);
-    if (!userEmail) helpers.response(res, 400, 'error', 'Email is required');
-    else if (!validateEmail) helpers.response(res, 400, 'error', 'Email format is wrong');
-    else if (!userPassword) helpers.response(res, 400, 'error', 'Password is required');
-    else if (!validatePassword) helpers.response(res, 400, 'error', 'Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    const errRes = this.checkEmailAndPassword(userEmail, userPassword);
+    if (errRes) helpers.response(res, 400, 'error', errRes);
     else next();
   }
 
@@ -36,10 +46,10 @@ export default class Valdiate {
     const ownerId = req.headers['owner-id'];
     const checkOwnerId = helpers.checkNumber(ownerId);
     const checkBankAccountType = helpers.checkName(bankAccountType);
-    if (!ownerId) helpers.response(res, 400, 'error', 'User Id is required');
-    else if (!checkOwnerId) helpers.response(res, 400, 'error', 'User id must be numbers');
-    else if (!bankAccountType) helpers.response(res, 400, 'error', 'Bank account type is required');
-    else if (!checkBankAccountType) helpers.response(res, 400, 'error', 'Bank account type must be letters');
+    if (!ownerId) helpers.response(res, 400, 'error', helpers.isRequired('User id'));
+    else if (!checkOwnerId) helpers.response(res, 400, 'error', helpers.notNumbers('User id'));
+    else if (!bankAccountType) helpers.response(res, 400, 'error', helpers.isRequired('Bank account type'));
+    else if (!checkBankAccountType) helpers.response(res, 400, 'error', helpers.notLetters('Bank account type'));
     else if (bankAccountType !== 'current' && bankAccountType !== 'savings'
       && bankAccountType !== 'Current' && bankAccountType !== 'Savings') helpers.response(res, 400, 'error', 'Bank account type must be savings or current');
     else next();
@@ -52,22 +62,19 @@ export default class Valdiate {
     const checkTransactionAmount = helpers.checkNumber(transactionAmount);
     const checkAccountNumber = helpers.checkNumber(accountNumber);
     const checkCashierId = helpers.checkNumber(cashierId);
-    if (!transactionAmount) helpers.response(res, 400, 'error', 'Transaction amount is required');
-    else if (!checkTransactionAmount) helpers.response(res, 400, 'error', 'Transaction amount must be numbers');
-    else if (!checkAccountNumber) helpers.response(res, 400, 'error', 'Account number must be numbers');
-    else if (!cashierId) helpers.response(res, 400, 'error', 'Cashier id is required');
-    else if (!checkCashierId) helpers.response(res, 400, 'error', 'Cashier id must be numbers');
+    if (!transactionAmount) helpers.response(res, 400, 'error', helpers.isRequired('Transaction amount'));
+    else if (!checkTransactionAmount) helpers.response(res, 400, 'error', helpers.notNumbers('Transaction amount'));
+    else if (!checkAccountNumber) helpers.response(res, 400, 'error', helpers.notNumbers('Account number'));
+    else if (!cashierId) helpers.response(res, 400, 'error', helpers.isRequired('Cashier id'));
+    else if (!checkCashierId) helpers.response(res, 400, 'error', helpers.notNumbers('Cashier id'));
     else next();
   }
 
   static deleteAccountInputs(req, res, next) {
     const adminId = req.headers['admin-id'];
     const accountNumber = req.params.account_number;
-    const checkAdminId = helpers.checkNumber(adminId);
-    const checkAccountNumber = helpers.checkNumber(accountNumber);
-    if (!adminId) helpers.response(res, 400, 'error', 'Admin id is required');
-    else if (!checkAdminId) helpers.response(res, 400, 'error', 'Admin id must be numbers');
-    else if (!checkAccountNumber) helpers.response(res, 400, 'error', 'Account number must be numbers');
+    const adminIdAndAccountNumberErr = this.checkAdminIdAndAccountNumber(adminId, accountNumber);
+    if (adminIdAndAccountNumberErr) helpers.response(res, 400, 'error', adminIdAndAccountNumberErr);
     else next();
   }
 
@@ -76,15 +83,22 @@ export default class Valdiate {
     const adminId = req.headers['admin-id'];
     const accountNumber = req.params.account_number;
     const checkAccountStatus = helpers.checkName(accountStatus);
-    const checkAdminId = helpers.checkNumber(adminId);
-    const checkAccountNumber = helpers.checkNumber(accountNumber);
-    if (!accountStatus) helpers.response(res, 400, 'error', 'Account status is required');
-    else if (!checkAccountStatus) helpers.response(res, 400, 'error', 'Account status must be letters');
+    const adminIdAndAccountNumberErr = this.checkAdminIdAndAccountNumber(adminId, accountNumber);
+    if (!accountStatus) helpers.response(res, 400, 'error', helpers.isRequired('Account status'));
+    else if (!checkAccountStatus) helpers.response(res, 400, 'error', helpers.notLetters('Account status'));
     else if (accountStatus !== 'active' && accountStatus !== 'Active'
       && accountStatus !== 'dormant' && accountStatus !== 'Dormant') helpers.response(res, 400, 'error', 'Account status must equal active or dormant');
-    else if (!adminId) helpers.response(res, 400, 'error', 'Admin id is required');
-    else if (!checkAdminId) helpers.response(res, 400, 'error', 'Admin id must be numbers');
-    else if (!checkAccountNumber) helpers.response(res, 400, 'error', 'Account number must be a number');
+    else if (adminIdAndAccountNumberErr) helpers.response(res, 400, 'error', adminIdAndAccountNumberErr);
     else next();
+  }
+
+  static checkAdminIdAndAccountNumber(adminId, accountNumber) {
+    const checkAdminId = helpers.checkNumber(adminId);
+    const checkAccountNumber = helpers.checkNumber(accountNumber);
+    let errMessage;
+    if (!adminId) errMessage = helpers.isRequired('Admin id');
+    else if (!checkAdminId) errMessage = helpers.notNumbers('Admin id');
+    else if (!checkAccountNumber) errMessage = helpers.notNumbers('Account number');
+    return errMessage;
   }
 }

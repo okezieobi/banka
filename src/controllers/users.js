@@ -30,7 +30,7 @@ export default class Users {
     if (!checkUser) return helpers.response(res, 404, 'error', 'User does not exist, please sign up');
     const verifyPassword = password.compare(checkUser.password, userPassword);
     if (!verifyPassword) return helpers.response(res, 400, 'error', 'Password does not match user');
-    const signInRes = models.createUserDataResponse(checkUser);
+    const signInRes = models.createUserDataResPostgre(checkUser);
     const newToken = await token.generate(checkUser);
     return helpers.authResponse(res, 200, 'data', signInRes, newToken, 'owner-id', checkUser.id);
   }

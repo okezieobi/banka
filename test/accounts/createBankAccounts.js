@@ -37,7 +37,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('User Id is required');
+    expect(response.body).to.have.property('error').equal('User id is required');
   });
 
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user or owner id is not a number', async () => {
