@@ -1,20 +1,33 @@
-import {
+import Test, {
   expect,
   chai,
   chaiHttp,
   app,
+  pool,
 } from '../test';
 
 chai.use(chaiHttp);
 
 describe('Test endpoints at "/api/v1/accounts" to create a bank account as a signed in User with POST', () => {
+  before(async () => {
+    await pool.queryNone(Test.deleteData());
+  });
+
+  before(async () => {
+    await pool.queryAny(Test.users());
+  });
+
+  after(async () => {
+    await pool.queryNone(Test.deleteData());
+  });
+
   it('Should create a bank account as a signed in User at "/api/v1/accounts" with POST if all request inputs are valid', async () => {
     const testData = {
       bankAccountType: 'Savings',
     };
 
-    const testHeader = '1010101010';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const token = Test.generateToken('1010101010101');
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(201);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(201);
@@ -27,52 +40,39 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response.body.data).to.have.property('type').equal(testData.bankAccountType);
   });
 
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user or owner id is an empty string', async () => {
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if client token is an empty string', async () => {
+    const token = '';
     const testData = {
       bankAccountType: 'Savings',
     };
 
-    const testHeader = '';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('User id is required');
+    expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
   });
 
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user or owner id is not a number', async () => {
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if client token does not match with any client', async () => {
+    const token = Test.generateToken('1010101010101222222');
     const testData = {
       bankAccountType: 'Savings',
     };
 
-    const testHeader = 'hahahwhatajoke@me';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
-    expect(response).to.have.status(400);
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
+    expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('User id must be numbers');
-  });
-
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user or owner id is null', async () => {
-    const testData = {
-      bankAccountType: 'Savings',
-    };
-
-    const testHeader = null;
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
-    expect(response).to.have.status(400);
-    expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('User id must be numbers');
+    expect(response.body).to.have.property('status').equal(404);
+    expect(response.body).to.have.property('error').equal('Token provided does not match any user');
   });
 
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is undefined ', async () => {
+    const token = Test.generateToken('1010101010101');
     const testData = {
       bankAccountType: undefined,
     };
 
-    const testHeader = '1010101010';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -84,8 +84,8 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: '',
     };
 
-    const testHeader = '1010101010';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const token = Test.generateToken('1010101010101');
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -97,8 +97,8 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: null,
     };
 
-    const testHeader = '1010101010';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const token = Test.generateToken('1010101010101');
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -108,8 +108,8 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type does not exist', async () => {
     const testData = {};
 
-    const testHeader = '1010101010';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const token = Test.generateToken('1010101010101');
+    const response = await chai.request(app).post('/api/v1/accounts').set('client_token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -121,8 +121,8 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: '1234@567',
     };
 
-    const testHeader = '1010101010';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const token = Test.generateToken('1010101010101');
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -134,24 +134,11 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: 'SavingCurren',
     };
 
-    const testHeader = '1010101010';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
+    const token = Test.generateToken('1010101010101');
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
     expect(response.body).to.have.property('error').equal('Bank account type must be savings or current');
-  });
-
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if user is not registered', async () => {
-    const testData = {
-      bankAccountType: 'Savings',
-    };
-
-    const testHeader = '101010101000';
-    const response = await chai.request(app).post('/api/v1/accounts').set('owner-id', testHeader).send(testData);
-    expect(response).to.have.status(400);
-    expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Only registered users can create bank accounts, please sign up');
   });
 });

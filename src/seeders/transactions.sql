@@ -12,10 +12,7 @@ VALUES
         WHERE id = 1111111111111),
         (SELECT id
         FROM staff
-        WHERE username = 'okezie'), 1000,
-        (SELECT balance
-        FROM accounts
-        WHERE id = 1111111111111), 9000);
+        WHERE username = 'okezie'), 1000, 10000, 9000);
 
 SELECT
     *

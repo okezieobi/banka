@@ -17,7 +17,7 @@ VALUES
     (4444444444444, 14141414141,
         (SELECT id
         FROM clients
-        WHERE email = 'frank@email.com'), 'savings', 'Dormant');
+        WHERE email = 'frank@email.com'), 'savings', 'Dormant', 20000);
 
 
 SELECT *

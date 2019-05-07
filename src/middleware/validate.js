@@ -43,12 +43,8 @@ export default class Valdiate {
 
   static createBankAccountInputs(req, res, next) {
     const { bankAccountType } = req.body;
-    const ownerId = req.headers['owner-id'];
-    const checkOwnerId = helpers.checkNumber(ownerId);
     const checkBankAccountType = helpers.checkName(bankAccountType);
-    if (!ownerId) helpers.response(res, 400, 'error', helpers.isRequired('User id'));
-    else if (!checkOwnerId) helpers.response(res, 400, 'error', helpers.notNumbers('User id'));
-    else if (!bankAccountType) helpers.response(res, 400, 'error', helpers.isRequired('Bank account type'));
+    if (!bankAccountType) helpers.response(res, 400, 'error', helpers.isRequired('Bank account type'));
     else if (!checkBankAccountType) helpers.response(res, 400, 'error', helpers.notLetters('Bank account type'));
     else if (bankAccountType !== 'current' && bankAccountType !== 'savings'
       && bankAccountType !== 'Current' && bankAccountType !== 'Savings') helpers.response(res, 400, 'error', 'Bank account type must be savings or current');

@@ -24,6 +24,18 @@ export default class Accounts {
     return newBankAccountRes;
   }
 
+  static createBankAccountResPostgre(dataOne, dataTwo) {
+    const newBankAccountRes = {
+      accountNumber: parseInt(dataOne.number, 10),
+      firstName: String(dataTwo.first_name),
+      lastName: String(dataTwo.last_name),
+      email: String(dataTwo.email),
+      type: String(dataOne.type),
+      openingBalance: parseFloat(dataOne.balance),
+    };
+    return newBankAccountRes;
+  }
+
   static updateAccountStatus(data) {
     const updateStatus = {
       accountNumber: data.accountNumber,

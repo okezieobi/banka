@@ -13,6 +13,6 @@ CREATE TABLE transactions
     account_no  BIGINT       NOT NULL REFERENCES accounts ("number") ON DELETE CASCADE,
     cashier     BIGINT       NOT NULL REFERENCES staff (id),
     amount      NUMERIC      NOT NULL,
-    old_balance NUMERIC      NOT NULL REFERENCES accounts (balance),
+    old_balance NUMERIC      NOT NULL,
     new_balance NUMERIC      NOT NULL
 );
