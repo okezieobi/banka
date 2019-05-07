@@ -178,7 +178,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Account number must be a number');
+    expect(response.body).to.have.property('error').equal('Account number must be numbers');
   });
 
 

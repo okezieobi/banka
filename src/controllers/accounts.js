@@ -3,14 +3,20 @@ import userData from '../db/users';
 import helpers from '../helpers/helper';
 import models from '../models/accounts';
 import transactionData from '../db/transactions';
+import database from '../db/pgConnect';
+import numbers from '../helpers/unique_no';
+import authenticate from '../middleware/authenticate';
 
 export default class Accounts {
-  static createAccount(req, res) {
-    const findUser = helpers.findById(userData.users.clients, req.headers, 'id', 'owner-id');
-    if (!findUser) return helpers.response(res, 400, 'error', 'Only registered users can create bank accounts, please sign up');
-    const newBankAccount = models.bankAccount(req.body);
-    accountData.accounts.push(newBankAccount);
-    const bankAccountRes = models.createBankAccountResponse(newBankAccount, findUser);
+  static async createAccount(req, res) {
+    const { bankAccountType } = req.body;
+    const { findClient } = authenticate;
+    const createAccountQuery = 'INSERT INTO accounts(id, number, owner, type) VALUES ($1, $2, $3, $4) RETURNING *';
+    const accountId = await numbers.uniqueIds();
+    const accountNumber = await numbers.accountNo();
+    const arrayData = [accountId, accountNumber, findClient.id, bankAccountType];
+    const newBankAccount = await database.queryOne(createAccountQuery, arrayData);
+    const bankAccountRes = await models.createBankAccountResPostgre(newBankAccount, findClient);
     return helpers.response(res, 201, 'data', bankAccountRes);
   }
 

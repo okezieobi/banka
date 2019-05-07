@@ -1,9 +1,12 @@
 import accountsController from '../controllers/accounts';
 import router from './router';
 import validate from '../middleware/validate';
+import authenticate from '../middleware/authenticate';
 
 router.post('/accounts', (...args) => {
   validate.createBankAccountInputs(...args);
+}, (...args) => {
+  authenticate.clients(...args);
 }, accountsController.createAccount);
 
 router.delete('/accounts/:account_number', (...args) => {

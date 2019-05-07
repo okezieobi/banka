@@ -5,6 +5,7 @@ import chaiHttp from 'chai-http';
 import app from '../src';
 import pool from '../src/db/pgConnect';
 import seeder from '../src/seeders/seeder';
+import token from '../src/helpers/jwt';
 
 export default class Test {
   static deleteData() {
@@ -16,6 +17,11 @@ export default class Test {
     const userData = seeder.users.insertData;
     return userData;
   }
+
+  static generateToken(id) {
+    const newToken = token.generate(id);
+    return newToken;
+  }
 }
 
 require('./users/signIn');
@@ -25,7 +31,6 @@ require('./transactions/debitAccounts');
 require('./transactions/creditAccounts');
 require('./accounts/updateAccountStatus');
 require('./accounts/deleteAccount');
-
 
 export {
   expect,
