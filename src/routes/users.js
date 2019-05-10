@@ -15,4 +15,16 @@ router.post('/auth/signin', (...args) => {
   authenitcate.authSignIn(...args);
 }, userController.signIn);
 
+router.post('/auth/signup/admin', (...args) => {
+  validate.createAdminStaffinputs(...args);
+}, (...args) => {
+  authenitcate.authCreateAdmin(...args);
+}, userController.createAdmin);
+
+router.post('/auth/signin/admin', (...args) => {
+  validate.createAdminStaffinputs(...args);
+}, (...args) => {
+  authenitcate.authSignInAdmin(...args);
+}, userController.signInAdmin);
+
 export default router;

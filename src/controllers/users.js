@@ -24,10 +24,31 @@ export default class Users {
   static async signIn(req, res) {
     const { userPassword } = req.body;
     const { checkUser } = authenticate;
-    const verifyPassword = password.compare(checkUser.password, userPassword);
-    if (!verifyPassword) return helpers.response(res, 400, 'error', 'Password does not match user');
-    const signInRes = models.createUserDataResPostgre(checkUser);
+    const verifyPassword = await password.compare(checkUser.password, userPassword);
+    if (!verifyPassword) return helpers.response(res, 400, 'error', helpers.wrongPassword());
+    const signInRes = await models.createUserDataResPostgre(checkUser);
     const newToken = await token.generate(checkUser.id);
     return helpers.authResponse(res, 200, 'data', signInRes, newToken, 'owner-id', checkUser.id);
+  }
+
+  static async createAdmin(req, res) {
+    const { userName, adminStaffPassword } = req.body;
+    const adminId = numbers.uniqueIds();
+    const hashedPassword = await password.hash(adminStaffPassword);
+    const createAdminQuery = 'INSERT INTO admins(id, username, password) VALUES ($1, $2, $3) RETURNING id, username';
+    const arrayData = [adminId, userName, hashedPassword];
+    const createAdmin = await database.queryOne(createAdminQuery, arrayData);
+    const newToken = await token.generate(createAdmin.id);
+    return helpers.authResponse(res, 201, 'data', createAdmin, newToken, 'admin-id', createAdmin.id);
+  }
+
+  static async signInAdmin(req, res) {
+    const { checkAdmin } = authenticate;
+    const { adminStaffPassword } = req.body;
+    const verifyPassword = await password.compare(checkAdmin.password, adminStaffPassword);
+    if (!verifyPassword) return helpers.response(res, 400, 'error', helpers.wrongPassword());
+    const signInRes = await models.createAdminStaffDataResPostgre(checkAdmin);
+    const newToken = await token.generate(checkAdmin.id);
+    return helpers.authResponse(res, 201, 'data', signInRes, newToken, 'admin-id', checkAdmin.id);
   }
 }

@@ -1,20 +1,36 @@
-import {
+import Test, {
   expect,
   chai,
   chaiHttp,
   app,
+  pool,
 } from '../test';
 
 chai.use(chaiHttp);
 
 describe('Test endpoints at "/api/v1/account/account_number" to toggle the status of a bank account as a signed in Admin with PATCH', () => {
+  before(async () => {
+    await pool.queryNone(Test.deleteData());
+  });
+
+  before(async () => {
+    await pool.queryAny(Test.users());
+  });
+
+  before(async () => {
+    await pool.queryAny(Test.accounts());
+  });
+
+  after(async () => {
+    await pool.queryNone(Test.deleteData());
+  });
   it('Should patch the status of a bank account as a signed in Admin at "/api/v1/account/account_number" with POST if all request inputs, headers and params are valid', async () => {
     const testData = {
       accountStatus: 'active',
     };
-    const testHeader = '5050505050';
-    const accountNumber = '1414141414';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '14141414141';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(200);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(200);
@@ -27,9 +43,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'active',
     };
-    const testHeader = '5050505050';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -40,9 +56,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: undefined,
     };
-    const testHeader = '5050505050';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -53,9 +69,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: '',
     };
-    const testHeader = '5050505050';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -66,9 +82,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: null,
     };
-    const testHeader = '5050505050';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -77,9 +93,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
 
   it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account status does not exist', async () => {
     const testData = {};
-    const testHeader = '5050505050';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -91,9 +107,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: '12345@45',
     };
-    const testHeader = '5050505050';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -104,77 +120,49 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'activ',
     };
-    const testHeader = '5050505050';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
     expect(response.body).to.have.property('error').equal('Account status must equal active or dormant');
   });
 
-  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if admin id is an empty string', async () => {
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if admin token is an empty string', async () => {
+    const token = '';
     const testData = {
       accountStatus: 'active',
     };
-    const testHeader = '';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Admin id is required');
+    expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
   });
 
 
-  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number/credit" if admin id is not a number', async () => {
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if admin token is not a match', async () => {
     const testData = {
       accountStatus: 'active',
     };
-    const testHeader = 'lmaooooooooooo';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
-    expect(response).to.have.status(400);
-    expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Admin id must be numbers');
-  });
-
-
-  it('Should NOT patch the status of a bank account as a signed in Staff at "/api/v1/account/:account_number" if admin id is not a number', async () => {
-    const testData = {
-      accountStatus: 'active',
-    };
-    const testHeader = null;
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
-    expect(response).to.have.status(400);
-    expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Admin id must be numbers');
-  });
-
-
-  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if admin id is not found', async () => {
-    const testData = {
-      accountStatus: 'active',
-    };
-    const testHeader = '505050505000000';
-    const accountNumber = '1313131313';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const token = Test.generateToken('5050505');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(404);
-    expect(response.body).to.have.property('error').equal('Admin id not found, only registered admins can update an account detail');
+    expect(response.body).to.have.property('error').equal('Token does not match any admin');
   });
 
   it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account number is not number', async () => {
     const testData = {
       accountStatus: 'active',
     };
-    const testHeader = '5050505050';
+    const token = Test.generateToken('5050505050505');
     const accountNumber = 'lmaooooooooooo';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -186,12 +174,12 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'active',
     };
-    const testHeader = '5050505050';
+    const token = Test.generateToken('5050505050505');
     const accountNumber = '338383838383';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-id', testHeader).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(404);
-    expect(response.body).to.have.property('error').equal('Account number not found');
+    expect(response.body).to.have.property('error').equal('Bank account not found');
   });
 });

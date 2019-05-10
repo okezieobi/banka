@@ -20,13 +20,14 @@ export default class Accounts {
     return helpers.response(res, 201, 'data', bankAccountRes);
   }
 
-  static updateStatus(req, res) {
-    if (!helpers.findById(userData.users.admins, req.headers, 'id', 'admin-id')) return helpers.response(res, 404, 'error', 'Admin id not found, only registered admins can update an account detail');
-    const bankAccount = helpers.findById(accountData.accounts, req.params, 'accountNumber', 'account_number');
-    if (!bankAccount) return helpers.response(res, 404, 'error', 'Account number not found');
-    if ((bankAccount.status).toLowerCase() === (req.body.accountStatus).toLowerCase()) return helpers.response(res, 400, 'error', `Account status is already ${req.body.accountStatus}`);
-    bankAccount.status = req.body.accountStatus;
-    const statusResponse = models.updateAccountStatus(bankAccount);
+  static async updateStatus(req, res) {
+    const { bankAccount } = authenticate;
+    const { accountStatus } = req.body;
+    if ((bankAccount.status).toLowerCase() === (accountStatus).toLowerCase()) return helpers.response(res, 400, 'error', `Account status is already ${accountStatus}`);
+    const updateAccountQuery = 'UPDATE accounts SET status = $1 WHERE id = $2 RETURNING *';
+    const arrayData = [accountStatus, bankAccount.id];
+    const updatedAccount = await database.queryOne(updateAccountQuery, arrayData);
+    const statusResponse = await models.updatedAccountResPostgre(updatedAccount);
     return helpers.response(res, 200, 'data', statusResponse);
   }
 

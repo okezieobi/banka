@@ -24,6 +24,14 @@ export default class Accounts {
     return newBankAccountRes;
   }
 
+  static updatedAccountResPostgre(data) {
+    const updatedAccount = {
+      accountNumber: parseInt(data.number, 10),
+      status: String(data.status),
+    };
+    return updatedAccount;
+  }
+
   static createBankAccountResPostgre(dataOne, dataTwo) {
     const newBankAccountRes = {
       accountNumber: parseInt(dataOne.number, 10),

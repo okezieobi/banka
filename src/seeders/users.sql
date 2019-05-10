@@ -18,7 +18,7 @@ FROM
 INSERT INTO staff
     (id, username, "password")
 VALUES
-    (3030303030303, 'okezie', crypt('12345', gen_salt('bf', 12)));
+    (3030303030303, 'okezie', crypt('AbcDFer123*@is!', gen_salt('bf', 12)));
 
 SELECT
     *
@@ -29,7 +29,7 @@ FROM
 INSERT INTO admins
     (id, username, "password", "type")
 VALUES
-    (5050505050505, 'obiedere', crypt('12345', gen_salt('bf', 12)), 'Admin');
+    (5050505050505, 'obiedere', crypt('AbcDFer123*@is!', gen_salt('bf', 12)), 'Admin');
 
 SELECT
     *

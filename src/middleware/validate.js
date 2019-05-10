@@ -41,6 +41,17 @@ export default class Valdiate {
     else next();
   }
 
+  static createAdminStaffinputs(req, res, next) {
+    const { userName, adminStaffPassword } = req.body;
+    const checkUsername = helpers.checkUserName(userName);
+    const checkPassword = helpers.validatePassword(adminStaffPassword);
+    if (!userName) helpers.response(res, 400, 'error', helpers.isRequired('Username'));
+    else if (!checkUsername) helpers.response(res, 400, 'error', helpers.notLetters('Username'));
+    else if (!adminStaffPassword) helpers.response(res, 400, 'error', helpers.isRequired('password'));
+    else if (!checkPassword) helpers.response(res, 400, 'error', helpers.notPassword());
+    else next();
+  }
+
   static createBankAccountInputs(req, res, next) {
     const { bankAccountType } = req.body;
     const checkBankAccountType = helpers.checkName(bankAccountType);
@@ -69,32 +80,26 @@ export default class Valdiate {
   static deleteAccountInputs(req, res, next) {
     const adminId = req.headers['admin-id'];
     const accountNumber = req.params.account_number;
-    const adminIdAndAccountNumberErr = this.checkAdminIdAndAccountNumber(adminId, accountNumber);
-    if (adminIdAndAccountNumberErr) helpers.response(res, 400, 'error', adminIdAndAccountNumberErr);
+    const checkAccountNumber = helpers.checkNumber(accountNumber);
+    const checkAdminId = helpers.checkNumber(adminId);
+    if (!adminId) helpers.response(res, 400, 'error', helpers.isRequired('Admin id'));
+    else if (!checkAdminId) helpers.response(res, 400, 'error', helpers.notNumbers('Admin id'));
+    else if (!accountNumber) helpers.response(res, 400, 'error', helpers.isRequired('Account number'));
+    else if (!checkAccountNumber) helpers.response(res, 400, 'error', helpers.notNumbers('Account number'));
     else next();
   }
 
   static updateAccountStatusInput(req, res, next) {
     const { accountStatus } = req.body;
-    const adminId = req.headers['admin-id'];
-    const accountNumber = req.params.account_number;
     const checkAccountStatus = helpers.checkName(accountStatus);
-    const adminIdAndAccountNumberErr = this.checkAdminIdAndAccountNumber(adminId, accountNumber);
-    if (!accountStatus) helpers.response(res, 400, 'error', helpers.isRequired('Account status'));
+    const accountNumber = req.params.account_number;
+    const checkAccountNumber = helpers.checkNumber(accountNumber);
+    if (!accountNumber) helpers.response(res, 400, 'error', helpers.isRequired('Account number'));
+    else if (!checkAccountNumber) helpers.response(res, 400, 'error', helpers.notNumbers('Account number'));
+    else if (!accountStatus) helpers.response(res, 400, 'error', helpers.isRequired('Account status'));
     else if (!checkAccountStatus) helpers.response(res, 400, 'error', helpers.notLetters('Account status'));
     else if (accountStatus !== 'active' && accountStatus !== 'Active'
       && accountStatus !== 'dormant' && accountStatus !== 'Dormant') helpers.response(res, 400, 'error', 'Account status must equal active or dormant');
-    else if (adminIdAndAccountNumberErr) helpers.response(res, 400, 'error', adminIdAndAccountNumberErr);
     else next();
-  }
-
-  static checkAdminIdAndAccountNumber(adminId, accountNumber) {
-    const checkAdminId = helpers.checkNumber(adminId);
-    const checkAccountNumber = helpers.checkNumber(accountNumber);
-    let errMessage;
-    if (!adminId) errMessage = helpers.isRequired('Admin id');
-    else if (!checkAdminId) errMessage = helpers.notNumbers('Admin id');
-    else if (!checkAccountNumber) errMessage = helpers.notNumbers('Account number');
-    return errMessage;
   }
 }
