@@ -15,6 +15,8 @@ router.delete('/accounts/:account_number', (...args) => {
 
 router.patch('/account/:account_number', (...args) => {
   validate.updateAccountStatusInput(...args);
+}, (...args) => {
+  authenticate.authUpdateAccountStatus(...args);
 }, accountsController.updateStatus);
 
 export default router;

@@ -9,6 +9,11 @@ export default class Queries {
     return queryClientId;
   }
 
+  static findAccountByNo() {
+    const queryAccountNo = 'SELECT * FROM accounts WHERE number = $1';
+    return queryAccountNo;
+  }
+
   static findStaffById() {
     const queryStaffId = 'SELECT * FROM staff WHERE id = $1';
     return queryStaffId;

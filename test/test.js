@@ -18,6 +18,11 @@ export default class Test {
     return userData;
   }
 
+  static accounts() {
+    const accountsData = seeder.accounts.insertData;
+    return accountsData;
+  }
+
   static generateToken(id) {
     const newToken = token.generate(id);
     return newToken;

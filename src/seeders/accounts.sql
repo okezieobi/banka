@@ -9,15 +9,23 @@ VALUES
     (1111111111111, 12121212121,
         (SELECT id
         FROM clients
-        WHERE email = 'frank@email.com'), 'current', 10000);
+        WHERE email = 'foobar@mail.com'), 'current', 10000);
 
 INSERT INTO accounts
-    (id, "number", "owner", "type", "status")
+    (id, "number", "owner", "type", balance)
+VALUES
+    (2222222222222, 13131313131,
+        (SELECT id
+        FROM clients
+        WHERE email = 'foobar@mail.com'), 'current', 10000);
+
+INSERT INTO accounts
+    (id, "number", "owner", "type", "status", balance)
 VALUES
     (4444444444444, 14141414141,
         (SELECT id
         FROM clients
-        WHERE email = 'frank@email.com'), 'savings', 'Dormant', 20000);
+        WHERE email = 'foobar@mail.com'), 'savings', 'Dormant', 20000);
 
 
 SELECT *
