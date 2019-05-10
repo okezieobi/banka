@@ -53,6 +53,18 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
   });
 
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if client token is not sent', async () => {
+    const testData = {
+      bankAccountType: 'Savings',
+    };
+
+    const response = await chai.request(app).post('/api/v1/accounts').send(testData);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
+  });
+
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if client token does not match with any client', async () => {
     const token = Test.generateToken('1010101010101222222');
     const testData = {

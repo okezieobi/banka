@@ -142,6 +142,18 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
   });
 
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if admin token is not sent', async () => {
+    const testData = {
+      accountStatus: 'active',
+    };
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).send(testData);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
+  });
+
 
   it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if admin token is not a match', async () => {
     const testData = {
