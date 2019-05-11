@@ -16,13 +16,13 @@ router.post('/auth/signin', (...args) => {
 }, userController.signIn);
 
 router.post('/auth/signup/admin', (...args) => {
-  validate.createAdminStaffinputs(...args);
+  validate.adminStaffinputs(...args);
 }, (...args) => {
   authenitcate.authCreateAdmin(...args);
 }, userController.createAdmin);
 
 router.post('/auth/signin/admin', (...args) => {
-  validate.createAdminStaffinputs(...args);
+  validate.adminStaffinputs(...args);
 }, (...args) => {
   authenitcate.authSignInAdmin(...args);
 }, userController.signInAdmin);

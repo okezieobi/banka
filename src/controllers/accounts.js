@@ -1,11 +1,12 @@
 import accountData from '../db/accounts';
 import userData from '../db/users';
-import helpers from '../helpers/helper';
+import helpers from '../helpers/searchArray';
 import models from '../models/accounts';
 import transactionData from '../db/transactions';
 import database from '../db/pgConnect';
 import numbers from '../helpers/unique_no';
 import authenticate from '../middleware/authenticate';
+import hypertext from '../helpers/response';
 
 export default class Accounts {
   static async createAccount(req, res) {
@@ -17,28 +18,28 @@ export default class Accounts {
     const arrayData = [accountId, accountNumber, findClient.id, bankAccountType];
     const newBankAccount = await database.queryOne(createAccountQuery, arrayData);
     const bankAccountRes = await models.createBankAccountResPostgre(newBankAccount, findClient);
-    return helpers.response(res, 201, 'data', bankAccountRes);
+    return hypertext.response(res, 201, 'data', bankAccountRes);
   }
 
   static async updateStatus(req, res) {
     const { bankAccount } = authenticate;
     const { accountStatus } = req.body;
-    if ((bankAccount.status).toLowerCase() === (accountStatus).toLowerCase()) return helpers.response(res, 400, 'error', `Account status is already ${accountStatus}`);
+    if ((bankAccount.status).toLowerCase() === (accountStatus).toLowerCase()) return hypertext.response(res, 400, 'error', `Account status is already ${accountStatus}`);
     const updateAccountQuery = 'UPDATE accounts SET status = $1 WHERE id = $2 RETURNING *';
     const arrayData = [accountStatus, bankAccount.id];
     const updatedAccount = await database.queryOne(updateAccountQuery, arrayData);
     const statusResponse = await models.updatedAccountResPostgre(updatedAccount);
-    return helpers.response(res, 200, 'data', statusResponse);
+    return hypertext.response(res, 200, 'data', statusResponse);
   }
 
   static deleteAccount(req, res) {
-    if (!helpers.findById(userData.users.admins, req.headers, 'id', 'admin-id')) return helpers.response(res, 404, 'error', 'Admin not found, only registered admins can delete a bank account');
+    if (!helpers.findById(userData.users.admins, req.headers, 'id', 'admin-id')) return hypertext.response(res, 404, 'error', 'Admin not found, only registered admins can delete a bank account');
     const bankAccount = helpers.findById(accountData.accounts, req.params, 'accountNumber', 'account_number');
-    if (!bankAccount) return helpers.response(res, 404, 'error', 'Account number not found');
+    if (!bankAccount) return hypertext.response(res, 404, 'error', 'Account number not found');
     accountData.accounts.splice(accountData.accounts.indexOf(bankAccount), 1);
     transactionData.transactions = transactionData.transactions.filter(
       transaction => transaction.accountNumber !== bankAccount.accountNumber,
     );
-    return helpers.response(res, 200, 'message', 'Account successfully deleted');
+    return hypertext.response(res, 200, 'message', 'Account successfully deleted');
   }
 }

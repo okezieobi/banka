@@ -28,9 +28,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'active',
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '14141414141';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(200);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(200);
@@ -43,9 +43,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'active',
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -56,9 +56,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: undefined,
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -69,9 +69,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: '',
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -82,9 +82,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: null,
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -93,9 +93,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
 
   it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account status does not exist', async () => {
     const testData = {};
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -107,9 +107,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: '12345@45',
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -120,9 +120,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'activ',
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -135,7 +135,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
       accountStatus: 'active',
     };
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -159,9 +159,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'active',
     };
-    const token = Test.generateToken('5050505');
+    const token = await Test.generateToken('5050505');
     const accountNumber = '13131313131';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(404);
@@ -172,9 +172,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'active',
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = 'lmaooooooooooo';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(400);
@@ -186,9 +186,9 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     const testData = {
       accountStatus: 'active',
     };
-    const token = Test.generateToken('5050505050505');
+    const token = await Test.generateToken('5050505050505');
     const accountNumber = '338383838383';
-    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('master-admin-token', token).send(testData);
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(404);

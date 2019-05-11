@@ -21,7 +21,7 @@ describe('Test endpoints at "/api/v1/auth/signin" to sign in a User with POST', 
     await pool.queryNone(Test.deleteData());
   });
 
-  it('Should create a User at "/api/v1/auth/signin" with POST if all request inputs are valid', async () => {
+  it('Should signin in a User at "/api/v1/auth/signin" with POST if all request inputs are valid', async () => {
     const testData = {
       userEmail: 'foobar@mail.com',
       userPassword: 'AbcDFer123*@is!',
