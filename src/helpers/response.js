@@ -1,4 +1,4 @@
-export default class Hypertext {
+export default class Protocol {
   static response(res, codeStatus, resKey, resValue) {
     const errRes = {
       status: codeStatus,

@@ -1,5 +1,5 @@
 import test from '../helpers/regexTests';
-import hypertext from '../helpers/response';
+import protocol from '../helpers/response';
 import errors from '../helpers/errorMessage';
 
 export default class Valdiate {
@@ -31,15 +31,15 @@ export default class Valdiate {
     } = req.body;
     const errResFirstAndLastName = this.checkFirstAndLastName(userFirstName, userLastName);
     const errResEmailAndPassword = this.checkEmailAndPassword(userEmail, userPassword);
-    if (errResFirstAndLastName) hypertext.response(res, 400, 'error', errResFirstAndLastName);
-    else if (errResEmailAndPassword) hypertext.response(res, 400, 'error', errResEmailAndPassword);
+    if (errResFirstAndLastName) protocol.response(res, 400, 'error', errResFirstAndLastName);
+    else if (errResEmailAndPassword) protocol.response(res, 400, 'error', errResEmailAndPassword);
     else next();
   }
 
   static signInInputs(req, res, next) {
     const { userEmail, userPassword } = req.body;
     const errRes = this.checkEmailAndPassword(userEmail, userPassword);
-    if (errRes) hypertext.response(res, 400, 'error', errRes);
+    if (errRes) protocol.response(res, 400, 'error', errRes);
     else next();
   }
 
@@ -47,20 +47,20 @@ export default class Valdiate {
     const { userName, adminStaffPassword } = req.body;
     const checkUsername = test.checkUserName(userName);
     const checkPassword = test.validatePassword(adminStaffPassword);
-    if (!userName) hypertext.response(res, 400, 'error', errors.isRequired('Username'));
-    else if (!checkUsername) hypertext.response(res, 400, 'error', errors.notLetters('Username'));
-    else if (!adminStaffPassword) hypertext.response(res, 400, 'error', errors.isRequired('Password'));
-    else if (!checkPassword) hypertext.response(res, 400, 'error', errors.notPassword());
+    if (!userName) protocol.response(res, 400, 'error', errors.isRequired('Username'));
+    else if (!checkUsername) protocol.response(res, 400, 'error', errors.notLetters('Username'));
+    else if (!adminStaffPassword) protocol.response(res, 400, 'error', errors.isRequired('Password'));
+    else if (!checkPassword) protocol.response(res, 400, 'error', errors.notPassword());
     else next();
   }
 
   static createBankAccountInputs(req, res, next) {
     const { bankAccountType } = req.body;
     const checkBankAccountType = test.checkName(bankAccountType);
-    if (!bankAccountType) hypertext.response(res, 400, 'error', errors.isRequired('Bank account type'));
-    else if (!checkBankAccountType) hypertext.response(res, 400, 'error', errors.notLetters('Bank account type'));
+    if (!bankAccountType) protocol.response(res, 400, 'error', errors.isRequired('Bank account type'));
+    else if (!checkBankAccountType) protocol.response(res, 400, 'error', errors.notLetters('Bank account type'));
     else if (bankAccountType !== 'current' && bankAccountType !== 'savings'
-      && bankAccountType !== 'Current' && bankAccountType !== 'Savings') hypertext.response(res, 400, 'error', 'Bank account type must be savings or current');
+      && bankAccountType !== 'Current' && bankAccountType !== 'Savings') protocol.response(res, 400, 'error', 'Bank account type must be savings or current');
     else next();
   }
 
@@ -71,11 +71,11 @@ export default class Valdiate {
     const checkTransactionAmount = test.checkNumber(transactionAmount);
     const checkAccountNumber = test.checkNumber(accountNumber);
     const checkCashierId = test.checkNumber(cashierId);
-    if (!transactionAmount) hypertext.response(res, 400, 'error', errors.isRequired('Transaction amount'));
-    else if (!checkTransactionAmount) hypertext.response(res, 400, 'error', errors.notNumbers('Transaction amount'));
-    else if (!checkAccountNumber) hypertext.response(res, 400, 'error', errors.notNumbers('Account number'));
-    else if (!cashierId) hypertext.response(res, 400, 'error', errors.isRequired('Cashier id'));
-    else if (!checkCashierId) hypertext.response(res, 400, 'error', errors.notNumbers('Cashier id'));
+    if (!transactionAmount) protocol.response(res, 400, 'error', errors.isRequired('Transaction amount'));
+    else if (!checkTransactionAmount) protocol.response(res, 400, 'error', errors.notNumbers('Transaction amount'));
+    else if (!checkAccountNumber) protocol.response(res, 400, 'error', errors.notNumbers('Account number'));
+    else if (!cashierId) protocol.response(res, 400, 'error', errors.isRequired('Cashier id'));
+    else if (!checkCashierId) protocol.response(res, 400, 'error', errors.notNumbers('Cashier id'));
     else next();
   }
 
@@ -84,10 +84,10 @@ export default class Valdiate {
     const accountNumber = req.params.account_number;
     const checkAccountNumber = test.checkNumber(accountNumber);
     const checkAdminId = test.checkNumber(adminId);
-    if (!adminId) hypertext.response(res, 400, 'error', errors.isRequired('Admin id'));
-    else if (!checkAdminId) hypertext.response(res, 400, 'error', errors.notNumbers('Admin id'));
-    else if (!accountNumber) hypertext.response(res, 400, 'error', errors.isRequired('Account number'));
-    else if (!checkAccountNumber) hypertext.response(res, 400, 'error', errors.notNumbers('Account number'));
+    if (!adminId) protocol.response(res, 400, 'error', errors.isRequired('Admin id'));
+    else if (!checkAdminId) protocol.response(res, 400, 'error', errors.notNumbers('Admin id'));
+    else if (!accountNumber) protocol.response(res, 400, 'error', errors.isRequired('Account number'));
+    else if (!checkAccountNumber) protocol.response(res, 400, 'error', errors.notNumbers('Account number'));
     else next();
   }
 
@@ -96,12 +96,12 @@ export default class Valdiate {
     const checkAccountStatus = test.checkName(accountStatus);
     const accountNumber = req.params.account_number;
     const checkAccountNumber = test.checkNumber(accountNumber);
-    if (!accountNumber) hypertext.response(res, 400, 'error', errors.isRequired('Account number'));
-    else if (!checkAccountNumber) hypertext.response(res, 400, 'error', errors.notNumbers('Account number'));
-    else if (!accountStatus) hypertext.response(res, 400, 'error', errors.isRequired('Account status'));
-    else if (!checkAccountStatus) hypertext.response(res, 400, 'error', errors.notLetters('Account status'));
+    if (!accountNumber) protocol.response(res, 400, 'error', errors.isRequired('Account number'));
+    else if (!checkAccountNumber) protocol.response(res, 400, 'error', errors.notNumbers('Account number'));
+    else if (!accountStatus) protocol.response(res, 400, 'error', errors.isRequired('Account status'));
+    else if (!checkAccountStatus) protocol.response(res, 400, 'error', errors.notLetters('Account status'));
     else if (accountStatus !== 'active' && accountStatus !== 'Active'
-      && accountStatus !== 'dormant' && accountStatus !== 'Dormant') hypertext.response(res, 400, 'error', 'Account status must equal active or dormant');
+      && accountStatus !== 'dormant' && accountStatus !== 'Dormant') protocol.response(res, 400, 'error', 'Account status must equal active or dormant');
     else next();
   }
 }

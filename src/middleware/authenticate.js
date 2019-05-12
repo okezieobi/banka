@@ -1,7 +1,7 @@
 import jwt from '../helpers/jwt';
 import queries from '../helpers/queries';
 import database from '../db/pgConnect';
-import hypertext from '../helpers/response';
+import protocol from '../helpers/response';
 import errors from '../helpers/errorMessage';
 
 export default class Authenticate {
@@ -9,7 +9,7 @@ export default class Authenticate {
     const { userEmail } = req.body;
     const checkUserQuery = queries.findClientByEmail();
     const checkUser = await database.queryOneORNone(checkUserQuery, [userEmail]);
-    if (checkUser) return hypertext.response(res, 400, 'error', errors.userExists('User'));
+    if (checkUser) return protocol.response(res, 400, 'error', errors.userExists('User'));
     return next();
   }
 
@@ -17,18 +17,18 @@ export default class Authenticate {
     const { userEmail } = req.body;
     const checkUserQuery = queries.findClientByEmail();
     this.checkUser = await database.queryOneORNone(checkUserQuery, [userEmail]);
-    if (!this.checkUser) return hypertext.response(res, 404, 'error', errors.userNotExists('User'));
+    if (!this.checkUser) return protocol.response(res, 404, 'error', errors.userNotExists('User'));
     return next();
   }
 
   static async clients(req, res, next) {
     const findClientQuery = queries.findClientById();
     const token = req.headers['client-token'];
-    if (!token) return hypertext.response(res, 400, 'error', errors.tokenIsRequired());
+    if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     this.findClient = await database.queryOneORNone(findClientQuery, [verifyToken.userId]);
-    if (!this.findClient) return hypertext.response(res, 404, 'error', errors.wrongToken());
+    if (!this.findClient) return protocol.response(res, 404, 'error', errors.wrongToken());
     return next();
   }
 
@@ -37,13 +37,13 @@ export default class Authenticate {
     const checkAdminQuery = queries.findAdminByUsername();
     const checkMasterAdmin = queries.findAdminById();
     const token = req.headers['master-admin-token'];
-    if (!token) return hypertext.response(res, 400, 'error', errors.tokenIsRequired());
+    if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [verifyToken.userId]);
-    if (!masterAdmin) return hypertext.response(res, 404, 'error', 'Token does not match master admin');
+    if (!masterAdmin) return protocol.response(res, 404, 'error', 'Token does not match master admin');
     const checkAdmin = await database.queryOneORNone(checkAdminQuery, [userName]);
-    if (checkAdmin) return hypertext.response(res, 404, 'error', errors.userExists('Admin'));
+    if (checkAdmin) return protocol.response(res, 404, 'error', errors.userExists('Admin'));
     return next();
   }
 
@@ -51,7 +51,7 @@ export default class Authenticate {
     const { userName } = req.body;
     const checkAdminQuery = queries.findAdminByUsername();
     this.checkAdmin = await database.queryOneORNone(checkAdminQuery, [userName]);
-    if (!this.checkAdmin) hypertext.response(res, 404, 'error', errors.userNotExists('Admin'));
+    if (!this.checkAdmin) protocol.response(res, 404, 'error', errors.userNotExists('Admin'));
     else next();
   }
 
@@ -60,13 +60,13 @@ export default class Authenticate {
     const verifyAccountQuery = queries.findAccountByNo();
     const findAdminQuery = queries.findAdminById();
     const token = req.headers['admin-token'];
-    if (!token) return hypertext.response(res, 400, 'error', errors.tokenIsRequired());
+    if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     const findAdmin = await database.queryOneORNone(findAdminQuery, [verifyToken.userId]);
-    if (!findAdmin) return hypertext.response(res, 404, 'error', 'Token does not match any admin');
+    if (!findAdmin) return protocol.response(res, 404, 'error', 'Token does not match any admin');
     this.bankAccount = await database.queryOneORNone(verifyAccountQuery, [accountNumber]);
-    if (!this.bankAccount) return hypertext.response(res, 404, 'error', 'Bank account not found');
+    if (!this.bankAccount) return protocol.response(res, 404, 'error', 'Bank account not found');
     return next();
   }
 }
