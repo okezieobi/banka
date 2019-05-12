@@ -168,6 +168,19 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response.body).to.have.property('error').equal('Token does not match any admin');
   });
 
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if id from admin token is not a number', async () => {
+    const testData = {
+      accountStatus: 'active',
+    };
+    const token = await Test.generateToken('50505PDFldse');
+    const accountNumber = '13131313131';
+    const response = await chai.request(app).patch(`/api/v1/account/${accountNumber}`).set('admin-token', token).send(testData);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal('Id from token is not an integer');
+  });
+
   it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account number is not number', async () => {
     const testData = {
       accountStatus: 'active',

@@ -52,4 +52,14 @@ export default class Users {
     const newToken = await token.generate(checkAdmin.id);
     return protocol.authResponse(res, 200, 'data', signInRes, newToken, 'admin-id', checkAdmin.id);
   }
+
+  static async signinStaff(req, res) {
+    const { checkStaff } = authenticate;
+    const { adminStaffPassword } = req.body;
+    const verifyPassword = await password.compare(checkStaff.password, adminStaffPassword);
+    if (!verifyPassword) return protocol.response(res, 400, 'error', errors.wrongPassword());
+    const signInRes = await models.createAdminStaffDataResPostgre(checkStaff);
+    const newToken = await token.generate(checkStaff.id);
+    return protocol.authResponse(res, 200, 'data', signInRes, newToken, 'staff-id', checkStaff.id);
+  }
 }

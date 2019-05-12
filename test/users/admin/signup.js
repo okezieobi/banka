@@ -262,7 +262,7 @@ describe('Test endpoints at "/api/v1/auth/signin/signin" to sign up an Admin wit
     expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
   });
 
-  it('Should not signup in an Admin as a signed in master Admin at "/api/v1/auth/signup/admin" with POST if token is an empty string', async () => {
+  it('Should not signup in an Admin as a signed in master Admin at "/api/v1/auth/signup/admin" with POST if token does not match master admin', async () => {
     const testData = {
       userName: 'Frank',
       adminStaffPassword: 'AbcDFer123*@is!',
@@ -273,5 +273,18 @@ describe('Test endpoints at "/api/v1/auth/signin/signin" to sign up an Admin wit
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').equal(404);
     expect(response.body).to.have.property('error').equal('Token does not match master admin');
+  });
+
+  it('Should not signup in an Admin as a signed in master Admin at "/api/v1/auth/signup/admin" with POST if id from token is not a number', async () => {
+    const testData = {
+      userName: 'Frank',
+      adminStaffPassword: 'AbcDFer123*@is!',
+    };
+    const token = await Test.generateToken('505050EeldldDS');
+    const response = await chai.request(app).post('/api/v1/auth/signup/admin').set('admin-token', token).send(testData);
+    expect(response).to.has.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal('Id from token is not an integer');
   });
 });

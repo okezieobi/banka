@@ -28,10 +28,12 @@ export default class Test {
     return newToken;
   }
 }
+
 require('./users/signIn');
 require('./users/signUp');
 require('./users/admin/signin');
 require('./users/admin/signup');
+require('./users/staff/signin');
 require('./accounts/createBankAccounts');
 require('./transactions/debitAccounts');
 require('./transactions/creditAccounts');

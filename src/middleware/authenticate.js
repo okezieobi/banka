@@ -3,6 +3,7 @@ import queries from '../helpers/queries';
 import database from '../db/pgConnect';
 import protocol from '../helpers/response';
 import errors from '../helpers/errorMessage';
+import test from '../helpers/regexTests';
 
 export default class Authenticate {
   static async authSignUp(req, res, next) {
@@ -27,7 +28,10 @@ export default class Authenticate {
     if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
-    this.findClient = await database.queryOneORNone(findClientQuery, [verifyToken.userId]);
+    const { userId } = verifyToken;
+    const checkId = await test.checkNumber(userId);
+    if (!checkId) return protocol.response(res, 400, 'error', errors.invalidToken());
+    this.findClient = await database.queryOneORNone(findClientQuery, [userId]);
     if (!this.findClient) return protocol.response(res, 404, 'error', errors.wrongToken());
     return next();
   }
@@ -40,7 +44,10 @@ export default class Authenticate {
     if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
-    const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [verifyToken.userId]);
+    const { userId } = verifyToken;
+    const checkId = await test.checkNumber(userId);
+    if (!checkId) return protocol.response(res, 400, 'error', errors.invalidToken());
+    const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [userId]);
     if (!masterAdmin) return protocol.response(res, 404, 'error', 'Token does not match master admin');
     const checkAdmin = await database.queryOneORNone(checkAdminQuery, [userName]);
     if (checkAdmin) return protocol.response(res, 404, 'error', errors.userExists('Admin'));
@@ -55,6 +62,14 @@ export default class Authenticate {
     else next();
   }
 
+  static async authSignInStaff(req, res, next) {
+    const { userName } = req.body;
+    const checkStaffQuery = queries.findStaffByUsername();
+    this.checkStaff = await database.queryOneORNone(checkStaffQuery, [userName]);
+    if (!this.checkStaff) protocol.response(res, 404, 'error', errors.userNotExists('Staff'));
+    else next();
+  }
+
   static async authUpdateAccountStatus(req, res, next) {
     const accountNumber = req.params.account_number;
     const verifyAccountQuery = queries.findAccountByNo();
@@ -63,7 +78,10 @@ export default class Authenticate {
     if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
-    const findAdmin = await database.queryOneORNone(findAdminQuery, [verifyToken.userId]);
+    const { userId } = verifyToken;
+    const checkId = await test.checkNumber(userId);
+    if (!checkId) return protocol.response(res, 400, 'error', errors.invalidToken());
+    const findAdmin = await database.queryOneORNone(findAdminQuery, [userId]);
     if (!findAdmin) return protocol.response(res, 404, 'error', 'Token does not match any admin');
     this.bankAccount = await database.queryOneORNone(verifyAccountQuery, [accountNumber]);
     if (!this.bankAccount) return protocol.response(res, 404, 'error', 'Bank account not found');
