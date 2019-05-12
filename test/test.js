@@ -31,6 +31,7 @@ export default class Test {
 
 require('./users/signIn');
 require('./users/signUp');
+require('./users/admin/signin');
 require('./accounts/createBankAccounts');
 require('./transactions/debitAccounts');
 require('./transactions/creditAccounts');

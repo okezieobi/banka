@@ -26,7 +26,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: 'Savings',
     };
 
-    const token = Test.generateToken('1010101010101');
+    const token = await Test.generateToken('1010101010101');
     const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(201);
     expect(response.body).to.be.an('object');
@@ -66,7 +66,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
   });
 
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if client token does not match with any client', async () => {
-    const token = Test.generateToken('1010101010101222222');
+    const token = await Test.generateToken('1010101010101222222');
     const testData = {
       bankAccountType: 'Savings',
     };
@@ -79,7 +79,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
   });
 
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is undefined ', async () => {
-    const token = Test.generateToken('1010101010101');
+    const token = await Test.generateToken('1010101010101');
     const testData = {
       bankAccountType: undefined,
     };
@@ -96,7 +96,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: '',
     };
 
-    const token = Test.generateToken('1010101010101');
+    const token = await Test.generateToken('1010101010101');
     const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
@@ -109,7 +109,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: null,
     };
 
-    const token = Test.generateToken('1010101010101');
+    const token = await Test.generateToken('1010101010101');
     const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
@@ -120,7 +120,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type does not exist', async () => {
     const testData = {};
 
-    const token = Test.generateToken('1010101010101');
+    const token = await Test.generateToken('1010101010101');
     const response = await chai.request(app).post('/api/v1/accounts').set('client_token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
@@ -133,7 +133,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: '1234@567',
     };
 
-    const token = Test.generateToken('1010101010101');
+    const token = await Test.generateToken('1010101010101');
     const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
@@ -146,7 +146,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
       bankAccountType: 'SavingCurren',
     };
 
-    const token = Test.generateToken('1010101010101');
+    const token = await Test.generateToken('1010101010101');
     const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
