@@ -36,7 +36,7 @@ export default class Authenticate {
     const { userName } = req.body;
     const checkAdminQuery = queries.findAdminByUsername();
     const checkMasterAdmin = queries.findAdminById();
-    const token = req.headers['master-admin-token'];
+    const token = req.headers['admin-token']; // master admin
     if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore

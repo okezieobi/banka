@@ -8,7 +8,7 @@ import Test, {
 
 chai.use(chaiHttp);
 
-describe('Test endpoints at "/api/v1/auth/signin/signin" to sign in am Admin with POST', () => {
+describe('Test endpoints at "/api/v1/auth/signin/signin" to sign in an Admin with POST', () => {
   before(async () => {
     await pool.queryNone(Test.deleteData());
   });
