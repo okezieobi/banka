@@ -44,6 +44,11 @@ export default class Errors {
     return wrongTokenErrMessage;
   }
 
+  static invalidToken() {
+    const invalidTokenErrMessage = 'Id from token is not an integer';
+    return invalidTokenErrMessage;
+  }
+
   static wrongPassword() {
     const wrongPasswordErr = 'Password does not match user';
     return wrongPasswordErr;

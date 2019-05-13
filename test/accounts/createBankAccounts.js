@@ -78,6 +78,19 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response.body).to.have.property('error').equal('Token provided does not match any user');
   });
 
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if id from client token is not a number', async () => {
+    const token = await Test.generateToken('101010101lJDFkdw');
+    const testData = {
+      bankAccountType: 'Savings',
+    };
+
+    const response = await chai.request(app).post('/api/v1/accounts').set('client-token', token).send(testData);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').equal(400);
+    expect(response.body).to.have.property('error').equal('Id from token is not an integer');
+  });
+
   it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if bank account type is undefined ', async () => {
     const token = await Test.generateToken('1010101010101');
     const testData = {

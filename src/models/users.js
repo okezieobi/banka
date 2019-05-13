@@ -37,6 +37,7 @@ export default class Users {
     const adminStaffData = {
       id: data.id,
       username: String(data.username),
+      type: String(data.type),
     };
     return adminStaffData;
   }
