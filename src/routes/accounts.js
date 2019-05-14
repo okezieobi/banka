@@ -6,7 +6,7 @@ import authenticate from '../middleware/authenticate';
 router.post('/accounts', (...args) => {
   validate.createBankAccountInputs(...args);
 }, (...args) => {
-  authenticate.clients(...args);
+  authenticate.authClients(...args);
 }, accountsController.createAccount);
 
 router.delete('/accounts/:account_number', (...args) => {
@@ -16,7 +16,9 @@ router.delete('/accounts/:account_number', (...args) => {
 router.patch('/account/:account_number', (...args) => {
   validate.updateAccountStatusInput(...args);
 }, (...args) => {
-  authenticate.authUpdateAccountStatus(...args);
+  authenticate.authAdmins(...args);
+}, (...args) => {
+  authenticate.verifyAccount(...args);
 }, accountsController.updateStatus);
 
 export default router;

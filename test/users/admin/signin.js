@@ -33,10 +33,9 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     expect(response.body).to.have.property('data');
     expect(response.body.data).to.have.property('id');
     expect(response.body.data).to.have.property('username').equal(testData.userName);
+    expect(response.body.data).to.have.property('type').equal('Admin');
     expect(response.body).to.have.property('headers');
-    expect(response.body.headers).to.have.property('admin-id');
     expect(response.body.headers).to.have.property('access-token');
-    expect(response.header).to.have.property('admin-id');
     expect(response.header).to.have.property('access-token');
   });
 

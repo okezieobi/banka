@@ -1,66 +1,46 @@
-import test from '../helpers/regexTests';
 import protocol from '../helpers/response';
-import errors from '../helpers/errorMessage';
+import errors from '../helpers/checkRequest';
 
 export default class Valdiate {
-  static checkEmailAndPassword(email, password) {
-    const validateEmail = test.validateEmail(email);
-    const validatePassword = test.validatePassword(password);
-    let errMessage;
-    if (!email) errMessage = errors.isRequired('Email');
-    else if (!validateEmail) errMessage = errors.notEmail();
-    else if (!password) errMessage = errors.isRequired('Password');
-    else if (!validatePassword) errMessage = errors.notPassword();
-    return errMessage;
-  }
-
-  static checkFirstAndLastName(firstName, lastName) {
-    const checkFirstName = test.checkName(firstName);
-    const checkLastName = test.checkName(lastName);
-    let errMessage;
-    if (!firstName) errMessage = errors.isRequired('First name');
-    else if (!checkFirstName) errMessage = errors.notLetters('First name');
-    else if (!lastName) errMessage = errors.isRequired('Last name');
-    else if (!checkLastName) errMessage = errors.notLetters('Last name');
-    return errMessage;
-  }
-
   static signUpInputs(req, res, next) {
     const {
       userFirstName, userLastName, userEmail, userPassword,
     } = req.body;
-    const errResFirstAndLastName = this.checkFirstAndLastName(userFirstName, userLastName);
-    const errResEmailAndPassword = this.checkEmailAndPassword(userEmail, userPassword);
-    if (errResFirstAndLastName) protocol.response(res, 400, 'error', errResFirstAndLastName);
-    else if (errResEmailAndPassword) protocol.response(res, 400, 'error', errResEmailAndPassword);
+    const firstNameErr = errors.validateLetters(userFirstName, 'First name');
+    const lastNameErr = errors.validateLetters(userLastName, 'Last name');
+    const emailErr = errors.checkEmailFormat(userEmail, 'Email');
+    const passwordErr = errors.checkPassword(userPassword, 'Password');
+    if (firstNameErr) protocol.err400Res(res, firstNameErr);
+    else if (lastNameErr) protocol.err400Res(res, lastNameErr);
+    else if (emailErr) protocol.err400Res(res, emailErr);
+    else if (passwordErr) protocol.err400Res(res, passwordErr);
     else next();
   }
 
   static signInInputs(req, res, next) {
     const { userEmail, userPassword } = req.body;
-    const errRes = this.checkEmailAndPassword(userEmail, userPassword);
-    if (errRes) protocol.response(res, 400, 'error', errRes);
+    const emailErr = errors.checkEmailFormat(userEmail, 'Email');
+    const passwordErr = errors.checkPassword(userPassword, 'Password');
+    if (emailErr) protocol.err400Res(res, emailErr);
+    else if (passwordErr) protocol.err400Res(res, passwordErr);
     else next();
   }
 
   static adminStaffinputs(req, res, next) {
     const { userName, adminStaffPassword } = req.body;
-    const checkUsername = test.checkUserName(userName);
-    const checkPassword = test.validatePassword(adminStaffPassword);
-    if (!userName) protocol.response(res, 400, 'error', errors.isRequired('Username'));
-    else if (!checkUsername) protocol.response(res, 400, 'error', errors.notLetters('Username'));
-    else if (!adminStaffPassword) protocol.response(res, 400, 'error', errors.isRequired('Password'));
-    else if (!checkPassword) protocol.response(res, 400, 'error', errors.notPassword());
+    const usernameErr = errors.validateUsername(userName, 'Username');
+    const passwordErr = errors.checkPassword(adminStaffPassword, 'Password');
+    if (usernameErr) protocol.err400Res(res, usernameErr);
+    else if (passwordErr) protocol.err400Res(res, passwordErr);
     else next();
   }
 
   static createBankAccountInputs(req, res, next) {
     const { bankAccountType } = req.body;
-    const checkBankAccountType = test.checkName(bankAccountType);
-    if (!bankAccountType) protocol.response(res, 400, 'error', errors.isRequired('Bank account type'));
-    else if (!checkBankAccountType) protocol.response(res, 400, 'error', errors.notLetters('Bank account type'));
+    const checkBankAccountType = errors.validateLetters(bankAccountType, 'Bank account type');
+    if (checkBankAccountType) protocol.err400Res(res, checkBankAccountType);
     else if (bankAccountType !== 'current' && bankAccountType !== 'savings'
-      && bankAccountType !== 'Current' && bankAccountType !== 'Savings') protocol.response(res, 400, 'error', 'Bank account type must be savings or current');
+      && bankAccountType !== 'Current' && bankAccountType !== 'Savings') protocol.err400Res(res, 'Bank account type must be savings or current');
     else next();
   }
 
@@ -68,40 +48,34 @@ export default class Valdiate {
     const { transactionAmount } = req.body;
     const cashierId = req.headers['cashier-id'];
     const accountNumber = req.params.account_number;
-    const checkTransactionAmount = test.checkNumber(transactionAmount);
-    const checkAccountNumber = test.checkNumber(accountNumber);
-    const checkCashierId = test.checkNumber(cashierId);
-    if (!transactionAmount) protocol.response(res, 400, 'error', errors.isRequired('Transaction amount'));
-    else if (!checkTransactionAmount) protocol.response(res, 400, 'error', errors.notNumbers('Transaction amount'));
-    else if (!checkAccountNumber) protocol.response(res, 400, 'error', errors.notNumbers('Account number'));
-    else if (!cashierId) protocol.response(res, 400, 'error', errors.isRequired('Cashier id'));
-    else if (!checkCashierId) protocol.response(res, 400, 'error', errors.notNumbers('Cashier id'));
+    const checkTransactionAmount = errors.validateNumber(transactionAmount, 'Transaction amount');
+    const checkAccountNumber = errors.validateNumber(accountNumber, 'Account number');
+    const checkCashierId = errors.validateNumber(cashierId, 'Cashier id');
+    if (checkTransactionAmount) protocol.err400Res(res, checkTransactionAmount);
+    else if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
+    else if (checkCashierId) protocol.err400Res(res, checkCashierId);
     else next();
   }
 
   static deleteAccountInputs(req, res, next) {
     const adminId = req.headers['admin-id'];
     const accountNumber = req.params.account_number;
-    const checkAccountNumber = test.checkNumber(accountNumber);
-    const checkAdminId = test.checkNumber(adminId);
-    if (!adminId) protocol.response(res, 400, 'error', errors.isRequired('Admin id'));
-    else if (!checkAdminId) protocol.response(res, 400, 'error', errors.notNumbers('Admin id'));
-    else if (!accountNumber) protocol.response(res, 400, 'error', errors.isRequired('Account number'));
-    else if (!checkAccountNumber) protocol.response(res, 400, 'error', errors.notNumbers('Account number'));
+    const checkAccountNumber = errors.validateNumber(accountNumber, 'Account number');
+    const checkAdminId = errors.validateNumber(adminId, 'Admin id');
+    if (checkAdminId) protocol.err400Res(res, checkAdminId);
+    else if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
     else next();
   }
 
   static updateAccountStatusInput(req, res, next) {
     const { accountStatus } = req.body;
-    const checkAccountStatus = test.checkName(accountStatus);
     const accountNumber = req.params.account_number;
-    const checkAccountNumber = test.checkNumber(accountNumber);
-    if (!accountNumber) protocol.response(res, 400, 'error', errors.isRequired('Account number'));
-    else if (!checkAccountNumber) protocol.response(res, 400, 'error', errors.notNumbers('Account number'));
-    else if (!accountStatus) protocol.response(res, 400, 'error', errors.isRequired('Account status'));
-    else if (!checkAccountStatus) protocol.response(res, 400, 'error', errors.notLetters('Account status'));
+    const checkAccountStatus = errors.validateLetters(accountStatus, 'Account status');
+    const checkAccountNumber = errors.validateNumber(accountNumber, 'Account number');
+    if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
+    else if (checkAccountStatus) protocol.err400Res(res, checkAccountStatus);
     else if (accountStatus !== 'active' && accountStatus !== 'Active'
-      && accountStatus !== 'dormant' && accountStatus !== 'Dormant') protocol.response(res, 400, 'error', 'Account status must equal active or dormant');
+      && accountStatus !== 'dormant' && accountStatus !== 'Dormant') protocol.err400Res(res, 'Account status must equal active or dormant');
     else next();
   }
 }

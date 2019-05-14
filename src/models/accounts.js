@@ -1,3 +1,5 @@
+import numbers from '../helpers/unique_no';
+
 export default class Accounts {
   static bankAccount(data) {
     const bankAccountData = {
@@ -8,6 +10,15 @@ export default class Accounts {
       type: String(data.bankAccountType),
       status: 'Active',
       balance: 0.00,
+    };
+    return bankAccountData;
+  }
+
+  static bankAccountPostgre(data) {
+    const bankAccountData = {
+      id: numbers.uniqueIds(),
+      accountNumber: numbers.accountNo(),
+      type: String(data.bankAccountType),
     };
     return bankAccountData;
   }

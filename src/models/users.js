@@ -1,3 +1,6 @@
+import numbers from '../helpers/unique_no';
+import bcrypt from '../helpers/bcrypt';
+
 export default class Users {
   static userData(data) {
     const userReqData = {
@@ -8,6 +11,20 @@ export default class Users {
       password: String(data.userPassword),
       type: 'Client',
       isAdmin: false,
+    };
+    return userReqData;
+  }
+
+  static userDataPostgre(data) {
+    const {
+      userEmail, userLastName, userFirstName, userPassword,
+    } = data;
+    const userReqData = {
+      id: numbers.uniqueIds(),
+      email: String(userEmail),
+      firstName: String(userFirstName),
+      lastName: String(userLastName),
+      hashedPassword: bcrypt.hash(String(userPassword)),
     };
     return userReqData;
   }
@@ -28,7 +45,7 @@ export default class Users {
       firstName: String(data.first_name),
       lastName: String(data.last_name),
       email: String(data.email),
-      headers: data.headers,
+      type: String(data.type),
     };
     return userResData;
   }
@@ -59,6 +76,16 @@ export default class Users {
       password: String(data.password),
       type: 'Staff',
       isAdmin: false,
+    };
+    return staffInfo;
+  }
+
+  static adminStaffDataPostgre(data) {
+    const { userName, adminStaffPassword } = data;
+    const staffInfo = {
+      id: numbers.uniqueIds(),
+      username: String(userName),
+      hashedPassword: bcrypt.hash(String(adminStaffPassword)),
     };
     return staffInfo;
   }
