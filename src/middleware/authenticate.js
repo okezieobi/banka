@@ -10,7 +10,7 @@ export default class Authenticate {
     const { userEmail } = req.body;
     const checkUserQuery = queries.findClientByEmail();
     const checkUser = await database.queryOneORNone(checkUserQuery, [userEmail]);
-    if (checkUser) return protocol.response(res, 400, 'error', errors.userExists('User'));
+    if (checkUser) return protocol.err400Res(res, errors.userExists('User'));
     return next();
   }
 
@@ -18,39 +18,57 @@ export default class Authenticate {
     const { userEmail } = req.body;
     const checkUserQuery = queries.findClientByEmail();
     this.checkUser = await database.queryOneORNone(checkUserQuery, [userEmail]);
-    if (!this.checkUser) return protocol.response(res, 404, 'error', errors.userNotExists('User'));
+    if (!this.checkUser) return protocol.err404Res(res, errors.userNotExists('User'));
     return next();
   }
 
-  static async clients(req, res, next) {
+  static async authClients(req, res, next) {
     const findClientQuery = queries.findClientById();
     const token = req.headers['client-token'];
-    if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
+    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     const { userId } = verifyToken;
     const checkId = await test.checkNumber(userId);
-    if (!checkId) return protocol.response(res, 400, 'error', errors.invalidToken());
+    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
     this.findClient = await database.queryOneORNone(findClientQuery, [userId]);
-    if (!this.findClient) return protocol.response(res, 404, 'error', errors.wrongToken());
+    if (!this.findClient) return protocol.err404Res(res, errors.wrongToken());
     return next();
   }
 
-  static async authCreateAdmin(req, res, next) {
+  static async authSignUpAdmin(req, res, next) {
     const { userName } = req.body;
     const checkAdminQuery = queries.findAdminByUsername();
     const checkMasterAdmin = queries.findAdminById();
     const token = req.headers['admin-token']; // master admin
-    if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
+    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     const { userId } = verifyToken;
     const checkId = await test.checkNumber(userId);
-    if (!checkId) return protocol.response(res, 400, 'error', errors.invalidToken());
+    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
     const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [userId]);
-    if (!masterAdmin) return protocol.response(res, 404, 'error', 'Token does not match master admin');
+    if (!masterAdmin) return protocol.err404Res(res, 'Token does not match master admin');
     const checkAdmin = await database.queryOneORNone(checkAdminQuery, [userName]);
-    if (checkAdmin) return protocol.response(res, 404, 'error', errors.userExists('Admin'));
+    if (checkAdmin) return protocol.err404Res(res, errors.userExists('Admin'));
+    return next();
+  }
+
+  static async authSignUpStaff(req, res, next) {
+    const { userName } = req.body;
+    const checkStaffQuery = queries.findStaffByUsername();
+    const checkMasterAdmin = queries.findAdminById();
+    const token = req.headers['admin-token']; // master admin
+    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
+    const verifyToken = await jwt.verify(token);
+    // @ts-ignore
+    const { userId } = verifyToken;
+    const checkId = await test.checkNumber(userId);
+    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
+    const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [userId]);
+    if (!masterAdmin) return protocol.err404Res(res, 'Token does not match master admin');
+    const checkStaff = await database.queryOneORNone(checkStaffQuery, [userName]);
+    if (checkStaff) return protocol.err404Res(res, errors.userExists('Staff'));
     return next();
   }
 
@@ -58,7 +76,7 @@ export default class Authenticate {
     const { userName } = req.body;
     const checkAdminQuery = queries.findAdminByUsername();
     this.checkAdmin = await database.queryOneORNone(checkAdminQuery, [userName]);
-    if (!this.checkAdmin) protocol.response(res, 404, 'error', errors.userNotExists('Admin'));
+    if (!this.checkAdmin) protocol.err404Res(res, errors.userNotExists('Admin'));
     else next();
   }
 
@@ -66,25 +84,29 @@ export default class Authenticate {
     const { userName } = req.body;
     const checkStaffQuery = queries.findStaffByUsername();
     this.checkStaff = await database.queryOneORNone(checkStaffQuery, [userName]);
-    if (!this.checkStaff) protocol.response(res, 404, 'error', errors.userNotExists('Staff'));
+    if (!this.checkStaff) protocol.err404Res(res, errors.userNotExists('Staff'));
     else next();
   }
 
-  static async authUpdateAccountStatus(req, res, next) {
-    const accountNumber = req.params.account_number;
-    const verifyAccountQuery = queries.findAccountByNo();
+  static async authAdmins(req, res, next) {
     const findAdminQuery = queries.findAdminById();
     const token = req.headers['admin-token'];
-    if (!token) return protocol.response(res, 400, 'error', errors.tokenIsRequired());
+    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     const { userId } = verifyToken;
     const checkId = await test.checkNumber(userId);
-    if (!checkId) return protocol.response(res, 400, 'error', errors.invalidToken());
+    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
     const findAdmin = await database.queryOneORNone(findAdminQuery, [userId]);
-    if (!findAdmin) return protocol.response(res, 404, 'error', 'Token does not match any admin');
+    if (!findAdmin) return protocol.err404Res(res, 'Token does not match any admin');
+    return next();
+  }
+
+  static async verifyAccount(req, res, next) {
+    const accountNumber = req.params.account_number;
+    const verifyAccountQuery = queries.findAccountByNo();
     this.bankAccount = await database.queryOneORNone(verifyAccountQuery, [accountNumber]);
-    if (!this.bankAccount) return protocol.response(res, 404, 'error', 'Bank account not found');
+    if (!this.bankAccount) return protocol.err404Res(res, 'Bank account not found');
     return next();
   }
 }

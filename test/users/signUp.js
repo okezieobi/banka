@@ -33,10 +33,9 @@ describe('Test endpoints at "/api/v1/auth/signup" to create a User with POST', (
     expect(response.body.data).to.have.property('firstName').equal(testData.userFirstName);
     expect(response.body.data).to.have.property('lastName').equal(testData.userLastName);
     expect(response.body.data).to.have.property('email').equal(testData.userEmail);
+    expect(response.body.data).to.have.property('type').equal('Client');
     expect(response.body).to.have.property('headers');
-    expect(response.body.headers).to.have.property('owner-id');
     expect(response.body.headers).to.have.property('access-token');
-    expect(response.header).to.have.property('owner-id');
     expect(response.header).to.have.property('access-token');
   });
 

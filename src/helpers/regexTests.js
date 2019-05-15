@@ -1,3 +1,5 @@
+import errors from './errorMessage';
+
 export default class Patterns {
   static validateEmail(email) {
     const emailPattern = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;

@@ -9,6 +9,11 @@ export default class Errors {
     return notLettersErrMessage;
   }
 
+  static notLettersAndNumbers(title) {
+    const ErrMessage = `${title} must be letters and numbers`;
+    return ErrMessage;
+  }
+
   static notNumbers(title) {
     const notNumbersErrMessage = `${title} must be numbers`;
     return notNumbersErrMessage;
