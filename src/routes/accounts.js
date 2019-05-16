@@ -11,6 +11,10 @@ router.post('/accounts', (...args) => {
 
 router.delete('/accounts/:account_number', (...args) => {
   validate.deleteAccountInputs(...args);
+}, (...args) => {
+  authenticate.authAdmins(...args);
+}, (...args) => {
+  authenticate.verifyAccount(...args);
 }, accountsController.deleteAccount);
 
 router.patch('/account/:account_number', (...args) => {

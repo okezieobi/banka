@@ -36,9 +36,8 @@ export default class Authenticate {
     return next();
   }
 
-  static async authSignUpAdmin(req, res, next) {
+  static async authSignupAdminStaff(req, res, next, findAdminStaffQuery, adminStaffTitle) {
     const { userName } = req.body;
-    const checkAdminQuery = queries.findAdminByUsername();
     const checkMasterAdmin = queries.findAdminById();
     const token = req.headers['admin-token']; // master admin
     if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
@@ -49,43 +48,36 @@ export default class Authenticate {
     if (!checkId) return protocol.err400Res(res, errors.invalidToken());
     const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [userId]);
     if (!masterAdmin) return protocol.err404Res(res, 'Token does not match master admin');
-    const checkAdmin = await database.queryOneORNone(checkAdminQuery, [userName]);
-    if (checkAdmin) return protocol.err404Res(res, errors.userExists('Admin'));
+    const checkStaffAdmin = await database.queryOneORNone(findAdminStaffQuery, [userName]);
+    if (checkStaffAdmin) return protocol.err404Res(res, errors.userExists(`${adminStaffTitle}`));
     return next();
+  }
+
+  static authSignUpAdmin(req, res, next) {
+    const signupAdmin = this.authSignupAdminStaff(req, res, next, queries.findAdminByUsername(), 'Admin');
+    return signupAdmin;
   }
 
   static async authSignUpStaff(req, res, next) {
+    const signupStaff = this.authSignupAdminStaff(req, res, next, queries.findStaffByUsername(), 'Staff');
+    return signupStaff;
+  }
+
+  static async authSigninAdminStaff(req, res, next, findAdminStaffQuery, adminStaffTitle) {
     const { userName } = req.body;
-    const checkStaffQuery = queries.findStaffByUsername();
-    const checkMasterAdmin = queries.findAdminById();
-    const token = req.headers['admin-token']; // master admin
-    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
-    const verifyToken = await jwt.verify(token);
-    // @ts-ignore
-    const { userId } = verifyToken;
-    const checkId = await test.checkNumber(userId);
-    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
-    const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [userId]);
-    if (!masterAdmin) return protocol.err404Res(res, 'Token does not match master admin');
-    const checkStaff = await database.queryOneORNone(checkStaffQuery, [userName]);
-    if (checkStaff) return protocol.err404Res(res, errors.userExists('Staff'));
+    this.checkStaffAdmin = await database.queryOneORNone(findAdminStaffQuery, [userName]);
+    if (!this.checkStaffAdmin) return protocol.err404Res(res, errors.userNotExists(`${adminStaffTitle}`));
     return next();
   }
 
-  static async authSignInAdmin(req, res, next) {
-    const { userName } = req.body;
-    const checkAdminQuery = queries.findAdminByUsername();
-    this.checkAdmin = await database.queryOneORNone(checkAdminQuery, [userName]);
-    if (!this.checkAdmin) protocol.err404Res(res, errors.userNotExists('Admin'));
-    else next();
+  static authSignInAdmin(req, res, next) {
+    const signinAdmin = this.authSigninAdminStaff(req, res, next, queries.findAdminByUsername(), 'Admin');
+    return signinAdmin;
   }
 
-  static async authSignInStaff(req, res, next) {
-    const { userName } = req.body;
-    const checkStaffQuery = queries.findStaffByUsername();
-    this.checkStaff = await database.queryOneORNone(checkStaffQuery, [userName]);
-    if (!this.checkStaff) protocol.err404Res(res, errors.userNotExists('Staff'));
-    else next();
+  static authSignInStaff(req, res, next) {
+    const signinStaff = this.authSigninAdminStaff(req, res, next, queries.findStaffByUsername(), 'Staff');
+    return signinStaff;
   }
 
   static async authAdmins(req, res, next) {

@@ -10,10 +10,8 @@ export default class Valdiate {
     const lastNameErr = errors.validateLetters(userLastName, 'Last name');
     const emailErr = errors.checkEmailFormat(userEmail, 'Email');
     const passwordErr = errors.checkPassword(userPassword, 'Password');
-    if (firstNameErr) protocol.err400Res(res, firstNameErr);
-    else if (lastNameErr) protocol.err400Res(res, lastNameErr);
-    else if (emailErr) protocol.err400Res(res, emailErr);
-    else if (passwordErr) protocol.err400Res(res, passwordErr);
+    const findError = errors.findError(firstNameErr, lastNameErr, emailErr, passwordErr);
+    if (findError) protocol.err400Res(res, findError);
     else next();
   }
 
@@ -21,8 +19,8 @@ export default class Valdiate {
     const { userEmail, userPassword } = req.body;
     const emailErr = errors.checkEmailFormat(userEmail, 'Email');
     const passwordErr = errors.checkPassword(userPassword, 'Password');
-    if (emailErr) protocol.err400Res(res, emailErr);
-    else if (passwordErr) protocol.err400Res(res, passwordErr);
+    const findError = errors.findError(emailErr, passwordErr);
+    if (findError) protocol.err400Res(res, findError);
     else next();
   }
 
@@ -30,17 +28,18 @@ export default class Valdiate {
     const { userName, adminStaffPassword } = req.body;
     const usernameErr = errors.validateUsername(userName, 'Username');
     const passwordErr = errors.checkPassword(adminStaffPassword, 'Password');
-    if (usernameErr) protocol.err400Res(res, usernameErr);
-    else if (passwordErr) protocol.err400Res(res, passwordErr);
+    const findError = errors.findError(usernameErr, passwordErr);
+    if (findError) protocol.err400Res(res, findError);
     else next();
   }
 
   static createBankAccountInputs(req, res, next) {
     const { bankAccountType } = req.body;
     const checkBankAccountType = errors.validateLetters(bankAccountType, 'Bank account type');
-    if (checkBankAccountType) protocol.err400Res(res, checkBankAccountType);
-    else if (bankAccountType !== 'current' && bankAccountType !== 'savings'
-      && bankAccountType !== 'Current' && bankAccountType !== 'Savings') protocol.err400Res(res, 'Bank account type must be savings or current');
+    const checkBankAccountTypeValue = errors.checkValue(bankAccountType, 'Bank account type must be savings or current', 'current', 'savings', 'Current', 'Savings');
+    const findErr = errors.findError(checkBankAccountType);
+    if (findErr) protocol.err400Res(res, findErr);
+    else if (checkBankAccountTypeValue) protocol.err400Res(res, checkBankAccountTypeValue);
     else next();
   }
 
@@ -51,19 +50,15 @@ export default class Valdiate {
     const checkTransactionAmount = errors.validateNumber(transactionAmount, 'Transaction amount');
     const checkAccountNumber = errors.validateNumber(accountNumber, 'Account number');
     const checkCashierId = errors.validateNumber(cashierId, 'Cashier id');
-    if (checkTransactionAmount) protocol.err400Res(res, checkTransactionAmount);
-    else if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
-    else if (checkCashierId) protocol.err400Res(res, checkCashierId);
+    const findError = errors.findError(checkTransactionAmount, checkAccountNumber, checkCashierId);
+    if (findError) protocol.err400Res(res, findError);
     else next();
   }
 
   static deleteAccountInputs(req, res, next) {
-    const adminId = req.headers['admin-id'];
     const accountNumber = req.params.account_number;
     const checkAccountNumber = errors.validateNumber(accountNumber, 'Account number');
-    const checkAdminId = errors.validateNumber(adminId, 'Admin id');
-    if (checkAdminId) protocol.err400Res(res, checkAdminId);
-    else if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
+    if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
     else next();
   }
 
@@ -72,10 +67,11 @@ export default class Valdiate {
     const accountNumber = req.params.account_number;
     const checkAccountStatus = errors.validateLetters(accountStatus, 'Account status');
     const checkAccountNumber = errors.validateNumber(accountNumber, 'Account number');
-    if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
-    else if (checkAccountStatus) protocol.err400Res(res, checkAccountStatus);
-    else if (accountStatus !== 'active' && accountStatus !== 'Active'
-      && accountStatus !== 'dormant' && accountStatus !== 'Dormant') protocol.err400Res(res, 'Account status must equal active or dormant');
+    const checkAccountStatusValue = errors.checkValue(accountStatus,
+      'Account status must equal active or dormant', 'active', 'Active', 'dormant', 'Dormant');
+    const findError = errors.findError(checkAccountStatus, checkAccountNumber);
+    if (findError) protocol.err400Res(res, findError);
+    else if (checkAccountStatusValue) protocol.err400Res(res, checkAccountStatusValue);
     else next();
   }
 }

@@ -5,6 +5,7 @@ import authenticate from '../middleware/authenticate';
 import protocol from '../helpers/response';
 import errors from '../helpers/errorMessage';
 import models from '../models/users';
+import queries from '../helpers/queries';
 
 export default class Users {
   static async signUp(req, res) {
@@ -12,7 +13,7 @@ export default class Users {
     const {
       id, firstName, lastName, email, hashedPassword,
     } = reqData;
-    const createUserQuery = 'INSERT INTO clients(id, first_name, last_name, email, password) VALUES ($1, $2, $3, $4, $5) RETURNING id, first_name, last_name, email, type';
+    const createUserQuery = queries.createClient();
     const arrayData = [id, firstName, lastName, email, hashedPassword];
     const newUser = await database.queryOne(createUserQuery, arrayData);
     const signUpRes = models.createUserDataResPostgre(newUser);
@@ -30,43 +31,32 @@ export default class Users {
     return protocol.auth200Res(res, signInRes, newToken);
   }
 
-  static async signUpAdmin(req, res) {
+  static async signupAdminStaff(req, res, signupQuery) {
     const reqData = await models.adminStaffDataPostgre(req.body);
     const { id, username, hashedPassword } = reqData;
-    const createAdminQuery = 'INSERT INTO admins(id, username, password) VALUES ($1, $2, $3) RETURNING id, username, type';
     const arrayData = [id, username, hashedPassword];
-    const createAdmin = await database.queryOne(createAdminQuery, arrayData);
-    const newToken = await token.generate(createAdmin.id);
-    return protocol.auth201Res(res, createAdmin, newToken);
+    const createAdminStaff = await database.queryOne(signupQuery, arrayData);
+    const newToken = await token.generate(createAdminStaff.id);
+    return protocol.auth201Res(res, createAdminStaff, newToken);
   }
 
-  static async signInAdmin(req, res) {
-    const { checkAdmin } = authenticate;
-    const { adminStaffPassword } = req.body;
-    const verifyPassword = await password.compare(checkAdmin.password, adminStaffPassword);
-    if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());
-    const signInRes = await models.createAdminStaffDataResPostgre(checkAdmin);
-    const newToken = await token.generate(checkAdmin.id);
-    return protocol.auth200Res(res, signInRes, newToken);
+  static signUpAdmin(req, res) {
+    const signup = Users.signupAdminStaff(req, res, queries.createAdmin());
+    return signup;
   }
 
   static async signUpStaff(req, res) {
-    const reqData = await models.adminStaffDataPostgre(req.body);
-    const { id, username, hashedPassword } = reqData;
-    const createStaffQuery = 'INSERT INTO staff(id, username, password) VALUES ($1, $2, $3) RETURNING id, username, type';
-    const arrayData = [id, username, hashedPassword];
-    const createStaff = await database.queryOne(createStaffQuery, arrayData);
-    const newToken = await token.generate(createStaff.id);
-    return protocol.auth201Res(res, createStaff, newToken);
+    const signupStaff = Users.signupAdminStaff(req, res, queries.createStaff());
+    return signupStaff;
   }
 
-  static async signinStaff(req, res) {
-    const { checkStaff } = authenticate;
+  static async signinAdminStaff(req, res) {
+    const { checkStaffAdmin } = authenticate;
     const { adminStaffPassword } = req.body;
-    const verifyPassword = await password.compare(checkStaff.password, adminStaffPassword);
+    const verifyPassword = await password.compare(checkStaffAdmin.password, adminStaffPassword);
     if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());
-    const signInRes = await models.createAdminStaffDataResPostgre(checkStaff);
-    const newToken = await token.generate(checkStaff.id);
+    const signInRes = await models.createAdminStaffDataResPostgre(checkStaffAdmin);
+    const newToken = await token.generate(checkStaffAdmin.id);
     return protocol.auth200Res(res, signInRes, newToken);
   }
 }

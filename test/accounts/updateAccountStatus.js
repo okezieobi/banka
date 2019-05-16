@@ -24,6 +24,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
   after(async () => {
     await pool.queryNone(Test.deleteData());
   });
+
   it('Should patch the status of a bank account as a signed in Admin at "/api/v1/account/account_number" with POST if all request inputs, headers and params are valid', async () => {
     const testData = {
       accountStatus: 'active',
