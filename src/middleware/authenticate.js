@@ -22,12 +22,6 @@ export default class Authenticate {
     return next();
   }
 
-  static async authSigninAll(req, res, next, requestData, findUserQuery, errMessage) {
-    this.verifyUser = await database.queryOneORNone(findUserQuery, [requestData]);
-    if (this.verifyUser) return protocol.err404Res(res, errMessage);
-    return next();
-  }
-
   static async authClients(req, res, next) {
     const findClientQuery = queries.findClientById();
     const token = req.headers['client-token'];
