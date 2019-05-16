@@ -9,6 +9,21 @@ export default class RequestCheck {
     return err;
   }
 
+  static findError(...errorsList) {
+    let err;
+    errorsList.forEach((error) => {
+      if (error) err = error;
+    });
+    return err;
+  }
+
+  static checkValue(data, errMessage, ...values) {
+    let err;
+    const verifyValue = values.find(value => value === data);
+    if (!verifyValue) err = errMessage;
+    return err;
+  }
+
   static validateLetters(request, title) {
     const err = this.checkRequest(request, regexTest.checkName(request),
       errors.isRequired(title), errors.notLetters(title));

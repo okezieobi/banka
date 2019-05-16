@@ -25,13 +25,13 @@ router.post('/auth/signin/admin', (...args) => {
   validate.adminStaffinputs(...args);
 }, (...args) => {
   authenitcate.authSignInAdmin(...args);
-}, userController.signInAdmin);
+}, userController.signinAdminStaff);
 
 router.post('/auth/signin/staff', (...args) => {
   validate.adminStaffinputs(...args);
 }, (...args) => {
   authenitcate.authSignInStaff(...args);
-}, userController.signinStaff);
+}, userController.signinAdminStaff);
 
 router.post('/auth/signup/staff', (...args) => {
   validate.adminStaffinputs(...args);
