@@ -1,28 +1,28 @@
 import accountsController from '../controllers/accounts';
 import router from './router';
-import validate from '../middleware/validate';
-import authenticate from '../middleware/authenticate';
+import { ValidateAccountInput, AuthenticateAccount } from '../middleware/accounts';
+import { AuthenticateUsers } from '../middleware/users';
 
 router.post('/accounts', (...args) => {
-  validate.createBankAccountInputs(...args);
+  ValidateAccountInput.createAccount(...args);
 }, (...args) => {
-  authenticate.authClients(...args);
+  AuthenticateUsers.clients(...args);
 }, accountsController.createAccount);
 
 router.delete('/accounts/:account_number', (...args) => {
-  validate.deleteAccountInputs(...args);
+  ValidateAccountInput.deleteAccount(...args);
 }, (...args) => {
-  authenticate.authAdmins(...args);
+  AuthenticateUsers.admin(...args);
 }, (...args) => {
-  authenticate.verifyAccount(...args);
+  AuthenticateAccount.account(...args);
 }, accountsController.deleteAccount);
 
 router.patch('/account/:account_number', (...args) => {
-  validate.updateAccountStatusInput(...args);
+  ValidateAccountInput.updateAccountStatus(...args);
 }, (...args) => {
-  authenticate.authAdmins(...args);
+  AuthenticateUsers.admin(...args);
 }, (...args) => {
-  authenticate.verifyAccount(...args);
+  AuthenticateAccount.account(...args);
 }, accountsController.updateStatus);
 
 export default router;

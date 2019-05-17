@@ -1,6 +1,7 @@
 import models from '../models/accounts';
 import database from '../db/pgConnect';
-import authenticate from '../middleware/authenticate';
+import { AuthenticateUsers } from '../middleware/users';
+import { AuthenticateAccount } from '../middleware/accounts';
 import protocol from '../helpers/response';
 import queries from '../helpers/queries';
 
@@ -8,7 +9,7 @@ export default class Accounts {
   static async createAccount(req, res) {
     const reqData = await models.bankAccountPostgre(req.body);
     const { id, accountNumber, type } = reqData;
-    const { findClient } = authenticate;
+    const { findClient } = AuthenticateUsers;
     const createAccountQuery = queries.createAccount();
     const arrayData = [id, accountNumber, findClient.id, type];
     const newBankAccount = await database.queryOne(createAccountQuery, arrayData);
@@ -17,7 +18,7 @@ export default class Accounts {
   }
 
   static async updateStatus(req, res) {
-    const { bankAccount } = authenticate;
+    const { bankAccount } = AuthenticateAccount;
     const { accountStatus } = req.body;
     if ((bankAccount.status).toLowerCase() === (accountStatus).toLowerCase()) return protocol.err400Res(res, `Account status is already ${accountStatus}`);
     const updateAccountQuery = queries.updateAccount();
@@ -28,7 +29,7 @@ export default class Accounts {
   }
 
   static async deleteAccount(req, res) {
-    const { bankAccount } = authenticate;
+    const { bankAccount } = AuthenticateAccount;
     const { id, status } = bankAccount;
     if (status === 'Active' || status === 'active') return protocol.err400Res(res, 'Only dormant accounts can be deleted, please update account status');
     const deleteAccountQuery = queries.deleteAccount();
