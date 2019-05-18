@@ -1,7 +1,7 @@
 import models from '../models/accounts';
 import database from '../db/pgConnect';
-import { AuthenticateUsers } from '../middleware/users';
-import { AuthenticateAccount } from '../middleware/accounts';
+import authenticateUsers from '../auth/users';
+import AuthenticateAccount from '../auth/accounts';
 import protocol from '../helpers/response';
 import queries from '../helpers/queries';
 
@@ -9,7 +9,7 @@ export default class Accounts {
   static async createAccount(req, res) {
     const reqData = await models.bankAccountPostgre(req.body);
     const { id, accountNumber, type } = reqData;
-    const { findClient } = AuthenticateUsers;
+    const { findClient } = authenticateUsers;
     const createAccountQuery = queries.createAccount();
     const arrayData = [id, accountNumber, findClient.id, type];
     const newBankAccount = await database.queryOne(createAccountQuery, arrayData);

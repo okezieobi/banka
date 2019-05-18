@@ -2,7 +2,7 @@ import protocol from '../helpers/response';
 import checkRequest from '../helpers/checkRequest';
 
 
-export class ValidateTransactionInput {
+export default class ValidateTransactionRequest {
   static transaction(req, res, next) {
     const { transactionAmount } = req.body;
     const cashierId = req.headers['cashier-id'];
@@ -15,8 +15,4 @@ export class ValidateTransactionInput {
     if (findError) protocol.err400Res(res, findError);
     else next();
   }
-}
-
-export class AuthenticateTransaction {
-
 }

@@ -1,7 +1,7 @@
 import database from '../db/pgConnect';
 import password from '../helpers/bcrypt';
 import token from '../helpers/jwt';
-import { AuthenticateUsers } from '../middleware/users';
+import authenticateUsers from '../auth/users';
 import protocol from '../helpers/response';
 import errors from '../helpers/errorMessage';
 import models from '../models/users';
@@ -23,7 +23,7 @@ export default class Users {
 
   static async signIn(req, res) {
     const { userPassword } = req.body;
-    const { checkUser } = AuthenticateUsers;
+    const { checkUser } = authenticateUsers;
     const verifyPassword = await password.compare(checkUser.password, userPassword);
     if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());
     const signInRes = await models.createUserDataResPostgre(checkUser);
@@ -51,7 +51,7 @@ export default class Users {
   }
 
   static async signinAdminStaff(req, res) {
-    const { checkStaffAdmin } = AuthenticateUsers;
+    const { checkStaffAdmin } = authenticateUsers;
     const { adminStaffPassword } = req.body;
     const verifyPassword = await password.compare(checkStaffAdmin.password, adminStaffPassword);
     if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());
