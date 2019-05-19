@@ -58,4 +58,15 @@ export default class Errors {
     const wrongPasswordErr = 'Password does not match user';
     return wrongPasswordErr;
   }
+
+
+  static insufficientBalance() {
+    const balance = 'Insufficient balance';
+    return balance;
+  }
+
+  static statusMustBeActive() {
+    const status = 'Only active accounts can be debited';
+    return status;
+  }
 }

@@ -94,4 +94,18 @@ export default class AuthenticateUsers {
     if (!findAdmin) return protocol.err404Res(res, 'Token does not match any admin');
     return next();
   }
+
+  static async staff(req, res, next) {
+    const findAdminQuery = queries.findStaffById();
+    const token = req.headers['staff-token'];
+    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
+    const verifyToken = await jwt.verify(token);
+    // @ts-ignore
+    const { userId } = verifyToken;
+    const checkId = await test.checkNumber(userId);
+    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
+    this.staffUser = await database.queryOneORNone(findAdminQuery, [userId]);
+    if (!this.staffUser) return protocol.err404Res(res, 'Token does not match any admin');
+    return next();
+  }
 }
