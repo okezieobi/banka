@@ -1,42 +1,17 @@
 import userController from '../controllers/users';
 import router from './router';
-import validate from '../middleware/validate';
-import authenitcate from '../middleware/authenticate';
+import userMiddleware from '../middleware/users';
 
-router.post('/auth/signup', (...args) => {
-  validate.signUpInputs(...args);
-}, (...args) => {
-  authenitcate.authSignUp(...args);
-}, userController.signUp);
+router.post('/auth/signup', userMiddleware.signupClients(), userController.signUp.bind(userController));
 
-router.post('/auth/signin', (...args) => {
-  validate.signInInputs(...args);
-}, (...args) => {
-  authenitcate.authSignIn(...args);
-}, userController.signIn);
+router.post('/auth/signin', userMiddleware.signinClients(), userController.signIn.bind(userController));
 
-router.post('/auth/signup/admin', (...args) => {
-  validate.adminStaffinputs(...args);
-}, (...args) => {
-  authenitcate.authSignUpAdmin(...args);
-}, userController.signUpAdmin);
+router.post('/auth/signup/admin', userMiddleware.signupAdmin(), userController.signUpAdmin.bind(userController));
 
-router.post('/auth/signin/admin', (...args) => {
-  validate.adminStaffinputs(...args);
-}, (...args) => {
-  authenitcate.authSignInAdmin(...args);
-}, userController.signinAdminStaff);
+router.post('/auth/signin/admin', userMiddleware.signinAdmin(), userController.signinAdminStaff.bind(userController));
 
-router.post('/auth/signin/staff', (...args) => {
-  validate.adminStaffinputs(...args);
-}, (...args) => {
-  authenitcate.authSignInStaff(...args);
-}, userController.signinAdminStaff);
+router.post('/auth/signin/staff', userMiddleware.signinStaff(), userController.signinAdminStaff.bind(userController));
 
-router.post('/auth/signup/staff', (...args) => {
-  validate.adminStaffinputs(...args);
-}, (...args) => {
-  authenitcate.authSignUpStaff(...args);
-}, userController.signUpStaff);
+router.post('/auth/signup/staff', userMiddleware.signupStaff(), userController.signUpStaff.bind(userController));
 
 export default router;

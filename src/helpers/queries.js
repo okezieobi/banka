@@ -63,4 +63,15 @@ export default class Queries {
     const createAccountQuery = 'INSERT INTO accounts(id, number, owner, type) VALUES ($1, $2, $3, $4) RETURNING *';
     return createAccountQuery;
   }
+
+  static async transaction(db, transactionArrayValues, accountArrayValues) {
+    const updateAccountBalanceQuery = 'UPDATE accounts SET balance = $1 WHERE id = $2';
+    const newTransactionQuery = 'INSERT INTO transactions(id, type, account_no, cashier, amount, old_balance, new_balance) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const newTransaction = await db.task('createTransaction', async (t) => {
+      const createTransaction = await t.one(newTransactionQuery, transactionArrayValues);
+      await t.none(updateAccountBalanceQuery, accountArrayValues);
+      return createTransaction;
+    });
+    return newTransaction;
+  }
 }

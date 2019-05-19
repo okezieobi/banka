@@ -1,7 +1,7 @@
 import database from '../db/pgConnect';
 import password from '../helpers/bcrypt';
 import token from '../helpers/jwt';
-import authenticate from '../middleware/authenticate';
+import authenticateUsers from '../auth/users';
 import protocol from '../helpers/response';
 import errors from '../helpers/errorMessage';
 import models from '../models/users';
@@ -23,7 +23,7 @@ export default class Users {
 
   static async signIn(req, res) {
     const { userPassword } = req.body;
-    const { checkUser } = authenticate;
+    const { checkUser } = authenticateUsers;
     const verifyPassword = await password.compare(checkUser.password, userPassword);
     if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());
     const signInRes = await models.createUserDataResPostgre(checkUser);
@@ -41,17 +41,17 @@ export default class Users {
   }
 
   static signUpAdmin(req, res) {
-    const signup = Users.signupAdminStaff(req, res, queries.createAdmin());
+    const signup = this.signupAdminStaff(req, res, queries.createAdmin());
     return signup;
   }
 
   static async signUpStaff(req, res) {
-    const signupStaff = Users.signupAdminStaff(req, res, queries.createStaff());
+    const signupStaff = this.signupAdminStaff(req, res, queries.createStaff());
     return signupStaff;
   }
 
   static async signinAdminStaff(req, res) {
-    const { checkStaffAdmin } = authenticate;
+    const { checkStaffAdmin } = authenticateUsers;
     const { adminStaffPassword } = req.body;
     const verifyPassword = await password.compare(checkStaffAdmin.password, adminStaffPassword);
     if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());

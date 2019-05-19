@@ -24,4 +24,5 @@ export default {
   queryOne: (text, params) => pool.one(text, params),
   queryNone: (text, params) => pool.none(text, params),
   queryMany: (text, params) => pool.many(text, params),
+  pool,
 };

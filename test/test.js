@@ -37,7 +37,7 @@ require('./users/staff/signin');
 require('./users/staff/signup');
 require('./accounts/createBankAccounts');
 require('./transactions/debitAccounts');
-require('./transactions/creditAccounts');
+// require('./transactions/creditAccounts');
 require('./accounts/updateAccountStatus');
 require('./accounts/deleteAccount');
 

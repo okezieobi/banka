@@ -1,13 +1,13 @@
 import transactionController from '../controllers/transactions';
 import router from './router';
-import validate from '../middleware/validate';
+import transactionsMiddleware from '../middleware/transactions';
 
-router.post('/transactions/:account_number/credit', (...args) => {
-  validate.transactionInputs(...args);
-}, transactionController.creditAccount);
+/*
+router.post('/transactions/:account_number/credit', transactionsMiddleware.creditAccount(),
+  transactionController.creditAccount);
+  */
 
-router.post('/transactions/:account_number/debit', (...args) => {
-  validate.transactionInputs(...args);
-}, transactionController.debitAccount);
+router.post('/transactions/:account_number/debit', transactionsMiddleware.debitAccount(),
+  transactionController.debitAccount.bind(transactionController));
 
 export default router;
