@@ -41,12 +41,12 @@ export default class Users {
   }
 
   static signUpAdmin(req, res) {
-    const signup = Users.signupAdminStaff(req, res, queries.createAdmin());
+    const signup = this.signupAdminStaff(req, res, queries.createAdmin());
     return signup;
   }
 
   static async signUpStaff(req, res) {
-    const signupStaff = Users.signupAdminStaff(req, res, queries.createStaff());
+    const signupStaff = this.signupAdminStaff(req, res, queries.createStaff());
     return signupStaff;
   }
 

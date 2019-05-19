@@ -5,31 +5,31 @@ import middleware from './middleware';
 
 export default class Accounts {
   static verifyAccount() {
-    const authAccount = (...args) => { authenticateAccount.account(...args); };
+    const authAccount = authenticateAccount.account.bind(authenticateAccount);
     return authAccount;
   }
 
   static authenticateAdmin() {
-    const authAdmin = (...args) => { authenticateUsers.admin(...args); };
+    const authAdmin = authenticateUsers.admin.bind(authenticateUsers);
     return authAdmin;
   }
 
   static createAccount() {
-    const validate = (...args) => { validateAccountRequest.createAccount(...args); };
-    const auth = (...args) => { authenticateUsers.clients(...args); };
+    const validate = validateAccountRequest.createAccount.bind(validateAccountRequest);
+    const auth = authenticateUsers.clients.bind(authenticateUsers);
     const newAccount = middleware.routeCallbacks(validate, auth);
     return newAccount;
   }
 
   static deleteAccount() {
-    const validate = (...args) => { validateAccountRequest.deleteAccount(...args); };
+    const validate = validateAccountRequest.deleteAccount.bind(validateAccountRequest);
     const deleteAccount = middleware.routeCallbacks(validate,
       this.authenticateAdmin(), this.verifyAccount());
     return deleteAccount;
   }
 
   static updateAccountStatus() {
-    const validate = (...args) => { validateAccountRequest.updateAccountStatus(...args); };
+    const validate = validateAccountRequest.updateAccountStatus.bind(validateAccountRequest);
     const updateStatus = middleware.routeCallbacks(validate, this.authenticateAdmin(),
       this.verifyAccount());
     return updateStatus;

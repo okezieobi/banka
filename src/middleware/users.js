@@ -4,49 +4,49 @@ import middleware from './middleware';
 
 export default class Users {
   static validateClients() {
-    const validate = (...args) => { validateUserRequest.signIn(...args); };
+    const validate = validateUserRequest.signIn.bind(validateUserRequest);
     return validate;
   }
 
   static validateAdminStaff() {
-    const validate = (...args) => { validateUserRequest.adminStaff(...args); };
+    const validate = validateUserRequest.adminStaff.bind(validateUserRequest);
     return validate;
   }
 
   static signupClients() {
-    const validate = (...args) => { validateUserRequest.signUp(...args); };
-    const auth = (...args) => { authenticateUsers.signUp(...args); };
+    const validate = validateUserRequest.signUp.bind(validateUserRequest);
+    const auth = authenticateUsers.signUp.bind(authenticateUsers);
     const signup = middleware.routeCallbacks(validate, auth);
     return signup;
   }
 
   static signinClients() {
-    const validate = (...args) => { validateUserRequest.signIn(...args); };
-    const auth = (...args) => { authenticateUsers.signIn(...args); };
+    const validate = validateUserRequest.signIn.bind(validateUserRequest);
+    const auth = authenticateUsers.signIn.bind(authenticateUsers);
     const signin = middleware.routeCallbacks(validate, auth);
     return signin;
   }
 
   static signupAdmin() {
-    const authSignUpAdmin = (...args) => { authenticateUsers.signUpAdmin(...args); };
+    const authSignUpAdmin = authenticateUsers.signUpAdmin.bind(authenticateUsers);
     const signup = middleware.routeCallbacks(this.validateAdminStaff(), authSignUpAdmin);
     return signup;
   }
 
   static signinAdmin() {
-    const auth = (...args) => { authenticateUsers.signInAdmin(...args); };
+    const auth = authenticateUsers.signInAdmin.bind(authenticateUsers);
     const signin = middleware.routeCallbacks(this.validateAdminStaff(), auth);
     return signin;
   }
 
   static signupStaff() {
-    const auth = (...args) => { authenticateUsers.signUpStaff(...args); };
+    const auth = authenticateUsers.signUpStaff.bind(authenticateUsers);
     const signup = middleware.routeCallbacks(this.validateAdminStaff(), auth);
     return signup;
   }
 
   static signinStaff() {
-    const authSigninStaff = (...args) => { authenticateUsers.signInStaff(...args); };
+    const authSigninStaff = authenticateUsers.signInStaff.bind(authenticateUsers);
     const signin = middleware.routeCallbacks(this.validateAdminStaff(), authSigninStaff);
     return signin;
   }
