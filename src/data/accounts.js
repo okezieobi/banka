@@ -15,7 +15,7 @@ export default class ValidateAccountRequest {
 
   static deleteAccount(req, res, next) {
     const accountNumber = req.params.account_number;
-    const checkAccountNumber = checkRequest.validateNumber(accountNumber, 'Account number');
+    const checkAccountNumber = checkRequest.validateInteger(accountNumber, 'Account number');
     if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
     else next();
   }
@@ -24,7 +24,7 @@ export default class ValidateAccountRequest {
     const { accountStatus } = req.body;
     const accountNumber = req.params.account_number;
     const checkAccountStatus = checkRequest.validateLetters(accountStatus, 'Account status');
-    const checkAccountNumber = checkRequest.validateNumber(accountNumber, 'Account number');
+    const checkAccountNumber = checkRequest.validateInteger(accountNumber, 'Account number');
     const checkAccountStatusValue = checkRequest.checkValue(accountStatus,
       'Account status must equal active or dormant', 'active', 'Active', 'dormant', 'Dormant');
     const findError = checkRequest.findError(checkAccountStatus, checkAccountNumber);

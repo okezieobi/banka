@@ -21,7 +21,7 @@ export default class Transactions {
   }
 
   static debitAccount() {
-    const verifyStatus = authenticateTransactions.accountStatus.bind(authenticateTransactions);
+    const verifyStatus = authenticateTransactions.accountStatusDebit.bind(authenticateTransactions);
     const verifyBalance = authenticateTransactions.accountBalance.bind(authenticateTransactions);
     const debit = middleware.routeCallbacks(this.verifyTransactionRequest(), this.authStaff(),
       this.verifyAccount(), verifyStatus, verifyBalance);
@@ -29,7 +29,10 @@ export default class Transactions {
   }
 
   static creditAccount() {
-    const credit = middleware.routeCallbacks(this.verifyTransactionRequest(), this.verifyAccount());
+    const verifyStatus = authenticateTransactions.accountStatusCredit
+      .bind(authenticateTransactions);
+    const credit = middleware.routeCallbacks(this.verifyTransactionRequest(), this.authStaff(),
+      this.verifyAccount(), verifyStatus);
     return credit;
   }
 }

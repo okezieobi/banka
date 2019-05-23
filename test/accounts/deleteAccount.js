@@ -31,8 +31,8 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(200);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(200);
-    expect(response.body).to.have.property('message').equal('Account successfully deleted');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(200);
+    expect(response.body).to.have.property('message').to.be.a('string').to.equal('Account successfully deleted');
   });
 
 
@@ -42,8 +42,8 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Token is required, please sign in or sign up');
   });
 
   it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if admin token is not sent', async () => {
@@ -51,8 +51,8 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Token is required, please sign in or sign up');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Token is required, please sign in or sign up');
   });
 
   it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is not a number', async () => {
@@ -61,8 +61,59 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Id from token is not an integer');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
+  });
+
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is a negative integer', async () => {
+    const token = await Test.generateToken('-5050505050505');
+    const accountNumber = '14141414141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
+  });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is a decimal number', async () => {
+    const token = await Test.generateToken('505050.5050505');
+    const accountNumber = '14141414141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
+  });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is a negative decimal number', async () => {
+    const token = await Test.generateToken('-505050.5050505');
+    const accountNumber = '14141414141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
+  });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is undefined', async () => {
+    const token = await Test.generateToken(undefined);
+    const accountNumber = '14141414141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
+  });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is null', async () => {
+    const token = await Test.generateToken(null);
+    const accountNumber = '14141414141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
   it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if token does not match master admin', async () => {
@@ -71,8 +122,8 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(404);
-    expect(response.body).to.have.property('error').equal('Token does not match any admin');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Token provided does not match any admin');
   });
 
   it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is not a number', async () => {
@@ -81,8 +132,38 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Account number must be numbers');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
+  });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is a negative integer', async () => {
+    const token = await Test.generateToken('5050505050505');
+    const accountNumber = '-14141414141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
+  });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is decimal number', async () => {
+    const token = await Test.generateToken('5050505050505');
+    const accountNumber = '141414.14141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
+  });
+
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is a negative decimal number', async () => {
+    const token = await Test.generateToken('5050505050505');
+    const accountNumber = '-14141.414141';
+    const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.an('object');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
   it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is not found', async () => {
@@ -91,8 +172,8 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(404);
-    expect(response.body).to.have.property('error').equal('Bank account not found');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Bank account not found');
   });
 
   it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number has already been deleted', async () => {
@@ -101,8 +182,8 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(404);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(404);
-    expect(response.body).to.have.property('error').equal('Bank account not found');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Bank account not found');
   });
 
   it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account status is not dormant', async () => {
@@ -111,7 +192,7 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Only dormant accounts can be deleted, please update account status');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Only dormant accounts can be deleted, please update account status');
   });
 });

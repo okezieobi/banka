@@ -1,6 +1,49 @@
 import numbers from '../helpers/unique_no';
 
 export default class Transactions {
+  static transactions(amount, bankInfo, cashierId, type, newBalance) {
+    const transactionData = {
+      transactionId: numbers.uniqueIds(),
+      type,
+      accountNumber: parseInt(bankInfo.number, 10),
+      cashier: parseInt(cashierId, 10),
+      amount: parseFloat(amount),
+      oldBalance: parseFloat(bankInfo.balance),
+      newBalance,
+    };
+    return transactionData;
+  }
+
+  static debitAccountPostgre(amount, bankInfo, cashierId) {
+    const type = 'Debit';
+    const newBalance = parseFloat((parseFloat(bankInfo.balance)
+      - parseFloat(amount)).toFixed(2));
+    const transactionData = this.transactions(amount, bankInfo, cashierId, type, newBalance);
+    return transactionData;
+  }
+
+
+  static creditAccountPostgre(amount, bankInfo, cashierId) {
+    const type = 'Credit';
+    const newBalance = parseFloat((parseFloat(bankInfo.balance)
+      + parseFloat(amount)).toFixed(2));
+    const transactionData = this.transactions(amount, bankInfo, cashierId, type, newBalance);
+    return transactionData;
+  }
+
+  static transactionResPostgre(data) {
+    const transactionResData = {
+      transactionId: parseInt(data.id, 10),
+      accountNumber: parseInt(data.account_no, 10),
+      amount: parseFloat(data.amount),
+      cashier: parseInt(data.cashier, 10),
+      transactionType: String(data.type),
+      accountBalance: parseFloat(data.new_balance),
+    };
+    return transactionResData;
+  }
+
+  /*
   static debitAccountTransaction(dataOne, dataTwo, dataThree) {
     const transactionData = {
       id: Math.floor(Math.random() * 1000000000),
@@ -12,20 +55,6 @@ export default class Transactions {
       oldBalance: parseFloat(dataTwo.accountBalance),
       newBalance: parseFloat((parseFloat(dataTwo.accountBalance)
         - parseFloat(dataOne.transactionAmount)).toFixed(2)),
-    };
-    return transactionData;
-  }
-
-  static debitAccountPostgre(amount, bankInfo, cashierId) {
-    const transactionData = {
-      transactionId: numbers.uniqueIds(),
-      type: 'Debit',
-      accountNumber: parseInt(bankInfo.number, 10),
-      cashier: parseInt(cashierId, 10),
-      amount: parseFloat(amount),
-      oldBalance: parseFloat(bankInfo.balance),
-      newBalance: parseFloat((parseFloat(bankInfo.balance)
-        - parseFloat(amount)).toFixed(2)),
     };
     return transactionData;
   }
@@ -45,19 +74,6 @@ export default class Transactions {
     return transactionData;
   }
 
-  static creditPostgre(dataOne, dataTwo, dataThree) {
-    const transactionData = {
-      type: 'Credit',
-      accountNumber: parseInt(dataTwo.account_no, 10),
-      cashier: parseInt(dataThree.id, 10),
-      amount: parseFloat(dataOne.transactionAmount),
-      oldBalance: parseFloat(dataTwo.balance),
-      newBalance: parseFloat((parseFloat(dataTwo.balance)
-        + parseFloat(dataOne.transactionAmount)).toFixed(2)),
-    };
-    return transactionData;
-  }
-
   static transactionResponse(data) {
     const transactionResData = {
       transactionId: parseInt(data.id, 10),
@@ -69,28 +85,5 @@ export default class Transactions {
     };
     return transactionResData;
   }
-
-  static transactionResPostgre(data) {
-    const transactionResData = {
-      transactionId: parseInt(data.id, 10),
-      accountNumber: String(data.account_no),
-      amount: parseFloat(data.amount),
-      cashier: parseInt(data.cashier, 10),
-      transactionType: String(data.type),
-      accountBalance: String(data.new_balance),
-    };
-    return transactionResData;
-  }
-
-  static transactionResponsePostgre(data) {
-    const transactionResData = {
-      transactionId: parseInt(data.id, 10),
-      accountNumber: String(data.accountNumber),
-      amount: parseFloat(data.amount),
-      cashier: parseInt(data.cashier, 10),
-      transactionType: String(data.type),
-      accountBalance: String(data.new_balance),
-    };
-    return transactionResData;
-  }
+  */
 }

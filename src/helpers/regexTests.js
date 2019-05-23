@@ -1,5 +1,3 @@
-import errors from './errorMessage';
-
 export default class Patterns {
   static validateEmail(email) {
     const emailPattern = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
@@ -17,12 +15,17 @@ export default class Patterns {
   }
 
   static checkNumber(amount) {
-    const amountPattern = /^[0-9]+$/;
+    const amountPattern = /^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/;
     return amountPattern.test(amount);
   }
 
+  static checkInteger(integer) {
+    const integerPattern = /^(0|[1-9]\d*)$/;
+    return integerPattern.test(integer);
+  }
+
   static checkUserName(username) {
-    const usernamePattern = /^[a-zA-Z0-9\s.-]+$/;
+    const usernamePattern = /^[a-zA-Z0-9\s_-]+$/;
     return usernamePattern.test(username);
   }
 }

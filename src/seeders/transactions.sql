@@ -6,7 +6,7 @@ RUN  \c banka \i src/seeders/transactions.sql
 INSERT INTO transactions
     (id, "type", account_no, cashier, amount, old_balance, new_balance)
 VALUES
-    (7777777777777, 'credit',
+    (7777777777777, 'Credit',
         (SELECT "number"
         FROM accounts
         WHERE id = 1111111111111),
