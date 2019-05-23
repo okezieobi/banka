@@ -48,6 +48,12 @@ export default class RequestCheck {
     return err;
   }
 
+  static validateInteger(request, title) {
+    const err = this.checkRequest(request, regexTest.checkInteger(request),
+      errors.isRequired(title), errors.notInteger(title));
+    return err;
+  }
+
   static validateUsername(request, title) {
     const err = this.checkRequest(request, regexTest.checkUserName(request),
       errors.isRequired(title), errors.notLettersAndNumbers(title));

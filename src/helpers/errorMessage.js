@@ -15,8 +15,13 @@ export default class Errors {
   }
 
   static notNumbers(title) {
-    const notNumbersErrMessage = `${title} must be numbers`;
+    const notNumbersErrMessage = `${title} must be a positive number`;
     return notNumbersErrMessage;
+  }
+
+  static notInteger(title) {
+    const notIntegerErrMessage = `${title} must be a positive integer`;
+    return notIntegerErrMessage;
   }
 
   static userExists(title) {
@@ -44,13 +49,18 @@ export default class Errors {
     return tokenRequiredErrMessage;
   }
 
-  static wrongToken() {
-    const wrongTokenErrMessage = 'Token provided does not match any user';
+  static wrongToken(title) {
+    const wrongTokenErrMessage = `Token provided does not match any ${title}`;
+    return wrongTokenErrMessage;
+  }
+
+  static wrongMasterToken() {
+    const wrongTokenErrMessage = 'Token provided does not match master admin';
     return wrongTokenErrMessage;
   }
 
   static invalidToken() {
-    const invalidTokenErrMessage = 'Id from token is not an integer';
+    const invalidTokenErrMessage = 'Id from token is not a positive integer';
     return invalidTokenErrMessage;
   }
 
@@ -65,8 +75,8 @@ export default class Errors {
     return balance;
   }
 
-  static statusMustBeActive() {
-    const status = 'Only active accounts can be debited';
+  static statusMustBeActive(title) {
+    const status = `Only active accounts can be ${title}`;
     return status;
   }
 }

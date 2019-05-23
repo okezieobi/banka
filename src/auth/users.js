@@ -15,26 +15,64 @@ export default class AuthenticateUsers {
     return next();
   }
 
+  static async signInAll(req, res, next, query, title, data) {
+    this.verifyUser = await database.queryOneORNone(query, [data]);
+    if (!this.verifyUser) return protocol.err404Res(res, errors.userNotExists(`${title}`));
+    return next();
+  }
+
+  static signInAdmin(req, res, next) {
+    const findAdminQuery = queries.findAdminByUsername();
+    const { userName } = req.body;
+    const signinAdmin = this.signInAll(req, res, next, findAdminQuery, 'Admin', userName);
+    return signinAdmin;
+  }
+
+  static signInStaff(req, res, next) {
+    const findStaffQuery = queries.findStaffByUsername();
+    const { userName } = req.body;
+    const signinStaff = this.signInAll(req, res, next, findStaffQuery, 'Staff', userName);
+    return signinStaff;
+  }
+
   static async signIn(req, res, next) {
     const { userEmail } = req.body;
     const checkUserQuery = queries.findClientByEmail();
-    this.checkUser = await database.queryOneORNone(checkUserQuery, [userEmail]);
-    if (!this.checkUser) return protocol.err404Res(res, errors.userNotExists('User'));
+    const signinClient = this.signInAll(req, res, next, checkUserQuery, 'User', userEmail);
+    return signinClient;
+  }
+
+  static async authenticateAll(req, res, next, token, query, title) {
+    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
+    const verifyToken = await jwt.verify(token);
+    // @ts-ignore
+    const { userId } = verifyToken;
+    const checkId = await test.checkInteger(userId);
+    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
+    this.findUser = await database.queryOneORNone(query, [userId]);
+    if (!this.findUser) return protocol.err404Res(res, errors.wrongToken([title]));
     return next();
   }
 
   static async clients(req, res, next) {
     const findClientQuery = queries.findClientById();
     const token = req.headers['client-token'];
-    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
-    const verifyToken = await jwt.verify(token);
-    // @ts-ignore
-    const { userId } = verifyToken;
-    const checkId = await test.checkNumber(userId);
-    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
-    this.findClient = await database.queryOneORNone(findClientQuery, [userId]);
-    if (!this.findClient) return protocol.err404Res(res, errors.wrongToken());
-    return next();
+    const auth = this.authenticateAll(req, res, next, token, findClientQuery, 'user');
+    return auth;
+  }
+
+  static async admin(req, res, next) {
+    const findAdminQuery = queries.findAdminById();
+    const token = req.headers['admin-token'];
+    const auth = this.authenticateAll(req, res, next, token, findAdminQuery, 'admin');
+    return auth;
+  }
+
+  static async staff(req, res, next) {
+    const findStaffQuery = queries.findStaffById();
+    const token = req.headers['staff-token'];
+    const auth = this.authenticateAll(req, res, next, token, findStaffQuery, 'staff');
+    return auth;
   }
 
   static async signUpAdminStaff(req, res, next, findAdminStaffQuery, adminStaffTitle) {
@@ -45,10 +83,10 @@ export default class AuthenticateUsers {
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     const { userId } = verifyToken;
-    const checkId = await test.checkNumber(userId);
+    const checkId = await test.checkInteger(userId);
     if (!checkId) return protocol.err400Res(res, errors.invalidToken());
     const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [userId]);
-    if (!masterAdmin) return protocol.err404Res(res, 'Token does not match master admin');
+    if (!masterAdmin) return protocol.err404Res(res, errors.wrongMasterToken());
     const checkStaffAdmin = await database.queryOneORNone(findAdminStaffQuery, [userName]);
     if (checkStaffAdmin) return protocol.err404Res(res, errors.userExists(`${adminStaffTitle}`));
     return next();
@@ -62,50 +100,5 @@ export default class AuthenticateUsers {
   static async signUpStaff(req, res, next) {
     const signupStaff = this.signUpAdminStaff(req, res, next, queries.findStaffByUsername(), 'Staff');
     return signupStaff;
-  }
-
-  static async signInAdminStaff(req, res, next, findAdminStaffQuery, adminStaffTitle) {
-    const { userName } = req.body;
-    this.checkStaffAdmin = await database.queryOneORNone(findAdminStaffQuery, [userName]);
-    if (!this.checkStaffAdmin) return protocol.err404Res(res, errors.userNotExists(`${adminStaffTitle}`));
-    return next();
-  }
-
-  static signInAdmin(req, res, next) {
-    const signinAdmin = this.signInAdminStaff(req, res, next, queries.findAdminByUsername(), 'Admin');
-    return signinAdmin;
-  }
-
-  static signInStaff(req, res, next) {
-    const signinStaff = this.signInAdminStaff(req, res, next, queries.findStaffByUsername(), 'Staff');
-    return signinStaff;
-  }
-
-  static async admin(req, res, next) {
-    const findAdminQuery = queries.findAdminById();
-    const token = req.headers['admin-token'];
-    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
-    const verifyToken = await jwt.verify(token);
-    // @ts-ignore
-    const { userId } = verifyToken;
-    const checkId = await test.checkNumber(userId);
-    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
-    const findAdmin = await database.queryOneORNone(findAdminQuery, [userId]);
-    if (!findAdmin) return protocol.err404Res(res, 'Token does not match any admin');
-    return next();
-  }
-
-  static async staff(req, res, next) {
-    const findAdminQuery = queries.findStaffById();
-    const token = req.headers['staff-token'];
-    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
-    const verifyToken = await jwt.verify(token);
-    // @ts-ignore
-    const { userId } = verifyToken;
-    const checkId = await test.checkNumber(userId);
-    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
-    this.staffUser = await database.queryOneORNone(findAdminQuery, [userId]);
-    if (!this.staffUser) return protocol.err404Res(res, 'Token does not match any admin');
-    return next();
   }
 }

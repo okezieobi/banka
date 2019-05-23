@@ -21,14 +21,27 @@ export default class Users {
     return protocol.auth201Res(res, signUpRes, newToken);
   }
 
-  static async signIn(req, res) {
-    const { userPassword } = req.body;
-    const { checkUser } = authenticateUsers;
-    const verifyPassword = await password.compare(checkUser.password, userPassword);
+  static async signinAll(req, res, userPassword, model) {
+    const { verifyUser } = authenticateUsers;
+    const verifyPassword = await password.compare(verifyUser.password, userPassword);
     if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());
-    const signInRes = await models.createUserDataResPostgre(checkUser);
-    const newToken = await token.generate(checkUser.id);
+    const signInRes = await model(verifyUser);
+    const newToken = await token.generate(verifyUser.id);
     return protocol.auth200Res(res, signInRes, newToken);
+  }
+
+  static async signinClients(req, res) {
+    const { userPassword } = req.body;
+    const userModel = models.createUserDataResPostgre;
+    const signin = this.signinAll(req, res, userPassword, userModel);
+    return signin;
+  }
+
+  static async signinAdminStaff(req, res) {
+    const { adminStaffPassword } = req.body;
+    const adminStaffModel = models.createAdminStaffDataResPostgre;
+    const signin = this.signinAll(req, res, adminStaffPassword, adminStaffModel);
+    return signin;
   }
 
   static async signupAdminStaff(req, res, signupQuery) {
@@ -36,8 +49,9 @@ export default class Users {
     const { id, username, hashedPassword } = reqData;
     const arrayData = [id, username, hashedPassword];
     const createAdminStaff = await database.queryOne(signupQuery, arrayData);
+    const signupRes = await models.createAdminStaffDataResPostgre(createAdminStaff);
     const newToken = await token.generate(createAdminStaff.id);
-    return protocol.auth201Res(res, createAdminStaff, newToken);
+    return protocol.auth201Res(res, signupRes, newToken);
   }
 
   static signUpAdmin(req, res) {
@@ -48,15 +62,5 @@ export default class Users {
   static async signUpStaff(req, res) {
     const signupStaff = this.signupAdminStaff(req, res, queries.createStaff());
     return signupStaff;
-  }
-
-  static async signinAdminStaff(req, res) {
-    const { checkStaffAdmin } = authenticateUsers;
-    const { adminStaffPassword } = req.body;
-    const verifyPassword = await password.compare(checkStaffAdmin.password, adminStaffPassword);
-    if (!verifyPassword) return protocol.err400Res(res, errors.wrongPassword());
-    const signInRes = await models.createAdminStaffDataResPostgre(checkStaffAdmin);
-    const newToken = await token.generate(checkStaffAdmin.id);
-    return protocol.auth200Res(res, signInRes, newToken);
   }
 }

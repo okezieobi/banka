@@ -29,14 +29,14 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.have.status(200);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(200);
-    expect(response.body).to.have.property('data');
-    expect(response.body.data).to.have.property('id');
-    expect(response.body.data).to.have.property('username').equal(testData.userName);
-    expect(response.body.data).to.have.property('type').equal('Admin');
-    expect(response.body).to.have.property('headers');
-    expect(response.body.headers).to.have.property('access-token');
-    expect(response.header).to.have.property('access-token');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(200);
+    expect(response.body).to.have.property('data').to.be.an('object');
+    expect(response.body.data).to.have.property('id').to.be.a('number');
+    expect(response.body.data).to.have.property('username').to.be.a('string').to.equal(testData.userName);
+    expect(response.body.data).to.have.property('type').to.be.a('string').to.equal('Admin');
+    expect(response.body).to.have.property('headers').to.be.an('object');
+    expect(response.body.headers).to.have.property('access-token').to.be.a('string');
+    expect(response.header).to.have.property('access-token').to.be.a('string');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if user name is an empty string', async () => {
@@ -48,8 +48,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Username is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Username is required');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if user name is not sent in request', async () => {
@@ -61,10 +61,9 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Username is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Username is required');
   });
-
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if user name equals undefined', async () => {
     const testData = {
@@ -75,10 +74,9 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Username is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Username is required');
   });
-
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if user name equals null', async () => {
     const testData = {
@@ -89,8 +87,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Username is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Username is required');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if user name is not an admin', async () => {
@@ -102,8 +100,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(404);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(404);
-    expect(response.body).to.have.property('error').equal('Admin does not exist, please sign up');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Admin does not exist, please sign up');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password is an empty string', async () => {
@@ -115,8 +113,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password is required');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password is not sent', async () => {
@@ -128,8 +126,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password is required');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password is undefined', async () => {
@@ -141,8 +139,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password is required');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password is null', async () => {
@@ -154,8 +152,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password is required');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password is required');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password does not match', async () => {
@@ -167,8 +165,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password does not match user');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password does not match user');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password is not a minimum of 8 characters', async () => {
@@ -180,8 +178,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password does not have at least 1 upper case letter', async () => {
@@ -193,8 +191,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password does not have at least 1 lower case letter', async () => {
@@ -206,8 +204,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password does not have at least 1 number', async () => {
@@ -219,8 +217,8 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 
   it('Should not sign in an Admin at "/api/v1/auth/signin/admin" with Post if password does not have at least 1 special character', async () => {
@@ -232,7 +230,7 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign in an Admin with
     const response = await chai.request(app).post('/api/v1/auth/signin/admin').send(testData);
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').equal(400);
-    expect(response.body).to.have.property('error').equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Password must be eight characters minimum, at least one uppercase letter, one lowercase letter, one number and one special character');
   });
 });

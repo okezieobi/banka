@@ -29,6 +29,7 @@ export default class Test {
   }
 }
 
+
 require('./users/signIn');
 require('./users/signUp');
 require('./users/admin/signin');
@@ -37,7 +38,7 @@ require('./users/staff/signin');
 require('./users/staff/signup');
 require('./accounts/createBankAccounts');
 require('./transactions/debitAccounts');
-// require('./transactions/creditAccounts');
+require('./transactions/creditAccounts');
 require('./accounts/updateAccountStatus');
 require('./accounts/deleteAccount');
 

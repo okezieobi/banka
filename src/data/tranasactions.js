@@ -7,7 +7,7 @@ export default class ValidateTransactionRequest {
     const { transactionAmount } = req.body;
     const accountNumber = req.params.account_number;
     const checkTransactionAmount = checkRequest.validateNumber(transactionAmount, 'Transaction amount');
-    const checkAccountNumber = checkRequest.validateNumber(accountNumber, 'Account number');
+    const checkAccountNumber = checkRequest.validateInteger(accountNumber, 'Account number');
     const findError = checkRequest.findError(checkTransactionAmount,
       checkAccountNumber);
     if (findError) protocol.err400Res(res, findError);
