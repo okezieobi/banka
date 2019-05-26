@@ -104,9 +104,9 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign up an Admin with
     const token = await Test.generateToken('5050505050505');
     testData.userName = 'obiedere';
     const response = await chai.request(app).post('/api/v1/auth/signup/admin').set('admin-token', token).send(testData);
-    expect(response).to.has.status(404);
+    expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Admin exists, please sign in');
   });
 
@@ -271,7 +271,7 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign up an Admin with
     expect(response).to.has.status(404);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
-    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Token provided does not match master admin');
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Token provided does not match any admin');
   });
 
   it('Should not signup in an Admin as a signed in master Admin at "/api/v1/auth/signup/admin" with POST if id from token is not a number', async () => {

@@ -1,4 +1,5 @@
 import numbers from '../helpers/unique_no';
+import transactionModels from './transactions';
 
 export default class Accounts {
   static bankAccountPostgre(data) {
@@ -29,6 +30,16 @@ export default class Accounts {
       openingBalance: parseFloat(dataOne.balance),
     };
     return newBankAccountRes;
+  }
+
+  static getTransactions(arrayData) {
+    const transactionArray = arrayData.map((data) => {
+      const transactionResData = transactionModels.allTransactionsResPostgre(data);
+      transactionResData.oldBalance = parseFloat(data.old_balance);
+      transactionResData.newBalance = parseFloat(data.new_balance);
+      return transactionResData;
+    });
+    return transactionArray;
   }
 
   /*

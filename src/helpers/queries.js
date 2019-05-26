@@ -64,6 +64,11 @@ export default class Queries {
     return createAccountQuery;
   }
 
+  static getAccountHistory() {
+    const accountHistory = 'SELECT * FROM transactions';
+    return accountHistory;
+  }
+
   static async transaction(db, transactionArrayValues, accountArrayValues) {
     const updateAccountBalanceQuery = 'UPDATE accounts SET balance = $1 WHERE id = $2';
     const newTransactionQuery = 'INSERT INTO transactions(id, type, account_no, cashier, amount, old_balance, new_balance) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';

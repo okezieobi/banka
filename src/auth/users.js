@@ -7,12 +7,31 @@ import jwt from '../helpers/jwt';
 
 
 export default class AuthenticateUsers {
-  static async signUp(req, res, next) {
+  static async signUpAll(req, res, next, userData, findUserQuery, userTitle) {
+    const user = await database.queryOneORNone(findUserQuery, [userData]);
+    if (user) return protocol.err400Res(res, errors.userExists(`${userTitle}`));
+    return next();
+  }
+
+  static signUp(req, res, next) {
     const { userEmail } = req.body;
     const checkUserQuery = queries.findClientByEmail();
-    const checkUser = await database.queryOneORNone(checkUserQuery, [userEmail]);
-    if (checkUser) return protocol.err400Res(res, errors.userExists('User'));
-    return next();
+    const signupClient = this.signUpAll(req, res, next, userEmail, checkUserQuery, 'User');
+    return signupClient;
+  }
+
+  static signUpAdmin(req, res, next) {
+    const { userName } = req.body;
+    const findAdmin = queries.findAdminByUsername();
+    const signupAdmin = this.signUpAll(req, res, next, userName, findAdmin, 'Admin');
+    return signupAdmin;
+  }
+
+  static async signUpStaff(req, res, next) {
+    const { userName } = req.body;
+    const findStaff = queries.findStaffByUsername();
+    const signupStaff = this.signUpAll(req, res, next, userName, findStaff, 'Staff');
+    return signupStaff;
   }
 
   static async signInAll(req, res, next, query, title, data) {
@@ -73,32 +92,5 @@ export default class AuthenticateUsers {
     const token = req.headers['staff-token'];
     const auth = this.authenticateAll(req, res, next, token, findStaffQuery, 'staff');
     return auth;
-  }
-
-  static async signUpAdminStaff(req, res, next, findAdminStaffQuery, adminStaffTitle) {
-    const { userName } = req.body;
-    const checkMasterAdmin = queries.findAdminById();
-    const token = req.headers['admin-token']; // master admin
-    if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
-    const verifyToken = await jwt.verify(token);
-    // @ts-ignore
-    const { userId } = verifyToken;
-    const checkId = await test.checkInteger(userId);
-    if (!checkId) return protocol.err400Res(res, errors.invalidToken());
-    const masterAdmin = await database.queryOneORNone(checkMasterAdmin, [userId]);
-    if (!masterAdmin) return protocol.err404Res(res, errors.wrongMasterToken());
-    const checkStaffAdmin = await database.queryOneORNone(findAdminStaffQuery, [userName]);
-    if (checkStaffAdmin) return protocol.err404Res(res, errors.userExists(`${adminStaffTitle}`));
-    return next();
-  }
-
-  static signUpAdmin(req, res, next) {
-    const signupAdmin = this.signUpAdminStaff(req, res, next, queries.findAdminByUsername(), 'Admin');
-    return signupAdmin;
-  }
-
-  static async signUpStaff(req, res, next) {
-    const signupStaff = this.signUpAdminStaff(req, res, next, queries.findStaffByUsername(), 'Staff');
-    return signupStaff;
   }
 }

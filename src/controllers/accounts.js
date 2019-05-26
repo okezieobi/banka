@@ -36,4 +36,13 @@ export default class Accounts {
     await database.queryNone(deleteAccountQuery, [id]);
     return protocol.success200ResMessage(res, 'Account successfully deleted');
   }
+
+  static async getAccountHistory(req, res) {
+    const { bankAccount } = AuthenticateAccount;
+    const { number } = bankAccount;
+    const getAccountHistoryQuery = queries.getAccountHistory();
+    const accountHistory = await database.queryAny(getAccountHistoryQuery, [number]);
+    const responseData = await models.getTransactions(accountHistory);
+    return protocol.success200Res(res, responseData);
+  }
 }

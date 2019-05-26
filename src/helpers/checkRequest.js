@@ -10,10 +10,7 @@ export default class RequestCheck {
   }
 
   static findError(...errorsList) {
-    let err;
-    errorsList.forEach((error) => {
-      if (error) err = error;
-    });
+    const err = errorsList.find(error => error);
     return err;
   }
 
@@ -25,38 +22,50 @@ export default class RequestCheck {
   }
 
   static validateLetters(request, title) {
-    const err = this.checkRequest(request, regexTest.checkName(request),
-      errors.isRequired(title), errors.notLetters(title));
+    const testRequest = regexTest.checkName(request);
+    const errMessage = errors.isRequired(title);
+    const testErrMessage = errors.notLetters(title);
+    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
     return err;
   }
 
   static checkEmailFormat(request, title) {
-    const err = this.checkRequest(request, regexTest.validateEmail(request),
-      errors.isRequired(title), errors.notEmail());
+    const testRequest = regexTest.validateEmail(request);
+    const errMessage = errors.isRequired(title);
+    const testErrMessage = errors.notEmail();
+    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
     return err;
   }
 
   static checkPassword(request, title) {
-    const err = this.checkRequest(request, regexTest.validatePassword(request),
-      errors.isRequired(title), errors.notPassword());
+    const testRequest = regexTest.validatePassword(request);
+    const errMessage = errors.isRequired(title);
+    const testErrMessage = errors.notPassword();
+    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
     return err;
   }
 
   static validateNumber(request, title) {
-    const err = this.checkRequest(request, regexTest.checkNumber(request),
-      errors.isRequired(title), errors.notNumbers(title));
+    const testRequest = regexTest.checkNumber(request);
+    const errMessage = errors.isRequired(title);
+    const testErrMessage = errors.notNumbers(title);
+    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
     return err;
   }
 
   static validateInteger(request, title) {
-    const err = this.checkRequest(request, regexTest.checkInteger(request),
-      errors.isRequired(title), errors.notInteger(title));
+    const testRequest = regexTest.checkInteger(request);
+    const errMessage = errors.isRequired(title);
+    const testErrMessage = errors.notInteger(title);
+    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
     return err;
   }
 
   static validateUsername(request, title) {
-    const err = this.checkRequest(request, regexTest.checkUserName(request),
-      errors.isRequired(title), errors.notLettersAndNumbers(title));
+    const testRequest = regexTest.checkUserName(request);
+    const errMessage = errors.isRequired(title);
+    const testErrMessage = errors.notLettersAndNumbers(title);
+    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
     return err;
   }
 }
