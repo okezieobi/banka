@@ -13,6 +13,11 @@ export default class Users {
     return validate;
   }
 
+  static authAdmin() {
+    const auth = authenticateUsers.admin.bind(authenticateUsers);
+    return auth;
+  }
+
   static signupClients() {
     const validate = validateUserRequest.signUp.bind(validateUserRequest);
     const auth = authenticateUsers.signUp.bind(authenticateUsers);
@@ -28,8 +33,8 @@ export default class Users {
   }
 
   static signupAdmin() {
-    const authSignUpAdmin = authenticateUsers.signUpAdmin.bind(authenticateUsers);
-    const signup = middleware.routeCallbacks(this.validateAdminStaff(), authSignUpAdmin);
+    const auth = authenticateUsers.signUpAdmin.bind(authenticateUsers);
+    const signup = middleware.routeCallbacks(this.validateAdminStaff(), this.authAdmin(), auth);
     return signup;
   }
 
@@ -41,7 +46,7 @@ export default class Users {
 
   static signupStaff() {
     const auth = authenticateUsers.signUpStaff.bind(authenticateUsers);
-    const signup = middleware.routeCallbacks(this.validateAdminStaff(), auth);
+    const signup = middleware.routeCallbacks(this.validateAdminStaff(), this.authAdmin(), auth);
     return signup;
   }
 

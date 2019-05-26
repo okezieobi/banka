@@ -12,12 +12,21 @@ export default class ValidateAccountRequest {
     else next();
   }
 
-
-  static deleteAccount(req, res, next) {
+  static checkAccountNumber(req, res, next) {
     const accountNumber = req.params.account_number;
     const checkAccountNumber = checkRequest.validateInteger(accountNumber, 'Account number');
     if (checkAccountNumber) protocol.err400Res(res, checkAccountNumber);
     else next();
+  }
+
+  static deleteAccount(req, res, next) {
+    const deleteAccount = this.checkAccountNumber(req, res, next);
+    return deleteAccount;
+  }
+
+  static accountHisory(req, res, next) {
+    const accountHistory = this.checkAccountNumber(req, res, next);
+    return accountHistory;
   }
 
   static updateAccountStatus(req, res, next) {

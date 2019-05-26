@@ -14,6 +14,11 @@ export default class Accounts {
     return authAdmin;
   }
 
+  static authClient() {
+    const client = authenticateUsers.clients.bind(authenticateUsers);
+    return client;
+  }
+
   static createAccount() {
     const validate = validateAccountRequest.createAccount.bind(validateAccountRequest);
     const auth = authenticateUsers.clients.bind(authenticateUsers);
@@ -33,5 +38,11 @@ export default class Accounts {
     const updateStatus = middleware.routeCallbacks(validate, this.authenticateAdmin(),
       this.verifyAccount());
     return updateStatus;
+  }
+
+  static getAccountHistory() {
+    const validate = validateAccountRequest.accountHisory.bind(validateAccountRequest);
+    const getHistory = middleware.routeCallbacks(validate, this.authClient(), this.verifyAccount());
+    return getHistory;
   }
 }

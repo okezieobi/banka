@@ -31,15 +31,21 @@ export default class Transactions {
     return transactionData;
   }
 
-  static transactionResPostgre(data) {
+  static allTransactionsResPostgre(data) {
     const transactionResData = {
       transactionId: parseInt(data.id, 10),
       accountNumber: parseInt(data.account_no, 10),
       amount: parseFloat(data.amount),
       cashier: parseInt(data.cashier, 10),
       transactionType: String(data.type),
-      accountBalance: parseFloat(data.new_balance),
     };
+    return transactionResData;
+  }
+
+  static transactionResPostgre(data) {
+    const transactionResData = this.allTransactionsResPostgre(data);
+    transactionResData.accountBalance = parseFloat(data.new_balance);
+
     return transactionResData;
   }
 

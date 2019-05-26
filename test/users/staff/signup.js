@@ -104,9 +104,9 @@ describe('Test endpoints at "/api/v1/auth/signup/staff" to sign up a Staff as an
     const token = await Test.generateToken('5050505050505');
     testData.userName = 'okezie';
     const response = await chai.request(app).post('/api/v1/auth/signup/staff').set('admin-token', token).send(testData);
-    expect(response).to.has.status(404);
+    expect(response).to.has.status(400);
     expect(response.body).to.be.an('object');
-    expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
+    expect(response.body).to.have.property('status').to.be.a('number').to.equal(400);
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Staff exists, please sign in');
   });
 
@@ -271,7 +271,7 @@ describe('Test endpoints at "/api/v1/auth/signup/staff" to sign up a Staff as an
     expect(response).to.has.status(404);
     expect(response.body).to.be.an('object');
     expect(response.body).to.have.property('status').to.be.a('number').to.equal(404);
-    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Token provided does not match master admin');
+    expect(response.body).to.have.property('error').to.be.a('string').to.equal('Token provided does not match any admin');
   });
 
   it('Should sign up a Staff at"/api/v1/auth/signup/staff" with POST if id from token is not a number', async () => {

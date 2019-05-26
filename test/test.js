@@ -23,12 +23,16 @@ export default class Test {
     return accountsData;
   }
 
+  static transactions() {
+    const transactionData = seeder.transactions.insertData;
+    return transactionData;
+  }
+
   static generateToken(id) {
     const newToken = token.generate(id);
     return newToken;
   }
 }
-
 
 require('./users/signIn');
 require('./users/signUp');
@@ -41,6 +45,7 @@ require('./transactions/debitAccounts');
 require('./transactions/creditAccounts');
 require('./accounts/updateAccountStatus');
 require('./accounts/deleteAccount');
+require('./accounts/accountHistory');
 
 export {
   expect,

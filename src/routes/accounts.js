@@ -10,4 +10,7 @@ router.delete('/accounts/:account_number', accountsMiddleware.deleteAccount(),
 router.patch('/account/:account_number', accountsMiddleware.updateAccountStatus(),
   accountsController.updateStatus);
 
+router.get('/accounts/:account_number/transactions', accountsMiddleware.getAccountHistory(),
+  accountsController.getAccountHistory.bind(accountsController));
+
 export default router;
