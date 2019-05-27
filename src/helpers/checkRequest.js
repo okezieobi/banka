@@ -21,51 +21,46 @@ export default class RequestCheck {
     return err;
   }
 
-  static validateLetters(request, title) {
-    const testRequest = regexTest.checkName(request);
+  static checkAllErrors(request, title, test, error) {
+    let testErrMessage;
+    if (error === 'notEmail' || error === 'notPassword') {
+      testErrMessage = errors[error]();
+    } else {
+      testErrMessage = errors[error](title);
+    }
+    const testRequest = regexTest[test](request);
     const errMessage = errors.isRequired(title);
-    const testErrMessage = errors.notLetters(title);
     const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
+    return err;
+  }
+
+  static validateLetters(request, title) {
+    const err = this.checkAllErrors(request, title, 'checkName', 'notLetters');
     return err;
   }
 
   static checkEmailFormat(request, title) {
-    const testRequest = regexTest.validateEmail(request);
-    const errMessage = errors.isRequired(title);
-    const testErrMessage = errors.notEmail();
-    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
+    const err = this.checkAllErrors(request, title, 'validateEmail', 'notEmail');
     return err;
   }
 
   static checkPassword(request, title) {
-    const testRequest = regexTest.validatePassword(request);
-    const errMessage = errors.isRequired(title);
-    const testErrMessage = errors.notPassword();
-    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
+    const err = this.checkAllErrors(request, title, 'validatePassword', 'notPassword');
     return err;
   }
 
   static validateNumber(request, title) {
-    const testRequest = regexTest.checkNumber(request);
-    const errMessage = errors.isRequired(title);
-    const testErrMessage = errors.notNumbers(title);
-    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
+    const err = this.checkAllErrors(request, title, 'checkNumber', 'notNumbers');
     return err;
   }
 
   static validateInteger(request, title) {
-    const testRequest = regexTest.checkInteger(request);
-    const errMessage = errors.isRequired(title);
-    const testErrMessage = errors.notInteger(title);
-    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
+    const err = this.checkAllErrors(request, title, 'checkInteger', 'notInteger');
     return err;
   }
 
   static validateUsername(request, title) {
-    const testRequest = regexTest.checkUserName(request);
-    const errMessage = errors.isRequired(title);
-    const testErrMessage = errors.notLettersAndNumbers(title);
-    const err = this.checkRequest(request, testRequest, errMessage, testErrMessage);
+    const err = this.checkAllErrors(request, title, 'checkUserName', 'notLettersAndNumbers');
     return err;
   }
 }
