@@ -8,4 +8,7 @@ router.post('/transactions/:account_number/credit', transactionsMiddleware.credi
 router.post('/transactions/:account_number/debit', transactionsMiddleware.debitAccount(),
   transactionController.debitAccount.bind(transactionController));
 
+router.get('/transactions/:transaction_id', transactionsMiddleware.getTransaction(),
+  transactionController.getTransaction.bind(transactionController));
+
 export default router;

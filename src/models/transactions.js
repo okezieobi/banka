@@ -34,6 +34,7 @@ export default class Transactions {
   static allTransactionsResPostgre(data) {
     const transactionResData = {
       transactionId: parseInt(data.id, 10),
+      createdOne: data.created_on,
       accountNumber: parseInt(data.account_no, 10),
       amount: parseFloat(data.amount),
       cashier: parseInt(data.cashier, 10),

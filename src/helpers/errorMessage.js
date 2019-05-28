@@ -79,4 +79,9 @@ export default class Errors {
     const status = `Only active accounts can be ${title}`;
     return status;
   }
+
+  static transactionNotFound() {
+    const err = 'Transaction not found';
+    return err;
+  }
 }

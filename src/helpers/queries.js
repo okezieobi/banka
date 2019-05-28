@@ -65,7 +65,12 @@ export default class Queries {
   }
 
   static getAccountHistory() {
-    const accountHistory = 'SELECT * FROM transactions';
+    const accountHistory = 'SELECT * FROM transactions WHERE account_no = $1';
+    return accountHistory;
+  }
+
+  static getTransaction() {
+    const accountHistory = 'SELECT * FROM transactions WHERE id = $1';
     return accountHistory;
   }
 

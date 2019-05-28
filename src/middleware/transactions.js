@@ -35,4 +35,11 @@ export default class Transactions {
       this.verifyAccount(), verifyStatus);
     return credit;
   }
+
+  static getTransaction() {
+    const authClient = authenticateUsers.clients.bind(authenticateUsers);
+    const validate = validateTransactionRequests.getTransaction.bind(validateTransactionRequests);
+    const getTransaction = middleware.routeCallbacks(validate, authClient);
+    return getTransaction;
+  }
 }
