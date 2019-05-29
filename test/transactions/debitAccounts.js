@@ -38,6 +38,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('data').to.be.an('object');
     expect(response.body.data).to.have.property('accountNumber').to.be.a('number');
     expect(response.body.data).to.have.property('transactionId').to.be.a('number');
+    expect(response.body.data).to.have.property('createdOn').to.be.a('string');
     expect(response.body.data).to.have.property('amount').to.be.a('number').to.equal(parseFloat(testData.transactionAmount));
     expect(response.body.data).to.have.property('cashier').to.be.a('number');
     expect(response.body.data).to.have.property('transactionType').to.be.a('string').to.equal('Debit');

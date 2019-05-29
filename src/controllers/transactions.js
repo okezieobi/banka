@@ -40,7 +40,7 @@ export default class Transactions {
     const findTransactionQuery = queries.getTransaction();
     const transaction = await database.queryOneORNone(findTransactionQuery, [transactionId]);
     if (!transaction) return protocol.err404Res(res, errors.transactionNotFound());
-    const transactionRes = await models.transactionResPostgre(transaction);
+    const transactionRes = await models.getTransaction(transaction);
     return protocol.success200Res(res, transactionRes);
   }
 }

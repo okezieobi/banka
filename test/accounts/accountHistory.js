@@ -40,6 +40,7 @@ describe('Test endpoints at "/api/v1/acounts/:account_number/transactions to get
     const resData = Math.floor(Math.random() * data.length);
     if (data.length > 0) {
       expect(response.body.data[resData]).to.have.property('transactionId').to.be.a('number');
+      expect(response.body.data[resData]).to.have.property('createdOn').to.be.a('string');
       expect(response.body.data[resData]).to.have.property('accountNumber').to.be.a('number');
       expect(response.body.data[resData]).to.have.property('amount').to.be.a('number');
       expect(response.body.data[resData]).to.have.property('cashier').to.be.a('number');

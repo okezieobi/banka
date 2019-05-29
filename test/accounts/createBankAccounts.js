@@ -33,6 +33,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response.body).to.have.property('status').to.be.a('number').to.equal(201);
     expect(response.body).to.have.property('data').to.be.an('object');
     expect(response.body.data).to.have.property('accountNumber').to.be.a('number');
+    expect(response.body.data).to.have.property('createdOn').to.be.a('string');
     expect(response.body.data).to.have.property('firstName').to.be.a('string');
     expect(response.body.data).to.have.property('lastName').to.be.a('string');
     expect(response.body.data).to.have.property('email').to.be.a('string');

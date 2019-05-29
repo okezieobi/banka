@@ -23,6 +23,7 @@ export default class Accounts {
   static createBankAccountResPostgre(dataOne, dataTwo) {
     const newBankAccountRes = {
       accountNumber: parseInt(dataOne.number, 10),
+      createdOn: String(dataOne.created_on),
       firstName: String(dataTwo.first_name),
       lastName: String(dataTwo.last_name),
       email: String(dataTwo.email),
@@ -34,9 +35,7 @@ export default class Accounts {
 
   static getTransactions(arrayData) {
     const transactionArray = arrayData.map((data) => {
-      const transactionResData = transactionModels.allTransactionsResPostgre(data);
-      transactionResData.oldBalance = parseFloat(data.old_balance);
-      transactionResData.newBalance = parseFloat(data.new_balance);
+      const transactionResData = transactionModels.getTransaction(data);
       return transactionResData;
     });
     return transactionArray;
