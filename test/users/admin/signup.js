@@ -300,7 +300,7 @@ describe('Test endpoints at "/api/v1/auth/signin/admin" to sign up an Admin with
     expect(response.body).to.have.property('error').equal('Id from token is not a positive integer');
   });
 
-  it('Should not signup in an Admin as a signed in master Admin at "/api/v1/auth/signup/admin" with POST if id from token is a decimal number', async () => {
+  it('Should not signup in an Admin as a signed in master Admin at "/api/v1/auth/signup/admin" with POST if id from token is a floating point number', async () => {
     const testData = {
       userName: 'Frank',
       adminStaffPassword: 'AbcDFer123*@is!',

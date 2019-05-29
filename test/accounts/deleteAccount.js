@@ -76,7 +76,7 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is a decimal number', async () => {
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is a floating point number', async () => {
     const token = await Test.generateToken('505050.5050505');
     const accountNumber = '14141414141';
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
@@ -86,7 +86,7 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is a negative decimal number', async () => {
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if id from admin token is a negative floating point number', async () => {
     const token = await Test.generateToken('-505050.5050505');
     const accountNumber = '14141414141';
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
@@ -146,7 +146,7 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is decimal number', async () => {
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is floating point number', async () => {
     const token = await Test.generateToken('5050505050505');
     const accountNumber = '141414.14141';
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);
@@ -156,7 +156,7 @@ describe('Test endpoints at "/api/v1/accounts/:account_number" to delete a bank 
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is a negative decimal number', async () => {
+  it('Should NOT delete a bank account and all associated transactions as a signed in Admin at "/api/v1/accounts/:account_number" with DELETE if account number is a negative floating point number', async () => {
     const token = await Test.generateToken('5050505050505');
     const accountNumber = '-14141.414141';
     const response = await chai.request(app).delete(`/api/v1/accounts/${accountNumber}`).set('admin-token', token);

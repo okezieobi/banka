@@ -34,7 +34,6 @@ export default class Test {
   }
 }
 
-/*
 require('./users/signIn');
 require('./users/signUp');
 require('./users/admin/signin');
@@ -47,7 +46,6 @@ require('./transactions/creditAccounts');
 require('./accounts/updateAccountStatus');
 require('./accounts/deleteAccount');
 require('./accounts/accountHistory');
-*/
 require('./transactions/getTransaction');
 
 export {

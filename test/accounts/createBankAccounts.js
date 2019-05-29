@@ -105,7 +105,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if id from client token is a decimal number', async () => {
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if id from client token is a floating point number', async () => {
     const token = await Test.generateToken('1010101.010101');
     const testData = {
       bankAccountType: 'Savings',
@@ -118,7 +118,7 @@ describe('Test endpoints at "/api/v1/accounts" to create a bank account as a sig
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if id from client token is a negative decimal number', async () => {
+  it('Should NOT create a bank account as a signed in User at "/api/v1/accounts" if id from client token is a negative floating point number', async () => {
     const token = await Test.generateToken('-1010101.010101');
     const testData = {
       bankAccountType: 'Savings',

@@ -45,7 +45,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
     expect(response.body.data).to.have.property('accountBalance').to.be.a('number');
   });
 
-  it('Should credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" with POST if all request inputs, headers and params are valid (transaction amount is a decimal number)', async () => {
+  it('Should credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" with POST if all request inputs, headers and params are valid (transaction amount is a floating point number)', async () => {
     const testData = {
       transactionAmount: '1000.504',
     };
@@ -140,7 +140,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Transaction amount must be a positive number');
   });
 
-  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if transaction amount is a negative decimal number', async () => {
+  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if transaction amount is a negative floating point number', async () => {
     const testData = {
       transactionAmount: '-1000.50',
     };
@@ -230,7 +230,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if id from staff token is a decimal number', async () => {
+  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if id from staff token is a floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -243,7 +243,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if id from staff token is a negative decimal number', async () => {
+  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if id from staff token is a negative floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -296,7 +296,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if account number is a decimal number', async () => {
+  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if account number is a floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -309,7 +309,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/credit" to cre
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if account number is a negative decimal number', async () => {
+  it('Should NOT credit a bank account with an amount as a signed in Staff at "/api/v1/transactions/:account_number/credit" if account number is a negative floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
