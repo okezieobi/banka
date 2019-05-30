@@ -8,89 +8,75 @@ import jwt from '../helpers/jwt';
 
 export default class AuthenticateUsers {
   static async signUpAll(req, res, next, userData, findUserQuery, userTitle) {
-    const user = await database.queryOneORNone(findUserQuery, [userData]);
+    const data = req.body[userData];
+    const checkUserQuery = queries[findUserQuery]();
+    const user = await database.queryOneORNone(checkUserQuery, [data]);
     if (user) return protocol.err400Res(res, errors.userExists(`${userTitle}`));
     return next();
   }
 
   static signUp(req, res, next) {
-    const { userEmail } = req.body;
-    const checkUserQuery = queries.findClientByEmail();
-    const signupClient = this.signUpAll(req, res, next, userEmail, checkUserQuery, 'User');
+    const signupClient = this.signUpAll(req, res, next, 'userEmail', 'findClientByEmail', 'User');
     return signupClient;
   }
 
   static signUpAdmin(req, res, next) {
-    const { userName } = req.body;
-    const findAdmin = queries.findAdminByUsername();
-    const signupAdmin = this.signUpAll(req, res, next, userName, findAdmin, 'Admin');
+    const signupAdmin = this.signUpAll(req, res, next, 'userName', 'findAdminByUsername', 'Admin');
     return signupAdmin;
   }
 
   static async signUpStaff(req, res, next) {
-    const { userName } = req.body;
-    const findStaff = queries.findStaffByUsername();
-    const signupStaff = this.signUpAll(req, res, next, userName, findStaff, 'Staff');
+    const signupStaff = this.signUpAll(req, res, next, 'userName', 'findStaffByUsername', 'Staff');
     return signupStaff;
   }
 
   static async signInAll(req, res, next, query, title, data) {
-    this.verifyUser = await database.queryOneORNone(query, [data]);
+    const userData = req.body[data];
+    this.verifyUser = await database.queryOneORNone(queries[query](), [userData]);
     if (!this.verifyUser) return protocol.err404Res(res, errors.userNotExists(`${title}`));
     return next();
   }
 
   static signInAdmin(req, res, next) {
-    const findAdminQuery = queries.findAdminByUsername();
-    const { userName } = req.body;
-    const signinAdmin = this.signInAll(req, res, next, findAdminQuery, 'Admin', userName);
+    const signinAdmin = this.signInAll(req, res, next, 'findAdminByUsername', 'Admin', 'userName');
     return signinAdmin;
   }
 
   static signInStaff(req, res, next) {
-    const findStaffQuery = queries.findStaffByUsername();
-    const { userName } = req.body;
-    const signinStaff = this.signInAll(req, res, next, findStaffQuery, 'Staff', userName);
+    const signinStaff = this.signInAll(req, res, next, 'findStaffByUsername', 'Staff', 'userName');
     return signinStaff;
   }
 
   static async signIn(req, res, next) {
-    const { userEmail } = req.body;
-    const checkUserQuery = queries.findClientByEmail();
-    const signinClient = this.signInAll(req, res, next, checkUserQuery, 'User', userEmail);
+    const signinClient = this.signInAll(req, res, next, 'findClientByEmail', 'User', 'userEmail');
     return signinClient;
   }
 
-  static async authenticateAll(req, res, next, token, query, title) {
+  static async authenticateAll(req, res, next, tokenTitle, query, title) {
+    const token = req.headers[tokenTitle];
     if (!token) return protocol.err400Res(res, errors.tokenIsRequired());
     const verifyToken = await jwt.verify(token);
     // @ts-ignore
     const { userId } = verifyToken;
     const checkId = await test.checkInteger(userId);
     if (!checkId) return protocol.err400Res(res, errors.invalidToken());
-    this.findUser = await database.queryOneORNone(query, [userId]);
+    this.findUser = await database.queryOneORNone(queries[query](), [userId]);
     if (!this.findUser) return protocol.err404Res(res, errors.wrongToken([title]));
     return next();
   }
 
   static async clients(req, res, next) {
-    const findClientQuery = queries.findClientById();
-    const token = req.headers['client-token'];
-    const auth = this.authenticateAll(req, res, next, token, findClientQuery, 'user');
+    const auth = this.authenticateAll(req, res, next, 'client-token', 'findClientById', 'user');
     return auth;
   }
 
   static async admin(req, res, next) {
-    const findAdminQuery = queries.findAdminById();
-    const token = req.headers['admin-token'];
-    const auth = this.authenticateAll(req, res, next, token, findAdminQuery, 'admin');
+    const auth = this.authenticateAll(req, res, next, 'admin-token', 'findAdminById', 'admin');
     return auth;
   }
 
   static async staff(req, res, next) {
-    const findStaffQuery = queries.findStaffById();
-    const token = req.headers['staff-token'];
-    const auth = this.authenticateAll(req, res, next, token, findStaffQuery, 'staff');
+    const auth = this.authenticateAll(req, res, next, 'staff-token', 'findStaffById', 'staff');
     return auth;
   }
 }

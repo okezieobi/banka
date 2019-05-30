@@ -40,6 +40,7 @@ describe('Test endpoints at "/api/v1/acounts/:account_number/transactions to get
     const resData = Math.floor(Math.random() * data.length);
     if (data.length > 0) {
       expect(response.body.data[resData]).to.have.property('transactionId').to.be.a('number');
+      expect(response.body.data[resData]).to.have.property('createdOn').to.be.a('string');
       expect(response.body.data[resData]).to.have.property('accountNumber').to.be.a('number');
       expect(response.body.data[resData]).to.have.property('amount').to.be.a('number');
       expect(response.body.data[resData]).to.have.property('cashier').to.be.a('number');
@@ -89,7 +90,7 @@ describe('Test endpoints at "/api/v1/acounts/:account_number/transactions to get
   });
 
 
-  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if id from token is a decimal number', async () => {
+  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if id from token is a floating point number', async () => {
     const token = await Test.generateToken('101010.1010101');
     const accountNumber = '12121212121';
     const response = await chai.request(app).get(`/api/v1/accounts/${accountNumber}/transactions`).set('client-token', token);
@@ -109,7 +110,7 @@ describe('Test endpoints at "/api/v1/acounts/:account_number/transactions to get
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if id from token is a negative decimal number', async () => {
+  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if id from token is a negative floating point number', async () => {
     const token = await Test.generateToken('-101010.1010101');
     const accountNumber = '12121212121';
     const response = await chai.request(app).get(`/api/v1/accounts/${accountNumber}/transactions`).set('client-token', token);
@@ -139,7 +140,7 @@ describe('Test endpoints at "/api/v1/acounts/:account_number/transactions to get
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if account number is a decimal number', async () => {
+  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if account number is a floating point number', async () => {
     const token = await Test.generateToken('1010101010101');
     const accountNumber = '12121.212121';
     const response = await chai.request(app).get(`/api/v1/accounts/${accountNumber}/transactions`).set('client-token', token);
@@ -169,7 +170,7 @@ describe('Test endpoints at "/api/v1/acounts/:account_number/transactions to get
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if account number is a negative decimal number', async () => {
+  it('Should not get account history at "/api/v1/accounts/:account_number/transactions" if account number is a negative floating point number', async () => {
     const token = await Test.generateToken('1010101010101');
     const accountNumber = '-12121.212121';
     const response = await chai.request(app).get(`/api/v1/accounts/${accountNumber}/transactions`).set('client-token', token);

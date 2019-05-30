@@ -46,6 +46,7 @@ require('./transactions/creditAccounts');
 require('./accounts/updateAccountStatus');
 require('./accounts/deleteAccount');
 require('./accounts/accountHistory');
+require('./transactions/getTransaction');
 
 export {
   expect,

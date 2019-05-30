@@ -182,7 +182,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if id from admin token is a decimal number', async () => {
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if id from admin token is a floating point number', async () => {
     const testData = {
       accountStatus: 'active',
     };
@@ -195,7 +195,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if id from admin token is a negative decimal number', async () => {
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if id from admin token is a negative floating point number', async () => {
     const testData = {
       accountStatus: 'active',
     };
@@ -273,7 +273,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account number a decimal number', async () => {
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account number a floating point number', async () => {
     const testData = {
       accountStatus: 'active',
     };
@@ -286,7 +286,7 @@ describe('Test endpoints at "/api/v1/account/account_number" to toggle the statu
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account number a negative decimal number', async () => {
+  it('Should NOT patch the status of a bank account as a signed in Admin at "/api/v1/account/:account_number" if account number a negative floating point number', async () => {
     const testData = {
       accountStatus: 'active',
     };

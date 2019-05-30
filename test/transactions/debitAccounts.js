@@ -38,13 +38,14 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('data').to.be.an('object');
     expect(response.body.data).to.have.property('accountNumber').to.be.a('number');
     expect(response.body.data).to.have.property('transactionId').to.be.a('number');
+    expect(response.body.data).to.have.property('createdOn').to.be.a('string');
     expect(response.body.data).to.have.property('amount').to.be.a('number').to.equal(parseFloat(testData.transactionAmount));
     expect(response.body.data).to.have.property('cashier').to.be.a('number');
     expect(response.body.data).to.have.property('transactionType').to.be.a('string').to.equal('Debit');
     expect(response.body.data).to.have.property('accountBalance').to.be.a('number');
   });
 
-  it('Should debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" with POST if all request inputs, headers and params are valid (transaction amount is a decimal number)', async () => {
+  it('Should debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" with POST if all request inputs, headers and params are valid (transaction amount is a floating point number)', async () => {
     const testData = {
       transactionAmount: '1000.67',
     };
@@ -139,7 +140,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Transaction amount must be a positive number');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is negative decimal number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if transaction amount is negative floating point number', async () => {
     const testData = {
       transactionAmount: '-1000.54',
     };
@@ -229,7 +230,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if staff token is a decimal number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if staff token is a floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -242,7 +243,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Id from token is not a positive integer');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if staff token is a negative decimal number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if staff token is a negative floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -295,7 +296,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
   });
 
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is a decimal number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is a floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };
@@ -308,7 +309,7 @@ describe('Test endpoints at "/api/v1/transactions/:account_number/debit" to debi
     expect(response.body).to.have.property('error').to.be.a('string').to.equal('Account number must be a positive integer');
   });
 
-  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is a negative decimal number', async () => {
+  it('Should NOT debit a bank account with an amount as a signed in Staff at "/api/v1/:transactions/:account_number/debit" if account number is a negative floating point number', async () => {
     const testData = {
       transactionAmount: '1000',
     };

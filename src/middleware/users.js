@@ -18,41 +18,52 @@ export default class Users {
     return auth;
   }
 
+  static clients(method) {
+    const validateAll = validateUserRequest[method].bind(validateUserRequest);
+    const authAll = authenticateUsers[method].bind(authenticateUsers);
+    const callBacks = middleware.routeCallbacks(validateAll, authAll);
+    return callBacks;
+  }
+
   static signupClients() {
-    const validate = validateUserRequest.signUp.bind(validateUserRequest);
-    const auth = authenticateUsers.signUp.bind(authenticateUsers);
-    const signup = middleware.routeCallbacks(validate, auth);
+    const signup = this.clients('signUp');
     return signup;
   }
 
   static signinClients() {
-    const validate = validateUserRequest.signIn.bind(validateUserRequest);
-    const auth = authenticateUsers.signIn.bind(authenticateUsers);
-    const signin = middleware.routeCallbacks(validate, auth);
+    const signin = this.clients('signIn');
     return signin;
+  }
+
+  static adminStaff(method) {
+    const auth = authenticateUsers[method].bind(authenticateUsers);
+    let callBacks;
+    if (method === 'signInAdmin' || method === 'signInStaff') {
+      callBacks = middleware.routeCallbacks(this.validateAdminStaff(), auth);
+    } else {
+      callBacks = middleware.routeCallbacks(this.validateAdminStaff(), this.authAdmin(), auth);
+    }
+    return callBacks;
   }
 
   static signupAdmin() {
-    const auth = authenticateUsers.signUpAdmin.bind(authenticateUsers);
-    const signup = middleware.routeCallbacks(this.validateAdminStaff(), this.authAdmin(), auth);
+    const signup = this.adminStaff('signUpAdmin');
     return signup;
-  }
-
-  static signinAdmin() {
-    const auth = authenticateUsers.signInAdmin.bind(authenticateUsers);
-    const signin = middleware.routeCallbacks(this.validateAdminStaff(), auth);
-    return signin;
   }
 
   static signupStaff() {
-    const auth = authenticateUsers.signUpStaff.bind(authenticateUsers);
-    const signup = middleware.routeCallbacks(this.validateAdminStaff(), this.authAdmin(), auth);
+    const signup = this.adminStaff('signUpStaff');
     return signup;
   }
 
+
+  static signinAdmin() {
+    const signin = this.adminStaff('signInAdmin');
+    return signin;
+  }
+
   static signinStaff() {
-    const authSigninStaff = authenticateUsers.signInStaff.bind(authenticateUsers);
-    const signin = middleware.routeCallbacks(this.validateAdminStaff(), authSigninStaff);
+    const signin = this.adminStaff('signInStaff');
     return signin;
   }
 }

@@ -15,22 +15,25 @@ export default class ValidateUserRequest {
     else next();
   }
 
-
-  static signIn(req, res, next) {
-    const { userEmail, userPassword } = req.body;
-    const emailErr = checkRequest.checkEmailFormat(userEmail, 'Email');
-    const passwordErr = checkRequest.checkPassword(userPassword, 'Password');
-    const findError = checkRequest.findError(emailErr, passwordErr);
+  static checkError(req, res, next, userData, userDataTest, userDataTitle, password) {
+    const userDataReq = req.body[userData];
+    const passwordReq = req.body[password];
+    const checkUserData = checkRequest[userDataTest](userDataReq, userDataTitle);
+    const checkPassword = checkRequest.checkPassword(passwordReq, 'Password');
+    const findError = checkRequest.findError(checkUserData, checkPassword);
     if (findError) protocol.err400Res(res, findError);
     else next();
   }
 
+  static signIn(req, res, next) {
+    const signInErr = this.checkError(req, res, next, 'userEmail',
+      'checkEmailFormat', 'Email', 'userPassword');
+    return signInErr;
+  }
+
   static adminStaff(req, res, next) {
-    const { userName, adminStaffPassword } = req.body;
-    const usernameErr = checkRequest.validateUsername(userName, 'Username');
-    const passwordErr = checkRequest.checkPassword(adminStaffPassword, 'Password');
-    const findError = checkRequest.findError(usernameErr, passwordErr);
-    if (findError) protocol.err400Res(res, findError);
-    else next();
+    const signInErr = this.checkError(req, res, next, 'userName',
+      'validateUsername', 'Username', 'adminStaffPassword');
+    return signInErr;
   }
 }

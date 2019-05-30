@@ -13,4 +13,11 @@ export default class ValidateTransactionRequest {
     if (findError) protocol.err400Res(res, findError);
     else next();
   }
+
+  static getTransaction(req, res, next) {
+    const transactionId = req.params.transaction_id;
+    const checkTransactionId = checkRequest.validateInteger(transactionId, 'Transaction id');
+    if (checkTransactionId) protocol.err400Res(res, checkTransactionId);
+    else next();
+  }
 }
