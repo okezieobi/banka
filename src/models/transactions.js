@@ -4,30 +4,36 @@ export default class Transactions {
   static transactions(amount, bankInfo, cashierId, type, newBalance) {
     const transactionData = {
       transactionId: numbers.uniqueIds(),
-      type,
+      type: String(type),
       accountNumber: parseInt(bankInfo.number, 10),
       cashier: parseInt(cashierId, 10),
       amount: parseFloat(amount),
       oldBalance: parseFloat(bankInfo.balance),
-      newBalance,
+      newBalance: parseFloat((newBalance).toFixed(2)),
     };
     return transactionData;
   }
 
+  static calcNewBalance(type, balance, amount) {
+    let newBalance;
+    if (type === 'Credit' || type === 'credit') {
+      newBalance = parseFloat(balance) + parseFloat(amount);
+    } else {
+      newBalance = parseFloat(balance) - parseFloat(amount);
+    }
+    return newBalance;
+  }
+
   static debitAccountPostgre(amount, bankInfo, cashierId) {
-    const type = 'Debit';
-    const newBalance = parseFloat((parseFloat(bankInfo.balance)
-      - parseFloat(amount)).toFixed(2));
-    const transactionData = this.transactions(amount, bankInfo, cashierId, type, newBalance);
+    const transactionData = this.transactions(amount, bankInfo, cashierId, 'Debit',
+      this.calcNewBalance('Debit', bankInfo.balance, amount));
     return transactionData;
   }
 
 
   static creditAccountPostgre(amount, bankInfo, cashierId) {
-    const type = 'Credit';
-    const newBalance = parseFloat((parseFloat(bankInfo.balance)
-      + parseFloat(amount)).toFixed(2));
-    const transactionData = this.transactions(amount, bankInfo, cashierId, type, newBalance);
+    const transactionData = this.transactions(amount, bankInfo, cashierId, 'Credit',
+      this.calcNewBalance('Credit', bankInfo.balance, amount));
     return transactionData;
   }
 
