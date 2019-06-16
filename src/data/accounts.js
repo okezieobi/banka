@@ -41,4 +41,14 @@ export default class ValidateAccountRequest {
     else if (checkAccountStatusValue) protocol.err400Res(res, checkAccountStatusValue);
     else next();
   }
+
+  static getAccountsByUser(req, res, next) {
+    const { userEmail } = req.body;
+    const accountNumber = req.params.account_number;
+    const checkAccountNumber = checkRequest.validateInteger(accountNumber, 'Account number');
+    const emailErr = checkRequest.checkEmailFormat(userEmail, 'Email');
+    const findError = checkRequest.findError(checkAccountNumber, emailErr);
+    if (findError) protocol.err400Res(res, findError);
+    else next();
+  }
 }
