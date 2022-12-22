@@ -59,7 +59,7 @@
     "core-js": "",
     "dotenv": "",
     "express": "",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "pg-promise": "^8.6.5",
     "unique-random": "^2.1.0"
   },
